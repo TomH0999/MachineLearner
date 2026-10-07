@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { SkillTreeFlow } from "@/components/skill-tree/skill-tree-flow";
+import { SkillTreeView } from "@/components/skill-tree/skill-tree-view";
 import { formatScore } from "@/components/skill-tree/styles";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getUserSkillTree } from "@/lib/data/progress";
@@ -28,14 +28,5 @@ export default function TreePage() {
 /** Lit la session et la progression : rendu dynamique, sous Suspense. */
 async function SkillTreeSection() {
   const nodes = await getUserSkillTree();
-  return (
-    <>
-      <div className="hidden md:block">
-          <SkillTreeFlow nodes={nodes} />
-      </div>
-      <p className="text-sm text-muted-foreground md:hidden">
-        La vue mobile arrive bientôt : élargis la fenêtre pour afficher l&apos;arbre.
-      </p>
-    </>
-  );
+  return <SkillTreeView nodes={nodes} />;
 }

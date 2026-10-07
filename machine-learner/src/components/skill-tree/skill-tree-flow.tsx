@@ -15,7 +15,7 @@ import {
 } from "@xyflow/react";
 import { ROUTES } from "@/lib/routes";
 import { computeLayeredLayout } from "@/lib/skill-tree/graph";
-import type { CalculatedNode } from "@/types/domain";
+import type { CalculatedNode, Domain } from "@/types/domain";
 import { SkillNodeCard, type SkillFlowNode } from "./skill-node";
 import { STATUS_COLOR_VARS } from "./styles";
 
@@ -44,9 +44,16 @@ function useIsDarkMode(): boolean {
   );
 }
 
-function buildFlowElements(nodes: CalculatedNode[]): { flowNodes: SkillFlowNode[]; flowEdges: Edge[] } {
+function buildFlowElements(
+  nodes: CalculatedNode[],
+  highlightDomains: readonly Domain[],
+): { flowNodes: SkillFlowNode[]; flowEdges: Edge[] } {
   const positions = computeLayeredLayout(nodes);
   const byId = new Map(nodes.map((node) => [node.id, node]));
+  // Sélection vide : rien n'est estompé et le rendu reste identique.
+  const highlighted = new Set(highlightDomains);
+  const isDimmed = (node: CalculatedNode | undefined): boolean =>
+    highlighted.size > 0 && node !== undefined && !highlighted.has(node.domain);
 
   const flowNodes = nodes.map(
     (node): SkillFlowNode => ({
@@ -54,6 +61,7 @@ function buildFlowElements(nodes: CalculatedNode[]): { flowNodes: SkillFlowNode[
       type: "skill",
       position: positions.get(node.id) ?? { x: 0, y: 0 },
       draggable: node.status !== "LOCKED",
+      ...(isDimmed(node) ? { style: { opacity: 0.2 } } : {}),
       data: {
         node,
         missingPrerequisites: node.missingPrerequisites.map((id) => ({ id, title: byId.get(id)?.title ?? id })),
@@ -63,15 +71,17 @@ function buildFlowElements(nodes: CalculatedNode[]): { flowNodes: SkillFlowNode[
 
   const flowEdges = nodes.flatMap((target) =>
     target.prerequisites.map((sourceId): Edge => {
-      const sourceCompleted = byId.get(sourceId)?.status === "COMPLETED";
+      const source = byId.get(sourceId);
+      const sourceCompleted = source?.status === "COMPLETED";
       const stroke = sourceCompleted ? STATUS_COLOR_VARS.COMPLETED : STATUS_COLOR_VARS.LOCKED;
+      const dimmed = isDimmed(source) || isDimmed(target);
       return {
         id: `${sourceId}->${target.id}`,
         source: sourceId,
         target: target.id,
         type: "smoothstep",
         markerEnd: { type: MarkerType.ArrowClosed, color: stroke },
-        style: { stroke, strokeWidth: 1.5 },
+        style: { stroke, strokeWidth: 1.5, ...(dimmed ? { opacity: 0.15 } : {}) },
         animated: sourceCompleted && target.status === "UNLOCKED",
       };
     }),
@@ -80,10 +90,21 @@ function buildFlowElements(nodes: CalculatedNode[]): { flowNodes: SkillFlowNode[
   return { flowNodes, flowEdges };
 }
 
-export function SkillTreeFlow({ nodes }: { nodes: CalculatedNode[] }) {
+const NO_HIGHLIGHT: readonly Domain[] = [];
+
+export function SkillTreeFlow({
+  nodes,
+  highlightDomains = NO_HIGHLIGHT,
+}: {
+  nodes: CalculatedNode[];
+  highlightDomains?: readonly Domain[]; // vide ou absent : aucun nœud estompé
+}) {
   const router = useRouter();
   const isDark = useIsDarkMode();
-  const { flowNodes, flowEdges } = useMemo(() => buildFlowElements(nodes), [nodes]);
+  const { flowNodes, flowEdges } = useMemo(
+    () => buildFlowElements(nodes, highlightDomains),
+    [nodes, highlightDomains],
+  );
 
   const handleNodeClick = useCallback<NodeMouseHandler<SkillFlowNode>>(
     (event, node) => {

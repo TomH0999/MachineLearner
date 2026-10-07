@@ -1,7 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
+// EngiPath — schéma Prisma 7.
+// L'URL de connexion vit dans prisma7.config.ts (CLI) et src/lib/db.ts (runtime) : ne pas ajouter `url` ici.
 
 generator client {
   provider = "prisma-client"
@@ -10,4 +8,184 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+}
+
+enum NodeCategory {
+  BUT
+  INGENIEUR_IA
+}
+
+enum Domain {
+  MATHS
+  DEV
+  RESEAUX
+  IA
+  ARCHI
+  ANGLAIS
+}
+
+// ─── Contenu pédagogique : statique, seedé, IDs stables (jamais de cuid) ───
+
+model SkillNode {
+  id            String         @id // ex. "BUT-ALG1"
+  title         String
+  category      NodeCategory
+  domain        Domain
+  description   String
+  prerequisites String[]       @default([]) // IDs de SkillNode, condition ET, validés au seed
+  markdownPath  String? // ex. "content/courses/BUT-ALG1.md"
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  lessons       Lesson[]
+  flashcards    Flashcard[]
+  quizQuestions QuizQuestion[]
+  userProgress  NodeProgress[]
+  quizAttempts  QuizAttempt[]
+}
+
+model Lesson {
+  id         String    @id // ex. "BUT-ALG1-L01"
+  nodeId     String
+  order      Int
+  title      String
+  youtubeUrl String
+  node       SkillNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+
+  @@unique([nodeId, order])
+}
+
+model Flashcard {
+  id         String           @id // ex. "BUT-ALG1-F01"
+  nodeId     String
+  front      String
+  back       String
+  node       SkillNode        @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+  userStates FlashcardState[]
+
+  @@index([nodeId])
+}
+
+model QuizQuestion {
+  id                 String    @id // ex. "BUT-ALG1-Q01"
+  nodeId             String
+  question           String
+  options            String[]
+  correctOptionIndex Int // index dans `options` (ordre d'origine) — ne jamais exposer au client
+  explanation        String
+  node               SkillNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+
+  @@index([nodeId])
+}
+
+// ─── Utilisateurs & authentification (modèles attendus par Better Auth) ───
+
+model User {
+  id              String           @id
+  name            String
+  email           String           @unique
+  emailVerified   Boolean          @default(false)
+  image           String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  sessions        Session[]
+  accounts        Account[]
+  nodeProgresses  NodeProgress[]
+  flashcardStates FlashcardState[]
+  quizAttempts    QuizAttempt[]
+}
+
+model Session {
+  id        String   @id
+  token     String   @unique
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+}
+
+// ─── Progression : dynamique, liée à l'utilisateur ───
+// LOCKED / UNLOCKED / COMPLETED ne sont jamais stockés : ils sont dérivés de
+// NodeProgress.isCompleted + des prérequis (calculateNodeStatuses, étape 4).
+
+model NodeProgress {
+  id             String    @id @default(cuid())
+  userId         String
+  nodeId         String
+  isCompleted    Boolean   @default(false)
+  bestScore      Int       @default(0) // 0..100
+  courseViewedAt DateTime?
+  completedAt    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  node           SkillNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, nodeId])
+}
+
+model FlashcardState {
+  id             String    @id @default(cuid())
+  userId         String
+  cardId         String
+  interval       Int       @default(0) // en jours
+  repetition     Int       @default(0)
+  easeFactor     Float     @default(2.5) // plancher 1.3 (SM-2)
+  dueDate        DateTime  @default(now())
+  lastReviewedAt DateTime?
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  card           Flashcard @relation(fields: [cardId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, cardId])
+  @@index([userId, dueDate])
+}
+
+model QuizAttempt {
+  id          String    @id @default(cuid())
+  userId      String
+  nodeId      String
+  items       Json // { questionId: string; optionOrder: number[] }[] — reste côté serveur (anti-triche)
+  answers     Int[]     @default([]) // index choisis, dans l'ordre affiché
+  score       Int? // 0..100, null tant que la tentative n'est pas soumise
+  passed      Boolean?
+  startedAt   DateTime  @default(now())
+  submittedAt DateTime?
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  node        SkillNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+
+  @@index([userId, nodeId])
 }

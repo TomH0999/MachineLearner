@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
-import { connection } from "next/server";
 import { Suspense } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { prisma } from "@/lib/db";
+import { getUserSkillTree } from "@/lib/data/progress";
+import { STATUS_LABELS, type NodeStatus } from "@/types/domain";
 
 export const metadata: Metadata = { title: "Tableau de bord" };
+
+const STATUS_BADGES: readonly { status: NodeStatus; className: string }[] = [
+  { status: "LOCKED", className: "bg-status-locked text-white" },
+  { status: "UNLOCKED", className: "bg-status-unlocked text-white glow-unlocked" },
+  { status: "COMPLETED", className: "bg-status-completed text-white" },
+];
 
 // Tableau de bord provisoire : remplacé à l'étape 20.
 export default function DashboardPage() {
@@ -19,41 +25,54 @@ export default function DashboardPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>État du système</CardTitle>
+          <CardTitle>Ta progression</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
-          <Suspense fallback={<Skeleton className="h-5 w-48" />}>
-            <DatabaseStatus />
+          <Suspense
+            fallback={
+              <>
+                <Skeleton className="h-5 w-48" />
+                <Skeleton className="h-6 w-72" />
+              </>
+            }
+          >
+            <ProgressSummary />
           </Suspense>
-          <div className="flex flex-wrap gap-2">
-            <Badge className="bg-status-locked text-white">Verrouillé</Badge>
-            <Badge className="bg-status-unlocked text-white glow-unlocked">Disponible</Badge>
-            <Badge className="bg-status-completed text-white">Validé</Badge>
-          </div>
         </CardContent>
       </Card>
     </div>
   );
 }
 
-async function DatabaseStatus() {
-  await connection();
+/** « 0 validé », « 1 validé », « 2 validés » : singulier jusqu'à 1 inclus. */
+function pluralize(count: number, singular: string, plural: string): string {
+  return `${count} ${count > 1 ? plural : singular}`;
+}
 
-  let count: number | null;
-  try {
-    count = await prisma.skillNode.count();
-  } catch (error) {
-    console.error("[DatabaseStatus] échec de la requête Prisma", error);
-    count = null;
-  }
+async function ProgressSummary() {
+  const nodes = await getUserSkillTree();
 
-  if (count === null) {
-    return <p className="text-sm text-destructive">Base de données injoignable</p>;
-  }
+  const counts: Record<NodeStatus, number> = { LOCKED: 0, UNLOCKED: 0, COMPLETED: 0 };
+  for (const node of nodes) counts[node.status] += 1;
+
+  const summary = [
+    pluralize(nodes.length, "module", "modules"),
+    pluralize(counts.UNLOCKED, "disponible", "disponibles"),
+    pluralize(counts.LOCKED, "verrouillé", "verrouillés"),
+    pluralize(counts.COMPLETED, "validé", "validés"),
+  ].join(" · ");
 
   return (
-    <p className="text-sm">
-      Base de données connectée · {count} module{count > 1 ? "s" : ""} en base
-    </p>
+    <>
+      <p className="text-sm">{summary}</p>
+      <div className="flex flex-wrap gap-2">
+        {STATUS_BADGES.map(({ status, className }) => (
+          <Badge key={status} className={className}>
+            {STATUS_LABELS[status]}
+            <span className="tabular-nums">{counts[status]}</span>
+          </Badge>
+        ))}
+      </div>
+    </>
   );
 }

@@ -2,8 +2,8 @@ import type { SeedNode } from "./schema";
 
 /**
  * Structure complète du Skill Tree (15 nœuds).
- * Couverture exhaustive des notions du BUT et du cycle Ingénieur / IA.
- */
+**/
+
 export const SKILL_TREE: readonly SeedNode[] = [
   // ─── SOCLE 1 : BUT INFORMATIQUE ───
   {
@@ -25,19 +25,19 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "BUT-ALG1-L02",
         order: 2,
-        title: "Piles, Files, Listes chaînées et Hash Tables — NeetCode (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=8hly31xKLI0",
+        title: "Data Structures and Algorithms Full Course — freeCodeCamp (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=RBSGKlAvoiM",
       },
       {
         id: "BUT-ALG1-L03",
         order: 3,
-        title: "Arbres binaires de recherche (BST) et Parcours BFS/DFS — freeCodeCamp (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=fAAZ2rCsw18",
+        title: "Introduction to Algorithms & Data Structures — Abdul Bari (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=0IAPZz2bZEg",
       },
       {
         id: "BUT-ALG1-L04",
         order: 4,
-        title: "Algorithmes de tri avancés (QuickSort, MergeSort, HeapSort) — mycodeschool (EN)",
+        title: "Algorithmes de tri avancés (QuickSort, MergeSort) — mycodeschool (EN)",
         youtubeUrl: "https://www.youtube.com/watch?v=COk73cpQbFQ",
       },
     ],
@@ -67,13 +67,13 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "BUT-DEV1-L03",
         order: 3,
-        title: "Les Principes SOLID en programmation orientée objet — Fireship (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=C3T6LpS_m4s",
+        title: "SOLID Design Principles — Web Dev Simplified (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=UJh3TEag0A8",
       },
       {
         id: "BUT-DEV1-L04",
         order: 4,
-        title: "Initiation à la programmation fonctionnelle et Lambdas — freeCodeCamp (EN)",
+        title: "Initiation à la programmation fonctionnelle — JSConf / Anjana Vakil (EN)",
         youtubeUrl: "https://www.youtube.com/watch?v=e-5obm1G_FY",
       },
     ],
@@ -102,13 +102,13 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "BUT-BDD1-L03",
         order: 3,
-        title: "Optimisation des requêtes, Indexation B-Tree et Transactions ACID — Fireship (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=Qp_4M_N-JdY",
+        title: "Database Indexing in 100 Seconds — Fireship (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=cl4N48-dFBo",
       },
       {
         id: "BUT-BDD1-L04",
         order: 4,
-        title: "Introduction aux bases NoSQL (Document, Clé-Valeur, Graphe) — Fireship (EN)",
+        title: "Introduction aux bases NoSQL — Simply Explained (EN)",
         youtubeUrl: "https://www.youtube.com/watch?v=0buKQHokLK8",
       },
     ],
@@ -125,26 +125,26 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "BUT-RES1-L01",
         order: 1,
-        title: "Le Modèle OSI et la suite TCP/IP expliqués — NetworkChuck (EN)",
+        title: "Le Modèle OSI et la suite TCP/IP expliqués — TechTerms (EN)",
         youtubeUrl: "https://www.youtube.com/watch?v=vv4y_uOneC0",
       },
       {
         id: "BUT-RES1-L02",
         order: 2,
-        title: "Adressage IPv4, Masques de sous-réseau (Subnetting) et CIDR — NetworkChuck (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=s_Ntt6eTn94",
+        title: "Subnetting is EASY! — NetworkChuck (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=ecCuyq-Wvhc",
       },
       {
         id: "BUT-RES1-L03",
         order: 3,
-        title: "Masterclass Terminal Linux & Administration Système — Xavki (FR)",
-        youtubeUrl: "https://www.youtube.com/watch?v=S2fIipA3Iwc",
+        title: "Linux for Beginners — NetworkChuck (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=wBp0Rb-ZJak",
       },
       {
         id: "BUT-RES1-L04",
         order: 4,
-        title: "Gestion des processus, signaux et permissions sous Linux — freeCodeCamp (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=v_1y1PrXACU",
+        title: "Linux Command Line Tutorial for Beginners — freeCodeCamp (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=ZtqB-UypI4s",
       },
     ],
   },
@@ -160,8 +160,8 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "BUT-WEB1-L01",
         order: 1,
-        title: "Git & GitHub pour les développeurs (Branching, Merge, Rebase) — freeCodeCamp (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=RGOj5yH7evE",
+        title: "Git & GitHub Crash Course — Traversy Media (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=8JJ148D413o",
       },
       {
         id: "BUT-WEB1-L02",
@@ -172,8 +172,8 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "BUT-WEB1-L03",
         order: 3,
-        title: "JavaScript ES6+ et l'Asynchronisme (Promises, Async/Await) — Fireship (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=DHvZLI7aU3c",
+        title: "Async Await in 100 Seconds — Fireship (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=vn3tm0quoqE",
       },
       {
         id: "BUT-WEB1-L04",
@@ -196,8 +196,8 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "BUT-MAT1-L01",
         order: 1,
-        title: "Logique propositionnelle, tables de vérité et démonstrations — TrevTutor (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=xlA2mS_1Moc",
+        title: "Logique propositionnelle et Tables de vérité — nptelhrd / NPTEL (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=xlUFkMKSB3Y",
       },
       {
         id: "BUT-MAT1-L02",
@@ -269,20 +269,20 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "ING-MAT3-L01",
         order: 1,
-        title: "Dérivées partielles et gradients à plusieurs variables — 3Blue1Brown (EN)",
+        title: "Dérivées partielles et gradients à plusieurs variables — Eugene Khutoryansky (EN)",
         youtubeUrl: "https://www.youtube.com/watch?v=GkB4vW16QHI",
       },
       {
         id: "ING-MAT3-L02",
         order: 2,
-        title: "Matrice Hessienne et optimisation locale — Khan Academy (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=v3C3O3I_Y20",
+        title: "Gradient Descent, Step-by-Step — 3Blue1Brown (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=IHZwWFHWa-w",
       },
       {
         id: "ING-MAT3-L03",
         order: 3,
-        title: "Optimisation sous contraintes : Multiplicateurs de Lagrange — Khan Academy (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=hQ4Sg2pP_xY",
+        title: "Linear Regression & Optimization — StatQuest (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=nk2CQITm_eY",
       },
       {
         id: "ING-MAT3-L04",
@@ -346,20 +346,20 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "ING-ALG2-L02",
         order: 2,
-        title: "Automates finis déterministes (DFA) et non-déterministes (NFA) — Neso Academy (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=58N2N7zJGr8",
+        title: "Automates finis déterministes (DFA) — Neso Academy (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=40i418O31gA",
       },
       {
         id: "ING-ALG2-L03",
         order: 3,
-        title: "Langages réguliers et Grammaires hors-contexte — Neso Academy (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=333MkW92u5g",
+        title: "Grammaires hors-contexte et Théorie des langages — Neso Academy (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=Ewy2oJ3B83E",
       },
       {
         id: "ING-ALG2-L04",
         order: 4,
-        title: "Calculabilité, Machines de Turing et Décidabilité — Easy Theory (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=dA13e6T0yI8",
+        title: "Turing Machines & Computability — Computerphile (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=gJQTFhkhwPA",
       },
     ],
   },
@@ -382,7 +382,7 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "ING-ALG3-L02",
         order: 2,
-        title: "Arbres couvrants minimaux (Kruskal, Prim) et Flot Max (Ford-Fulkerson) — WilliamFiset (EN)",
+        title: "Arbres couvrants minimaux (Kruskal, Prim) et Flot Max — WilliamFiset (EN)",
         youtubeUrl: "https://www.youtube.com/watch?v=09_LlHjoEiY",
       },
       {
@@ -394,8 +394,8 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "ING-ALG3-L04",
         order: 4,
-        title: "Théorie de la complexité : P, NP, NP-Complet et NP-Difficile — Abdul Bari (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=e2UFFxBrb2Y",
+        title: "P vs NP and the Complexity Zoo — Computerphile (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=YX40hbAHx3s",
       },
     ],
   },
@@ -412,20 +412,20 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "ING-IA1-L01",
         order: 1,
-        title: "Introduction globale au Machine Learning et aux algorithmes — StatQuest (EN)",
+        title: "Introduction globale au Machine Learning — StatQuest (EN)",
         youtubeUrl: "https://www.youtube.com/watch?v=Gv9_4yMHFhI",
       },
       {
         id: "ING-IA1-L02",
         order: 2,
-        title: "Machine Learning pratique en Python (Scikit-Learn, Pandas, Numpy) — Machine Learnia (FR)",
-        youtubeUrl: "https://www.youtube.com/watch?v=823qnyhMKhA",
+        title: "Machine Learning et Scikit-Learn — Machine Learnia (FR)",
+        youtubeUrl: "https://www.youtube.com/watch?v=w_bLGK4Pteo",
       },
       {
         id: "ING-IA1-L03",
         order: 3,
-        title: "Les algorithmes de classification (SVM, Random Forests, Decision Trees) — StatQuest (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=efR1C6UrvzU",
+        title: "Random Forests and Decision Trees — StatQuest (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=J4Wdy0Wc_xQ",
       },
       {
         id: "ING-IA1-L04",
@@ -436,7 +436,7 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "ING-IA1-L05",
         order: 5,
-        title: "Évaluation des modèles : Courbe ROC, AUC, F1-Score et Cross-Validation — StatQuest (EN)",
+        title: "Évaluation des modèles : Courbe ROC, AUC et Cross-Validation — StatQuest (EN)",
         youtubeUrl: "https://www.youtube.com/watch?v=4jRBRDbJemM",
       },
     ],
@@ -502,8 +502,8 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "ING-ARCH1-L02",
         order: 2,
-        title: "Patterns d'architecture logicielle (Hexagonale, Event-Driven, Microservices) — Fireship (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=CmW5409pAAM",
+        title: "Microservices in 100 Seconds — Fireship (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=Cib75_4A4aE",
       },
       {
         id: "ING-ARCH1-L03",
@@ -514,8 +514,8 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "ING-ARCH1-L04",
         order: 4,
-        title: "Conteneurisation avancée et Orchestration avec Docker & Kubernetes — Xavki (FR)",
-        youtubeUrl: "https://www.youtube.com/watch?v=c2mKThR5450",
+        title: "Docker in 100 Seconds — Fireship (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=gAkwW2tuIqE",
       },
     ],
   },
@@ -532,20 +532,20 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "ING-ENG1-L01",
         order: 1,
-        title: "Vocabulaire anglais technique et Software Engineering — English for Tech (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=342IeA8y_c8",
+        title: "Harvard CS50 - Lecture 0 (Introduction to Computer Science) — Harvard (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=8mAITcNt710",
       },
       {
         id: "ING-ENG1-L02",
         order: 2,
-        title: "Entraînement complet TOEIC Listening & Reading — TOEIC Test Prep (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=Kz6E11a14cE",
+        title: "How Computers Work: Hardware and Software — Code.org (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=OAx_6-wdslM",
       },
       {
         id: "ING-ENG1-L03",
         order: 3,
-        title: "Grammaire et structures complexes indispensables pour le TOEIC 900+ — Learn English (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=s1R1x_hC9g0",
+        title: "Technical English Terms for Developers — freeCodeCamp (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=0pThnRneDjw",
       },
     ],
   },

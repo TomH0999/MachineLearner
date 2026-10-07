@@ -1,0 +1,1 @@
+DATABASE_URL="postgresql://<utilisateur>:<mot_de_passe>@ep-xxx.us-east-2.aws.neon.tech/neondb?sslmode=require"

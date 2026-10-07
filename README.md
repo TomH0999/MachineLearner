@@ -44,11 +44,11 @@
 ### 2. Installation
 
 bash
-# Cloner le projet
+Cloner le projet
 git clone [https://github.com/ton-compte/machine-learner.git](https://github.com/ton-compte/machine-learner.git)
 cd machine-learner/machine-learner
 
-# Installer les dépendances
+Installer les dépendances
 npm install
 
 ### 3. Configuration de l'environnement
@@ -56,10 +56,10 @@ Crée un fichier .env dans le dossier machine-learner/ :
 DATABASE_URL="postgresql://user:password@ep-cool-name.us-east-2.aws.neon.tech/neondb?sslmode=require"
 
 ### 4. Base de données & Démarrage
-# Appliquer le schéma Prisma à la base Neon
+Appliquer le schéma Prisma à la base Neon
 npx prisma db push
 
-# Lancer le serveur de développement
+Lancer le serveur de développement
 npm run dev
 
 ### Ouvre http://localhost:3000 dans ton navigateur.
@@ -67,6 +67,7 @@ npm run dev
 ---
 
 ## Architecture des dossiers
+
 machine-learner/
 ├── prisma/          # Schéma Prisma et configurations de base
 ├── src/

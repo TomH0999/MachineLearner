@@ -13,6 +13,7 @@ import {
   Sun,
   type LucideIcon,
 } from "lucide-react";
+import { UserMenu } from "@/components/auth/user-menu";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -21,6 +22,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { NAV_ITEMS, ROUTES, getActiveNavKey, type NavKey } from "@/lib/routes";
 import { applyTheme, getStoredTheme, type ThemePreference } from "@/lib/theme";
@@ -41,21 +43,26 @@ function isThemePreference(value: string): value is ThemePreference {
   return THEME_OPTIONS.some((option) => option.value === value);
 }
 
+export interface NavUser {
+  name: string;
+  email: string;
+}
+
 /**
  * Navigation principale. `usePathname` suspend sur les routes dynamiques avec
  * cacheComponents : à rendre sous <Suspense fallback={<AppNavFallback />}>.
  */
-export function AppNav() {
+export function AppNav({ user }: { user: NavUser }) {
   const pathname = usePathname();
-  return <AppNavView activeKey={getActiveNavKey(pathname)} />;
+  return <AppNavView activeKey={getActiveNavKey(pathname)} user={user} />;
 }
 
-/** Fallback du Suspense : même rendu que AppNav, sans lien actif. */
+/** Fallback du Suspense : même rendu que AppNav, sans lien actif ni utilisateur. */
 export function AppNavFallback() {
   return <AppNavView activeKey={null} />;
 }
 
-function AppNavView({ activeKey }: { activeKey: NavKey | null }) {
+function AppNavView({ activeKey, user }: { activeKey: NavKey | null; user?: NavUser }) {
   return (
     <>
       <aside className="fixed inset-y-0 left-0 z-40 hidden h-dvh w-60 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground md:flex">
@@ -85,8 +92,18 @@ function AppNavView({ activeKey }: { activeKey: NavKey | null }) {
             );
           })}
         </nav>
-        <div className="border-t border-sidebar-border p-3">
-          <ThemeToggle align="start" />
+        <div className="flex items-center gap-2 border-t border-sidebar-border p-3">
+          <div className="min-w-0 flex-1">
+            {user ? (
+              <UserMenu user={user} showName />
+            ) : (
+              // Mêmes bordure et padding que le bouton du UserMenu : la sidebar ne bouge pas au chargement.
+              <div className="w-fit border border-transparent px-1.5 py-1">
+                <Skeleton className="size-8 rounded-full" />
+              </div>
+            )}
+          </div>
+          <ThemeToggle align="end" />
         </div>
       </aside>
 
@@ -94,7 +111,7 @@ function AppNavView({ activeKey }: { activeKey: NavKey | null }) {
         aria-label="Navigation principale"
         className="fixed inset-x-0 bottom-0 z-40 border-t bg-background/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
       >
-        <div className="grid h-16 grid-cols-4">
+        <div className="grid h-16 grid-cols-5">
           {NAV_ITEMS.map((item) => {
             const Icon = NAV_ICONS[item.key];
             const isActive = item.key === activeKey;
@@ -115,6 +132,9 @@ function AppNavView({ activeKey }: { activeKey: NavKey | null }) {
           })}
           <div className="flex items-center justify-center">
             <ThemeToggle align="end" />
+          </div>
+          <div className="flex items-center justify-center">
+            {user ? <UserMenu user={user} /> : <Skeleton className="size-8 rounded-full" />}
           </div>
         </div>
       </nav>

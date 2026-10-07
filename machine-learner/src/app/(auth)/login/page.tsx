@@ -1,11 +1,15 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { Route } from "lucide-react";
 import { AuthForm } from "@/components/auth/auth-form";
 import { Card, CardContent } from "@/components/ui/card";
+import { ROUTES } from "@/lib/routes";
+import { getCurrentUser } from "@/lib/session";
 
 export const metadata: Metadata = { title: "Connexion" };
 
-/** Page statique : la redirection d'un utilisateur déjà connecté est faite par le proxy. */
+/** Shell statique ; un utilisateur déjà connecté est renvoyé vers le tableau de bord par RedirectIfAuthenticated. */
 export default function LoginPage() {
   return (
     <main className="flex min-h-dvh flex-1 items-center justify-center p-4">
@@ -21,6 +25,19 @@ export default function LoginPage() {
           </CardContent>
         </Card>
       </div>
+      <Suspense fallback={null}>
+        <RedirectIfAuthenticated />
+      </Suspense>
     </main>
   );
+}
+
+/**
+ * Vérifie une session réellement valide (et pas seulement la présence du cookie, comme le proxy) :
+ * un cookie expiré ne renvoie donc pas vers /, ce qui évite une boucle / ↔ /login.
+ */
+async function RedirectIfAuthenticated() {
+  const user = await getCurrentUser();
+  if (user) redirect(ROUTES.dashboard);
+  return null;
 }

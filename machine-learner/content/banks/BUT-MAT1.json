@@ -1,0 +1,122 @@
+{
+  "nodeId": "BUT-MAT1",
+  "questions": [
+    {
+      "id": "BUT-MAT1-Q01",
+      "question": "Quelle est la contraposée de l'implication « P ⇒ Q » ?",
+      "options": ["Q ⇒ P", "¬P ⇒ ¬Q", "¬Q ⇒ ¬P", "P ∧ ¬Q"],
+      "correctOptionIndex": 2,
+      "explanation": "La contraposée de P ⇒ Q est ¬Q ⇒ ¬P, qui lui est logiquement équivalente. Q ⇒ P est la réciproque et ¬P ⇒ ¬Q l'inverse : aucune des deux n'est équivalente à P ⇒ Q en général."
+    },
+    {
+      "id": "BUT-MAT1-Q02",
+      "question": "Dans quel cas l'implication « P ⇒ Q » est-elle fausse ?",
+      "options": [
+        "Uniquement quand P est vraie et Q est fausse",
+        "Uniquement quand P est fausse et Q est vraie",
+        "Dès que P est fausse",
+        "Dès que P et Q n'ont pas la même valeur de vérité"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "P ⇒ Q équivaut à ¬P ∨ Q : elle n'est fausse que si P est vraie et Q fausse. Quand P est fausse, l'implication est vraie quelle que soit la valeur de Q."
+    },
+    {
+      "id": "BUT-MAT1-Q03",
+      "question": "Quelle est la négation de l'énoncé « ∀x ∈ ℝ, ∃y ∈ ℝ, y > x » ?",
+      "options": [
+        "∀x ∈ ℝ, ∃y ∈ ℝ, y ≤ x",
+        "∃x ∈ ℝ, ∃y ∈ ℝ, y ≤ x",
+        "∀x ∈ ℝ, ∀y ∈ ℝ, y ≤ x",
+        "∃x ∈ ℝ, ∀y ∈ ℝ, y ≤ x"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "On échange chaque quantificateur (∀ devient ∃, ∃ devient ∀) en gardant leur ordre, puis on nie la propriété finale : la négation de y > x est y ≤ x."
+    },
+    {
+      "id": "BUT-MAT1-Q04",
+      "question": "Dans E = {1, 2, 3, 4, 5, 6}, on pose A = {1, 2, 3} et B = {2, 4}. Quel est le complémentaire de A ∪ B dans E ?",
+      "options": ["{2}", "{5, 6}", "{1, 3, 4, 5, 6}", "{4, 5, 6}"],
+      "correctOptionIndex": 1,
+      "explanation": "A ∪ B = {1, 2, 3, 4}, donc son complémentaire dans E est {5, 6}. On le retrouve avec De Morgan : c'est l'intersection des complémentaires de A et de B, {4, 5, 6} ∩ {1, 3, 5, 6} = {5, 6}."
+    },
+    {
+      "id": "BUT-MAT1-Q05",
+      "question": "Un ensemble E contient 4 éléments. Combien d'éléments contient P(E), l'ensemble des parties de E ?",
+      "options": ["16", "8", "4", "24"],
+      "correctOptionIndex": 0,
+      "explanation": "Chaque élément est soit dans la partie, soit absent : 2 choix par élément, donc 2⁴ = 16 parties, en comptant ∅ et E lui-même."
+    },
+    {
+      "id": "BUT-MAT1-Q06",
+      "question": "A contient 3 éléments et B en contient 4. Combien d'éléments contient le produit cartésien A × B ?",
+      "options": ["7", "64", "12", "81"],
+      "correctOptionIndex": 2,
+      "explanation": "A × B est l'ensemble des couples (a, b) avec a ∈ A et b ∈ B : il y a 3 × 4 = 12 couples. 7 serait le cardinal de A ∪ B si A et B étaient disjoints."
+    },
+    {
+      "id": "BUT-MAT1-Q07",
+      "question": "A est une matrice 2×3 et B une matrice 3×4. Quelle est la taille du produit AB ?",
+      "options": ["3×3", "4×2", "Le produit AB n'est pas défini", "2×4"],
+      "correctOptionIndex": 3,
+      "explanation": "Le produit d'une matrice n×p par une matrice p×m est défini car les dimensions intérieures coïncident (ici 3 = 3) ; il donne une matrice n×m, soit 2×4."
+    },
+    {
+      "id": "BUT-MAT1-Q08",
+      "question": "Soit A la matrice 2×2 de lignes (1, 2) et (3, 4), et B celle de lignes (0, 1) et (1, 0). Quelles sont les lignes du produit AB ?",
+      "options": ["(3, 4) et (1, 2)", "(2, 1) et (4, 3)", "(0, 2) et (3, 0)", "(2, 4) et (1, 3)"],
+      "correctOptionIndex": 1,
+      "explanation": "Chaque coefficient est le produit d'une ligne de A par une colonne de B : ligne 1, colonne 1 donne 1×0 + 2×1 = 2. Multiplier A à droite par B échange ici ses colonnes."
+    },
+    {
+      "id": "BUT-MAT1-Q09",
+      "question": "Soit M la matrice 2×2 de lignes (2, 3) et (4, 6). Que vaut det(M), et M est-elle inversible ?",
+      "options": [
+        "0 : M n'est pas inversible",
+        "24 : M est inversible",
+        "12 : M est inversible",
+        "0 : M est inversible"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "det(M) = ad − bc = 2×6 − 3×4 = 0. Une matrice carrée est inversible si et seulement si son déterminant est non nul ; ici la 2e ligne vaut 2 fois la 1re."
+    },
+    {
+      "id": "BUT-MAT1-Q10",
+      "question": "A et B sont deux événements indépendants avec P(A) = 0,5 et P(B) = 0,4. Quelle est la probabilité qu'aucun des deux ne se réalise ?",
+      "options": ["0,2", "0,1", "0,7", "0,3"],
+      "correctOptionIndex": 3,
+      "explanation": "Les complémentaires de A et B sont aussi indépendants : (1 − 0,5) × (1 − 0,4) = 0,5 × 0,6 = 0,3. On retrouve 1 − P(A ∪ B) = 1 − (0,5 + 0,4 − 0,2) = 0,3."
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "BUT-MAT1-F01",
+      "front": "Contraposée de P ⇒ Q",
+      "back": "¬Q ⇒ ¬P. Elle est équivalente à P ⇒ Q, alors que la réciproque Q ⇒ P ne l'est pas en général."
+    },
+    {
+      "id": "BUT-MAT1-F02",
+      "front": "Négation de « ∀x, P(x) » et de « ∃x, P(x) »",
+      "back": "¬(∀x, P(x)) ⇔ ∃x, ¬P(x) et ¬(∃x, P(x)) ⇔ ∀x, ¬P(x). On échange le quantificateur, puis on nie la propriété."
+    },
+    {
+      "id": "BUT-MAT1-F03",
+      "front": "Transposée d'une matrice",
+      "back": "Aᵀ échange lignes et colonnes : le coefficient en ligne i, colonne j de Aᵀ est celui en ligne j, colonne i de A. Si A est n×p, Aᵀ est p×n."
+    },
+    {
+      "id": "BUT-MAT1-F04",
+      "front": "Matrice identité I",
+      "back": "Matrice carrée avec des 1 sur la diagonale et des 0 ailleurs. Elle est neutre pour le produit : AI = IA = A. A est inversible s'il existe B telle que AB = BA = I."
+    },
+    {
+      "id": "BUT-MAT1-F05",
+      "front": "Déterminant d'une matrice 2×2 de lignes (a, b) et (c, d)",
+      "back": "det = ad − bc. La matrice est inversible si et seulement si ce déterminant est non nul."
+    },
+    {
+      "id": "BUT-MAT1-F06",
+      "front": "Événements indépendants",
+      "back": "A et B sont indépendants si P(A ∩ B) = P(A) × P(B). Rappel : la probabilité du complémentaire de A vaut 1 − P(A)."
+    }
+  ]
+}

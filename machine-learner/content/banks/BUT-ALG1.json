@@ -1,0 +1,132 @@
+{
+  "nodeId": "BUT-ALG1",
+  "questions": [
+    {
+      "id": "BUT-ALG1-Q01",
+      "question": "Quelle est la complexité dans le pire cas d'une recherche dichotomique dans un tableau trié de n éléments ?",
+      "options": ["O(n)", "O(n log n)", "O(1)", "O(log n)"],
+      "correctOptionIndex": 3,
+      "explanation": "Chaque comparaison élimine la moitié de la zone restante (n, n/2, n/4…) : il faut donc de l'ordre de log₂(n) comparaisons au plus."
+    },
+    {
+      "id": "BUT-ALG1-Q02",
+      "question": "Quelle est la complexité dans le pire cas du tri fusion sur un tableau de n éléments ?",
+      "options": ["O(n²)", "O(n log n)", "O(n)", "O(log n)"],
+      "correctOptionIndex": 1,
+      "explanation": "Le tableau est coupé en deux jusqu'à des sous-tableaux d'un élément, soit environ log₂(n) niveaux, et chaque niveau de fusion traite les n éléments : O(n log n), même dans le pire cas."
+    },
+    {
+      "id": "BUT-ALG1-Q03",
+      "question": "Dans quelle situation le tri rapide (quicksort) atteint-il sa complexité de pire cas O(n²) ?",
+      "options": [
+        "Quand le pivot choisi est à chaque fois le plus petit ou le plus grand élément",
+        "Quand tous les éléments du tableau sont distincts",
+        "Quand le pivot est à chaque fois la médiane du sous-tableau",
+        "Quand le tableau contient un nombre impair d'éléments"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "Un pivot extrême produit des partitions de tailles n − 1 et 0 : il faut alors n niveaux de partition coûtant chacun O(n), soit O(n²). C'est le cas, par exemple, si l'on prend le premier élément comme pivot sur un tableau déjà trié."
+    },
+    {
+      "id": "BUT-ALG1-Q04",
+      "question": "On empile successivement 1, 2 puis 3 dans une pile vide, puis on effectue deux dépilements. Quelle valeur reste dans la pile ?",
+      "options": ["3", "2", "1", "La pile est vide"],
+      "correctOptionIndex": 2,
+      "explanation": "Une pile est LIFO (dernier entré, premier sorti) : les deux dépilements retirent 3 puis 2, il reste donc 1."
+    },
+    {
+      "id": "BUT-ALG1-Q05",
+      "question": "Quelle structure de données convient pour stocker les documents envoyés à une imprimante, qui doivent être imprimés dans leur ordre d'arrivée ?",
+      "options": [
+        "Une pile (LIFO)",
+        "Une file (FIFO)",
+        "Un arbre binaire de recherche",
+        "Une table de hachage"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "Une file respecte l'ordre d'arrivée : premier entré, premier sorti (FIFO). On ajoute en queue et on retire en tête, chaque opération en O(1)."
+    },
+    {
+      "id": "BUT-ALG1-Q06",
+      "question": "Dans une liste simplement chaînée de n éléments, dont on ne connaît que la tête, quelles sont les complexités de l'insertion en tête et de l'accès à un élément par son indice (pire cas) ?",
+      "options": ["O(1) et O(1)", "O(n) et O(1)", "O(n) et O(n)", "O(1) et O(n)"],
+      "correctOptionIndex": 3,
+      "explanation": "Insérer en tête ne modifie que le nouveau maillon et le pointeur de tête : O(1). Pour atteindre l'élément d'indice i, il faut suivre les maillons depuis la tête : O(n) dans le pire cas, contrairement au tableau."
+    },
+    {
+      "id": "BUT-ALG1-Q07",
+      "question": "Quel parcours d'un arbre binaire de recherche visite ses clés dans l'ordre croissant ?",
+      "options": [
+        "Le parcours infixe (gauche, racine, droite)",
+        "Le parcours préfixe (racine, gauche, droite)",
+        "Le parcours postfixe (gauche, droite, racine)",
+        "Le parcours en largeur (niveau par niveau)"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "Dans un ABR, les clés du sous-arbre gauche sont inférieures à la racine et celles du sous-arbre droit supérieures : visiter gauche, racine, puis droite donne donc les clés triées."
+    },
+    {
+      "id": "BUT-ALG1-Q08",
+      "question": "On insère n clés dans l'ordre croissant dans un arbre binaire de recherche vide, sans rééquilibrage. Quelle est ensuite la complexité d'une recherche dans le pire cas ?",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+      "correctOptionIndex": 2,
+      "explanation": "Chaque clé est insérée à droite de la précédente : l'arbre dégénère en une liste de hauteur n, et une recherche peut parcourir tous les nœuds. Les arbres équilibrés (AVL, rouge-noir) garantissent O(log n)."
+    },
+    {
+      "id": "BUT-ALG1-Q09",
+      "question": "Qu'appelle-t-on une collision dans une table de hachage ?",
+      "options": [
+        "La recherche d'une clé absente de la table",
+        "L'insertion d'une clé déjà présente dans la table",
+        "Le dépassement de la capacité de la table",
+        "Deux clés différentes auxquelles la fonction de hachage associe la même case"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "La fonction de hachage n'est pas injective : des clés distinctes peuvent tomber dans la même case. On gère la collision par chaînage (une liste par case) ou par adressage ouvert (recherche d'une autre case libre)."
+    },
+    {
+      "id": "BUT-ALG1-Q10",
+      "question": "On définit récursivement fact(n) = n × fact(n − 1), sans aucun cas de base. Que se passe-t-il lors de l'appel fact(3) ?",
+      "options": [
+        "Les appels ne s'arrêtent jamais et la pile d'appels finit par déborder",
+        "La fonction renvoie 6",
+        "La fonction renvoie 0",
+        "La fonction renvoie 3"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "Sans cas de base (par exemple « si n ≤ 1, renvoyer 1 »), chaque appel en déclenche un autre avec n − 1 : 2, 1, 0, −1… sans fin. Chaque appel occupe la pile d'exécution, qui finit par déborder (stack overflow)."
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "BUT-ALG1-F01",
+      "front": "Complexité des tris usuels",
+      "back": "Tri fusion : O(n log n) dans tous les cas. Tri rapide : O(n log n) en moyenne, mais O(n²) dans le pire cas. Tri par insertion ou à bulles : O(n²) dans le pire cas."
+    },
+    {
+      "id": "BUT-ALG1-F02",
+      "front": "Pile ou file ?",
+      "back": "Pile : LIFO, dernier entré premier sorti (empiler et dépiler au sommet). File : FIFO, premier entré premier sorti (ajout en queue, retrait en tête)."
+    },
+    {
+      "id": "BUT-ALG1-F03",
+      "front": "Liste chaînée ou tableau ?",
+      "back": "Liste chaînée : insertion en tête en O(1), accès par indice en O(n). Tableau : accès par indice en O(1), insertion au début en O(n) car il faut décaler les éléments."
+    },
+    {
+      "id": "BUT-ALG1-F04",
+      "front": "Propriété d'un arbre binaire de recherche (ABR)",
+      "back": "Pour chaque nœud, les clés du sous-arbre gauche sont inférieures à sa clé et celles du sous-arbre droit supérieures. Une recherche coûte O(h) : O(log n) si l'arbre est équilibré, O(n) s'il dégénère en liste."
+    },
+    {
+      "id": "BUT-ALG1-F05",
+      "front": "Table de hachage : coût d'accès et collisions",
+      "back": "Recherche, insertion et suppression en O(1) en moyenne grâce à la fonction de hachage. Les collisions se gèrent par chaînage ou adressage ouvert ; si toutes les clés collisionnent, l'accès devient O(n)."
+    },
+    {
+      "id": "BUT-ALG1-F06",
+      "front": "Cas de base d'une fonction récursive",
+      "back": "Condition qui renvoie un résultat sans nouvel appel récursif, par exemple fact(0) = 1. Chaque appel doit s'en rapprocher, sinon la récursion ne termine pas."
+    }
+  ]
+}

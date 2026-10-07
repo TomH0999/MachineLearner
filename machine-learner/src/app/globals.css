@@ -7,7 +7,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
+  --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -46,6 +46,16 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --color-status-locked: var(--status-locked);
+  --color-status-unlocked: var(--status-unlocked);
+  --color-status-completed: var(--status-completed);
+  --color-gold: var(--gold);
+  --color-domain-maths: var(--domain-maths);
+  --color-domain-dev: var(--domain-dev);
+  --color-domain-reseaux: var(--domain-reseaux);
+  --color-domain-ia: var(--domain-ia);
+  --color-domain-archi: var(--domain-archi);
+  --color-domain-anglais: var(--domain-anglais);
 }
 
 :root {
@@ -55,7 +65,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: oklch(0.51 0.2 268);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -66,7 +76,7 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --ring: oklch(0.51 0.2 268);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -81,6 +91,17 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  /* EngiPath : statuts des nœuds et domaines */
+  --status-locked: oklch(0.68 0.015 260);
+  --status-unlocked: oklch(0.58 0.2 262);
+  --status-completed: oklch(0.6 0.16 155);
+  --gold: oklch(0.78 0.15 80);
+  --domain-maths: oklch(0.56 0.21 293);
+  --domain-dev: oklch(0.58 0.17 245);
+  --domain-reseaux: oklch(0.62 0.12 200);
+  --domain-ia: oklch(0.6 0.22 340);
+  --domain-archi: oklch(0.66 0.16 55);
+  --domain-anglais: oklch(0.6 0.18 25);
 }
 
 .dark {
@@ -90,8 +111,8 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --primary: oklch(0.7 0.16 268);
+  --primary-foreground: oklch(0.18 0.03 268);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
@@ -101,7 +122,7 @@
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --ring: oklch(0.7 0.16 268);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -115,6 +136,17 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  /* EngiPath : statuts des nœuds et domaines */
+  --status-locked: oklch(0.48 0.015 260);
+  --status-unlocked: oklch(0.72 0.16 258);
+  --status-completed: oklch(0.74 0.16 155);
+  --gold: oklch(0.84 0.14 85);
+  --domain-maths: oklch(0.72 0.17 293);
+  --domain-dev: oklch(0.72 0.14 245);
+  --domain-reseaux: oklch(0.76 0.11 200);
+  --domain-ia: oklch(0.74 0.18 340);
+  --domain-archi: oklch(0.8 0.14 60);
+  --domain-anglais: oklch(0.74 0.15 25);
 }
 
 @layer base {
@@ -127,4 +159,8 @@
   html {
     @apply font-sans;
   }
+}
+
+@utility glow-unlocked {
+  box-shadow: 0 0 0 1px var(--status-unlocked), 0 0 20px -4px var(--status-unlocked);
 }

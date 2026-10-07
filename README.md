@@ -48,7 +48,7 @@ git clone [https://github.com/ton-compte/machine-learner.git](https://github.com
 cd machine-learner/machine-learner
 
 #### Installer les dépendances
-npm install
+npm install @prisma/client @xyflow/react react-player react-markdown
 
 ### 3. Configuration de l'environnement
 #### Crée un fichier .env dans le dossier machine-learner/ :

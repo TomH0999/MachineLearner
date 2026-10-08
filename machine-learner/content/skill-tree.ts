@@ -2,8 +2,7 @@ import type { SeedNode } from "./schema";
 
 /**
  * Structure complète du Skill Tree (15 nœuds).
-**/
-
+ */
 export const SKILL_TREE: readonly SeedNode[] = [
   // ─── SOCLE 1 : BUT INFORMATIQUE ───
   {
@@ -25,20 +24,20 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "BUT-ALG1-L02",
         order: 2,
-        title: "Data Structures and Algorithms Full Course — freeCodeCamp (EN)",
+        title: "Data Structures Easy to Advanced — freeCodeCamp / WilliamFiset (EN)",
         youtubeUrl: "https://www.youtube.com/watch?v=RBSGKlAvoiM",
       },
       {
         id: "BUT-ALG1-L03",
         order: 3,
-        title: "Introduction to Algorithms & Data Structures — Abdul Bari (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=0IAPZz2bZEg",
+        title: "Algorithmes de tri avancés (QuickSort, MergeSort) — mycodeschool (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=COk73cpQbFQ",
       },
       {
         id: "BUT-ALG1-L04",
         order: 4,
-        title: "Algorithmes de tri avancés (QuickSort, MergeSort) — mycodeschool (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=COk73cpQbFQ",
+        title: "CS50 Data Structures Lecture — Harvard / CS50 (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=t2CEgPsws3U",
       },
     ],
   },
@@ -67,13 +66,13 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "BUT-DEV1-L03",
         order: 3,
-        title: "SOLID Design Principles — Web Dev Simplified (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=UJh3TEag0A8",
+        title: "Design Patterns in 100 Seconds — Fireship (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=tv-_1er1mWI",
       },
       {
         id: "BUT-DEV1-L04",
         order: 4,
-        title: "Initiation à la programmation fonctionnelle — JSConf / Anjana Vakil (EN)",
+        title: "Initiation à la programmation fonctionnelle et Lambdas — freeCodeCamp (EN)",
         youtubeUrl: "https://www.youtube.com/watch?v=e-5obm1G_FY",
       },
     ],
@@ -102,13 +101,13 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "BUT-BDD1-L03",
         order: 3,
-        title: "Database Indexing in 100 Seconds — Fireship (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=cl4N48-dFBo",
+        title: "SQL in 100 Seconds — Fireship (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=zsjvFFKOm3c",
       },
       {
         id: "BUT-BDD1-L04",
         order: 4,
-        title: "Introduction aux bases NoSQL — Simply Explained (EN)",
+        title: "Introduction aux bases NoSQL (Document, Clé-Valeur, Graphe) — Fireship (EN)",
         youtubeUrl: "https://www.youtube.com/watch?v=0buKQHokLK8",
       },
     ],
@@ -125,26 +124,26 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "BUT-RES1-L01",
         order: 1,
-        title: "Le Modèle OSI et la suite TCP/IP expliqués — TechTerms (EN)",
+        title: "Le Modèle OSI et la suite TCP/IP expliqués — NetworkChuck (EN)",
         youtubeUrl: "https://www.youtube.com/watch?v=vv4y_uOneC0",
       },
       {
         id: "BUT-RES1-L02",
         order: 2,
-        title: "Subnetting is EASY! — NetworkChuck (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=ecCuyq-Wvhc",
+        title: "TCP/IP Protocol Suite — NetworkChuck (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=PpsEaqJV_A0",
       },
       {
         id: "BUT-RES1-L03",
         order: 3,
-        title: "Linux for Beginners — NetworkChuck (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=wBp0Rb-ZJak",
+        title: "Network Fundamentals — NetworkChuck (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=L3Z4pP_a22A",
       },
       {
         id: "BUT-RES1-L04",
         order: 4,
-        title: "Linux Command Line Tutorial for Beginners — freeCodeCamp (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=ZtqB-UypI4s",
+        title: "Linux for Hackers and Developers — NetworkChuck (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=VbEx7B_ZZE4",
       },
     ],
   },
@@ -160,8 +159,8 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "BUT-WEB1-L01",
         order: 1,
-        title: "Git & GitHub Crash Course — Traversy Media (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=8JJ148D413o",
+        title: "Git in 100 Seconds — Fireship (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=hwP7WQkmECE",
       },
       {
         id: "BUT-WEB1-L02",
@@ -196,26 +195,26 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "BUT-MAT1-L01",
         order: 1,
-        title: "Logique propositionnelle et Tables de vérité — nptelhrd / NPTEL (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=xlUFkMKSB3Y",
-      },
-      {
-        id: "BUT-MAT1-L02",
-        order: 2,
         title: "Vecteurs — Essence of linear algebra, ch. 1 — 3Blue1Brown (EN)",
         youtubeUrl: "https://www.youtube.com/watch?v=fNk_zzaMoSs",
       },
       {
-        id: "BUT-MAT1-L03",
-        order: 3,
+        id: "BUT-MAT1-L02",
+        order: 2,
         title: "Transformations linéaires et matrices — ch. 3 — 3Blue1Brown (EN)",
         youtubeUrl: "https://www.youtube.com/watch?v=kYB8IZa5AuE",
       },
       {
-        id: "BUT-MAT1-L04",
-        order: 4,
+        id: "BUT-MAT1-L03",
+        order: 3,
         title: "Produit matriciel et composition — ch. 4 — 3Blue1Brown (EN)",
         youtubeUrl: "https://www.youtube.com/watch?v=XkY2DOUCWMU",
+      },
+      {
+        id: "BUT-MAT1-L04",
+        order: 4,
+        title: "Le déterminant — ch. 6 — 3Blue1Brown (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=Ip3X9LOh2dk",
       },
     ],
   },
@@ -269,7 +268,7 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "ING-MAT3-L01",
         order: 1,
-        title: "Dérivées partielles et gradients à plusieurs variables — Eugene Khutoryansky (EN)",
+        title: "Dérivées partielles et gradients à plusieurs variables — 3Blue1Brown (EN)",
         youtubeUrl: "https://www.youtube.com/watch?v=GkB4vW16QHI",
       },
       {
@@ -281,8 +280,8 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "ING-MAT3-L03",
         order: 3,
-        title: "Linear Regression & Optimization — StatQuest (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=nk2CQITm_eY",
+        title: "Linear Regression, Clearly Explained — StatQuest (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=7ArmBVF2d54",
       },
       {
         id: "ING-MAT3-L04",
@@ -346,20 +345,20 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "ING-ALG2-L02",
         order: 2,
-        title: "Automates finis déterministes (DFA) — Neso Academy (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=40i418O31gA",
+        title: "Turing Machines & Computability — Computerphile (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=gJQTFhkhwPA",
       },
       {
         id: "ING-ALG2-L03",
         order: 3,
-        title: "Grammaires hors-contexte et Théorie des langages — Neso Academy (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=Ewy2oJ3B83E",
+        title: "P vs NP and the Complexity Zoo — Computerphile (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=YX40hbAHx3s",
       },
       {
         id: "ING-ALG2-L04",
         order: 4,
-        title: "Turing Machines & Computability — Computerphile (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=gJQTFhkhwPA",
+        title: "Harvard CS50 Theoretical CS Concepts — Harvard / CS50 (EN)",
+        youtubeUrl: "https://www.youtube.com/watch?v=8mAITcNt710",
       },
     ],
   },
@@ -394,7 +393,7 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "ING-ALG3-L04",
         order: 4,
-        title: "P vs NP and the Complexity Zoo — Computerphile (EN)",
+        title: "P vs NP Problem Explained — Computerphile (EN)",
         youtubeUrl: "https://www.youtube.com/watch?v=YX40hbAHx3s",
       },
     ],
@@ -503,7 +502,7 @@ export const SKILL_TREE: readonly SeedNode[] = [
         id: "ING-ARCH1-L02",
         order: 2,
         title: "Microservices in 100 Seconds — Fireship (EN)",
-        youtubeUrl: "https://www.youtube.com/watch?v=Cib75_4A4aE",
+        youtubeUrl: "https://www.youtube.com/watch?v=rv4LlmLmV3w",
       },
       {
         id: "ING-ARCH1-L03",
@@ -532,7 +531,7 @@ export const SKILL_TREE: readonly SeedNode[] = [
       {
         id: "ING-ENG1-L01",
         order: 1,
-        title: "Harvard CS50 - Lecture 0 (Introduction to Computer Science) — Harvard (EN)",
+        title: "Harvard CS50 - Lecture 0 (Computer Science Introduction) — Harvard (EN)",
         youtubeUrl: "https://www.youtube.com/watch?v=8mAITcNt710",
       },
       {

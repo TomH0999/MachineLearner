@@ -1,0 +1,171 @@
+{
+  "nodeId": "ING-MAT3",
+  "questions": [
+    {
+      "id": "ING-MAT3-Q01",
+      "question": "Pour f(x, y) = x²y + 3y², que vaut la dérivée partielle ∂f/∂x au point (1, 2) ?",
+      "options": ["13", "4", "2", "14"],
+      "correctOptionIndex": 1,
+      "explanation": "On dérive par rapport à x en traitant y comme une constante : ∂f/∂x = 2xy, qui vaut 2 × 1 × 2 = 4. La valeur 13 est celle de ∂f/∂y = x² + 6y, et 14 est la valeur de f elle-même."
+    },
+    {
+      "id": "ING-MAT3-Q02",
+      "question": "En un point où ∇f n'est pas nul, dans quelle direction la fonction f augmente-t-elle le plus vite ?",
+      "options": [
+        "Dans la direction de ∇f",
+        "Dans la direction de −∇f",
+        "Dans une direction orthogonale à ∇f",
+        "Dans la direction de l'axe des x, quelle que soit f"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "La dérivée dans la direction d'un vecteur unitaire u vaut ∇f·u = ‖∇f‖·cos θ, maximale pour θ = 0, c'est-à-dire u colinéaire à ∇f et de même sens. −∇f donne la plus forte descente, et une direction orthogonale laisse f constante au premier ordre."
+    },
+    {
+      "id": "ING-MAT3-Q03",
+      "question": "Pour f(x, y) = x² + y², quel vecteur est tangent à la ligne de niveau passant par le point (3, 4) ?",
+      "options": ["(6, 8)", "(3, 4)", "(−4, 3)", "(1, 1)"],
+      "correctOptionIndex": 2,
+      "explanation": "Le gradient ∇f(3, 4) = (6, 8) est orthogonal à la ligne de niveau, ici le cercle de rayon 5. Le vecteur (−4, 3) vérifie (−4) × 6 + 3 × 8 = 0, il est donc tangent ; (3, 4) et (6, 8) sont au contraire normaux au cercle."
+    },
+    {
+      "id": "ING-MAT3-Q04",
+      "question": "Quelle est la matrice hessienne de f(x, y) = x³ + 2xy + y² au point (1, 0) ?",
+      "options": [
+        "Matrice de lignes (3, 2) et (2, 2)",
+        "Matrice de lignes (6, 0) et (0, 2)",
+        "Matrice de lignes (6, 1) et (1, 2)",
+        "Matrice de lignes (6, 2) et (2, 2)"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "∂²f/∂x² = 6x vaut 6 en x = 1, ∂²f/∂x∂y = 2 et ∂²f/∂y² = 2. Les termes croisés ne sont pas nuls : la dérivée de 2xy par rapport à x puis à y vaut 2."
+    },
+    {
+      "id": "ING-MAT3-Q05",
+      "question": "En un point critique de f, la matrice hessienne est la matrice de lignes (1, 3) et (3, 1). Quelle est la nature de ce point ?",
+      "options": [
+        "Un minimum local, car les coefficients diagonaux sont positifs",
+        "Un maximum local",
+        "Un point col (point selle)",
+        "On ne peut pas conclure"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "det(H) = 1 × 1 − 3 × 3 = −8 < 0 : les valeurs propres, 4 et −2, sont de signes opposés, donc f monte dans une direction et descend dans l'autre. Des coefficients diagonaux positifs ne suffisent pas à garantir un minimum."
+    },
+    {
+      "id": "ING-MAT3-Q06",
+      "question": "Quelle est la nature du point critique (0, 0) de f(x, y) = −2x² + 2xy − y² ?",
+      "options": [
+        "Un minimum local, car det(H) > 0",
+        "Un maximum local",
+        "Un point col",
+        "On ne peut pas conclure sans calculer f(0, 0)"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "La hessienne a pour lignes (−4, 2) et (2, −2) : det = 8 − 4 = 4 > 0 et trace = −6 < 0, donc les deux valeurs propres sont négatives et le point est un maximum. Un déterminant positif indique seulement que les valeurs propres ont le même signe ; c'est la trace qui donne ce signe."
+    },
+    {
+      "id": "ING-MAT3-Q07",
+      "question": "Quel est le développement de Taylor à l'ordre 2 de f(x, y) = exp(x + y) au voisinage de (0, 0) ?",
+      "options": [
+        "1 + x + y + (x + y)²/2",
+        "1 + x + y",
+        "1 + x + y + (x² + y²)/2",
+        "1 + x + y + (x + y)²"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "En (0, 0), f vaut 1, le gradient vaut (1, 1) et toutes les dérivées secondes valent 1 : le terme d'ordre 2 est ½(x² + 2xy + y²) = (x + y)²/2. Oublier le terme croisé 2xy donne (x² + y²)/2, et oublier le facteur ½ donne (x + y)²."
+    },
+    {
+      "id": "ING-MAT3-Q08",
+      "question": "f est convexe et différentiable sur ℝⁿ, et ∇f(a) = 0. Que peut-on affirmer sur le point a ?",
+      "options": [
+        "a est un minimum local, mais pas forcément global",
+        "a peut être un point col",
+        "a est un maximum global de f",
+        "a est un minimum global de f"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "Une fonction convexe est au-dessus de ses plans tangents : f(x) ≥ f(a) + ∇f(a)·(x − a) = f(a) pour tout x. Tout point critique d'une fonction convexe est donc un minimum global."
+    },
+    {
+      "id": "ING-MAT3-Q09",
+      "question": "Laquelle de ces fonctions est convexe sur ℝ² ?",
+      "options": ["x² + 3xy + y²", "x² + xy + y²", "xy", "x² − y²"],
+      "correctOptionIndex": 1,
+      "explanation": "La hessienne de x² + xy + y² est la matrice constante de lignes (2, 1) et (1, 2), de déterminant 3 > 0 et de trace 4 > 0 : elle est définie positive partout. Pour x² + 3xy + y², le déterminant vaut 4 − 9 = −5 < 0, et xy comme x² − y² ont un point col en (0, 0)."
+    },
+    {
+      "id": "ING-MAT3-Q10",
+      "question": "On applique un pas de descente de gradient à f(x, y) = x² + 2y², depuis θ = (1, 1) avec η = 0,1. Quel est le nouveau point ?",
+      "options": ["(1,2 ; 1,4)", "(0,8 ; 0,8)", "(−1 ; −3)", "(0,8 ; 0,6)"],
+      "correctOptionIndex": 3,
+      "explanation": "∇f = (2x, 4y) vaut (2, 4) en (1, 1), donc θ ← (1, 1) − 0,1 × (2, 4) = (0,8 ; 0,6). Ajouter le gradient au lieu de le soustraire donne (1,2 ; 1,4), et oublier η donne (−1 ; −3)."
+    },
+    {
+      "id": "ING-MAT3-Q11",
+      "question": "Pour f(x) = x², la descente de gradient s'écrit x ← x − η·2x = (1 − 2η)·x. Que se passe-t-il avec η = 1,5, en partant de x = 1 ?",
+      "options": [
+        "La suite converge vers 0 plus vite qu'avec η = 0,1",
+        "La suite reste bloquée en x = 1",
+        "La suite oscille autour de 0 en s'éloignant : −2, puis 4, puis −8…",
+        "La suite converge lentement vers 0 sans changer de signe"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "Chaque pas multiplie x par 1 − 2η = −2, de valeur absolue supérieure à 1 : le pas saute par-dessus le minimum et la suite diverge. Il faut |1 − 2η| < 1, soit 0 < η < 1, pour converger."
+    },
+    {
+      "id": "ING-MAT3-Q12",
+      "question": "Avec la méthode de Lagrange, quel est le maximum de f(x, y) = xy sous la contrainte x + y = 10 ?",
+      "options": [
+        "25, atteint en x = y = 5",
+        "24, atteint en (4, 6)",
+        "100, atteint en x = y = 10",
+        "0, atteint en (10, 0)"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "∇f = (y, x) et ∇g = (1, 1) : la condition ∇f = λ∇g impose y = λ = x, et la contrainte donne x = y = 5, d'où f = 25. Le point (10, 10) ne respecte pas la contrainte, et (4, 6) la respecte mais donne seulement 24."
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "ING-MAT3-F01",
+      "front": "Dérivée partielle ∂f/∂x",
+      "back": "Dérivée de f par rapport à x, toutes les autres variables étant traitées comme des constantes. Pour f(x, y) = x²y : ∂f/∂x = 2xy et ∂f/∂y = x²."
+    },
+    {
+      "id": "ING-MAT3-F02",
+      "front": "Gradient ∇f",
+      "back": "Vecteur des dérivées partielles (∂f/∂x₁, …, ∂f/∂xₙ). Il pointe vers la plus forte croissance de f, sa norme mesure la pente dans cette direction, et il est orthogonal aux lignes de niveau."
+    },
+    {
+      "id": "ING-MAT3-F03",
+      "front": "Matrice hessienne",
+      "back": "Matrice des dérivées secondes, de coefficient ∂²f/∂xᵢ∂xⱼ en ligne i et colonne j. Pour f de classe C², elle est symétrique (théorème de Schwarz) et décrit la courbure locale de f."
+    },
+    {
+      "id": "ING-MAT3-F04",
+      "front": "Classer un point critique en 2D",
+      "back": "On regarde la hessienne H au point critique : det(H) > 0 et trace(H) > 0 donnent un minimum, det(H) > 0 et trace(H) < 0 un maximum, det(H) < 0 un col. Si det(H) = 0, le test ne permet pas de conclure."
+    },
+    {
+      "id": "ING-MAT3-F05",
+      "front": "Développement de Taylor à l'ordre 2",
+      "back": "f(a + h) ≈ f(a) + ∇f(a)·h + ½·hᵀH(a)h. En un point critique, le terme d'ordre 1 s'annule : c'est la hessienne qui décide de la nature du point."
+    },
+    {
+      "id": "ING-MAT3-F06",
+      "front": "Fonction convexe",
+      "back": "Tout segment reliant deux points du graphe reste au-dessus du graphe ; pour f de classe C², cela revient à une hessienne semi-définie positive en tout point. Un minimum local est alors un minimum global."
+    },
+    {
+      "id": "ING-MAT3-F07",
+      "front": "Choix du taux d'apprentissage η",
+      "back": "Trop petit, la descente de gradient converge très lentement ; trop grand, elle oscille puis diverge. Pour une fonction quadratique de hessienne H, la convergence exige η < 2/λmax, où λmax est la plus grande valeur propre de H."
+    },
+    {
+      "id": "ING-MAT3-F08",
+      "front": "Multiplicateurs de Lagrange",
+      "back": "Pour optimiser f sous la contrainte g = 0, on résout ∇f = λ∇g avec g = 0 (si ∇g ≠ 0). À l'optimum, la ligne de niveau de f est tangente à la contrainte, donc les deux gradients sont colinéaires."
+    }
+  ]
+}

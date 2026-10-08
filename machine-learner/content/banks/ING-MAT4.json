@@ -1,0 +1,166 @@
+{
+  "nodeId": "ING-MAT4",
+  "questions": [
+    {
+      "id": "ING-MAT4-Q01",
+      "question": "Une variable aléatoire X a pour densité f(x) = 2x sur [0, 1], et 0 ailleurs. Que vaut E(X) ?",
+      "options": ["1/2", "1", "2/3", "1/3"],
+      "correctOptionIndex": 2,
+      "explanation": "Pour une variable continue, E(X) = ∫ x·f(x) dx = ∫₀¹ 2x² dx = 2/3. La valeur 1/2 serait l'espérance d'une loi uniforme sur [0, 1], alors que la densité 2x donne plus de poids aux grandes valeurs."
+    },
+    {
+      "id": "ING-MAT4-Q02",
+      "question": "X suit une loi binomiale de paramètres n = 20 et p = 0,25. Que valent E(X) et Var(X) ?",
+      "options": [
+        "E(X) = 5 et Var(X) = 5",
+        "E(X) = 5 et Var(X) = 3,75",
+        "E(X) = 5 et Var(X) ≈ 1,94",
+        "E(X) = 0,25 et Var(X) = 0,1875"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "E(X) = np = 20 × 0,25 = 5 et Var(X) = np(1 − p) = 5 × 0,75 = 3,75. La valeur 1,94 est l'écart-type √3,75, et l'égalité entre espérance et variance est propre à la loi de Poisson."
+    },
+    {
+      "id": "ING-MAT4-Q03",
+      "question": "Un serveur reçoit en moyenne 3 requêtes par seconde, et le nombre de requêtes par seconde suit une loi de Poisson. Quelle est la probabilité de n'en recevoir aucune pendant une seconde donnée ?",
+      "options": [
+        "e⁻³ ≈ 0,050",
+        "3·e⁻³ ≈ 0,149",
+        "1/3 ≈ 0,333",
+        "0, car on attend en moyenne 3 requêtes"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "Pour une loi de Poisson de paramètre λ, P(X = k) = exp(−λ)·λᵏ/k! ; avec λ = 3 et k = 0, il reste e⁻³ ≈ 0,0498. La valeur 3·e⁻³ correspond à P(X = 1)."
+    },
+    {
+      "id": "ING-MAT4-Q04",
+      "question": "La durée de vie T d'un composant, en années, suit une loi exponentielle de paramètre λ = 0,5. Que valent E(T) et Var(T) ?",
+      "options": [
+        "E(T) = 0,5 et Var(T) = 0,25",
+        "E(T) = 2 et Var(T) = 2",
+        "E(T) = 0,5 et Var(T) = 4",
+        "E(T) = 2 et Var(T) = 4"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "Pour une loi exponentielle de paramètre λ, E(T) = 1/λ = 2 ans et Var(T) = 1/λ² = 4. Prendre λ pour la moyenne donne 0,5 et 0,25 : λ est un taux de pannes par an, pas une durée."
+    },
+    {
+      "id": "ING-MAT4-Q05",
+      "question": "X suit une loi uniforme sur [0, 6]. Que valent E(2X + 1) et Var(2X + 1) ?",
+      "options": [
+        "E = 7 et Var = 12",
+        "E = 7 et Var = 13",
+        "E = 7 et Var = 6",
+        "E = 6 et Var = 12"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "E(X) = 3 et Var(X) = (6 − 0)²/12 = 3. Par linéarité, E(2X + 1) = 2 × 3 + 1 = 7, et Var(2X + 1) = 2² × 3 = 12, car une constante ajoutée décale la loi sans changer sa dispersion."
+    },
+    {
+      "id": "ING-MAT4-Q06",
+      "question": "X et Y sont indépendantes, avec Var(X) = 4 et Var(Y) = 9. Que vaut Var(X − Y) ?",
+      "options": ["5", "−5", "13", "25"],
+      "correctOptionIndex": 2,
+      "explanation": "Var(X − Y) = Var(X) + (−1)²·Var(Y) = 4 + 9 = 13 : les variances de variables indépendantes s'ajoutent, même pour une différence. Une variance n'est jamais négative, et 25 = (2 + 3)² vient de l'erreur qui additionne les écarts-types."
+    },
+    {
+      "id": "ING-MAT4-Q07",
+      "question": "La machine A fabrique 60 % des pièces, dont 2 % sont défectueuses ; la machine B fabrique les 40 % restants, dont 5 % sont défectueuses. Une pièce prise au hasard est défectueuse : quelle est la probabilité qu'elle vienne de B ?",
+      "options": ["40 %", "5 %", "3,2 %", "62,5 %"],
+      "correctOptionIndex": 3,
+      "explanation": "Les probabilités totales donnent P(D) = 0,6 × 0,02 + 0,4 × 0,05 = 0,032, puis Bayes donne P(B|D) = 0,02 / 0,032 = 0,625. Le défaut observé fait passer B de 40 % à 62,5 %, car B produit proportionnellement plus de défauts."
+    },
+    {
+      "id": "ING-MAT4-Q08",
+      "question": "X₁, …, Xₙ sont indépendantes, de même loi, d'espérance μ et d'écart-type σ. Pour n grand, que dit le théorème central limite de la moyenne X̄ₙ = (X₁ + … + Xₙ)/n ?",
+      "options": [
+        "Elle suit exactement la loi commune des Xᵢ",
+        "Elle suit approximativement une loi normale de moyenne μ et d'écart-type σ/√n",
+        "Elle suit approximativement une loi normale de moyenne μ et d'écart-type σ",
+        "Elle suit approximativement une loi normale de moyenne μ et d'écart-type σ/n"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "Par indépendance, Var(X̄ₙ) = nσ²/n² = σ²/n, donc l'écart-type vaut σ/√n. Le TCL ajoute que la loi de X̄ₙ devient approximativement normale, quelle que soit la loi des Xᵢ."
+    },
+    {
+      "id": "ING-MAT4-Q09",
+      "question": "Sur un échantillon de n = 100 mesures, la moyenne observée est x̄ = 50, et l'écart-type σ = 10 est connu. Quel est l'intervalle de confiance à 95 % pour μ ?",
+      "options": ["[48,04 ; 51,96]", "[30,4 ; 69,6]", "[49,80 ; 50,20]", "[40 ; 60]"],
+      "correctOptionIndex": 0,
+      "explanation": "x̄ ± 1,96·σ/√n = 50 ± 1,96 × 10/10 = 50 ± 1,96. Oublier √n donne [30,4 ; 69,6], et diviser par n au lieu de √n donne [49,80 ; 50,20]."
+    },
+    {
+      "id": "ING-MAT4-Q10",
+      "question": "Un test au seuil α = 5 % donne une p-value de 0,03. Que conclut-on ?",
+      "options": [
+        "H0 a 3 % de chances d'être vraie",
+        "On conserve H0, car 0,03 < 0,05",
+        "H1 est vraie avec une probabilité de 97 %",
+        "On rejette H0 au seuil de 5 %"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "La p-value est la probabilité, si H0 est vraie, d'observer un résultat au moins aussi extrême que celui obtenu ; comme 0,03 < 0,05, on rejette H0. Ce n'est pas la probabilité que H0 soit vraie."
+    },
+    {
+      "id": "ING-MAT4-Q11",
+      "question": "Un contrôle qualité teste l'hypothèse H0 « la pièce est conforme ». Une pièce défectueuse passe le contrôle et est déclarée conforme. De quelle erreur s'agit-il ?",
+      "options": [
+        "Une erreur de type I",
+        "Une erreur de type II",
+        "Aucune erreur, puisque H0 n'est pas rejetée",
+        "Une erreur de type I ou II selon la valeur de α"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "H0 est fausse (la pièce est défectueuse) et n'est pas rejetée : c'est une erreur de type II, de probabilité β. L'erreur de type I, de probabilité α, consisterait à déclarer défectueuse une pièce conforme."
+    },
+    {
+      "id": "ING-MAT4-Q12",
+      "question": "Une chaîne de Markov à deux états A et B a pour matrice de transition la matrice de lignes (0,7 ; 0,3) et (0,2 ; 0,8), chaque ligne donnant les probabilités de passage depuis un état. Quelle est sa distribution stationnaire (πA ; πB) ?",
+      "options": ["(0,5 ; 0,5)", "(0,6 ; 0,4)", "(0,4 ; 0,6)", "(0,7 ; 0,3)"],
+      "correctOptionIndex": 2,
+      "explanation": "πP = π donne πA = 0,7·πA + 0,2·πB, soit 0,3·πA = 0,2·πB ; avec πA + πB = 1, on obtient πA = 0,4 et πB = 0,6. Vérification : 0,4 × 0,7 + 0,6 × 0,2 = 0,4."
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "ING-MAT4-F01",
+      "front": "Variable aléatoire discrète ou continue",
+      "back": "Une variable discrète se décrit par les probabilités P(X = k), de somme 1. Une variable continue a une densité f ≥ 0 d'intégrale 1 : P(a ≤ X ≤ b) est l'intégrale de f entre a et b, et P(X = a) = 0 pour tout a."
+    },
+    {
+      "id": "ING-MAT4-F02",
+      "front": "Linéarité de l'espérance",
+      "back": "E(aX + bY + c) = a·E(X) + b·E(Y) + c, que X et Y soient indépendantes ou non. La variance n'est pas linéaire : Var(aX + b) = a²·Var(X)."
+    },
+    {
+      "id": "ING-MAT4-F03",
+      "front": "Variance d'une somme",
+      "back": "Var(X + Y) = Var(X) + Var(Y) + 2·Cov(X, Y). Si X et Y sont indépendantes, la covariance est nulle et les variances s'ajoutent ; les écarts-types, eux, ne s'ajoutent pas."
+    },
+    {
+      "id": "ING-MAT4-F04",
+      "front": "Loi des grands nombres",
+      "back": "La moyenne de n variables indépendantes de même loi, d'espérance μ, converge vers μ quand n tend vers l'infini. C'est ce qui justifie d'estimer une espérance par une moyenne, ou une probabilité par une fréquence."
+    },
+    {
+      "id": "ING-MAT4-F05",
+      "front": "Théorème de Bayes",
+      "back": "P(A|B) = P(B|A)·P(A) / P(B), avec P(B) = P(B|A)·P(A) + P(B|non A)·P(non A). Il transforme la probabilité a priori P(A) en probabilité a posteriori, une fois B observé."
+    },
+    {
+      "id": "ING-MAT4-F06",
+      "front": "Estimateur sans biais",
+      "back": "Un estimateur T d'un paramètre θ est sans biais si E(T) = θ. La moyenne empirique estime μ sans biais ; pour la variance, il faut diviser la somme des carrés des écarts à x̄ par n − 1 et non par n."
+    },
+    {
+      "id": "ING-MAT4-F07",
+      "front": "Loi normale : règle 68-95-99,7",
+      "back": "Pour une loi normale de moyenne μ et d'écart-type σ, environ 68 % des valeurs tombent dans [μ − σ, μ + σ], 95 % dans [μ − 2σ, μ + 2σ] et 99,7 % dans [μ − 3σ, μ + 3σ]. La valeur exacte pour 95 % est ±1,96σ."
+    },
+    {
+      "id": "ING-MAT4-F08",
+      "front": "Distribution stationnaire d'une chaîne de Markov",
+      "back": "Vecteur de probabilités π, de somme 1, vérifiant πP = π, où P est la matrice de transition. Pour une chaîne à nombre fini d'états, irréductible et apériodique, la loi de l'état converge vers π quel que soit l'état de départ."
+    }
+  ]
+}

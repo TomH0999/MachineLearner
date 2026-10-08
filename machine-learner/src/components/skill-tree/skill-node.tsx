@@ -3,7 +3,7 @@
 import { memo, type ReactNode } from "react";
 import Link from "next/link";
 import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
-import { Lock, Trophy } from "lucide-react";
+import { ClipboardCheck, Lock, Trophy } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Popover, PopoverContent, PopoverHeader, PopoverTitle, PopoverTrigger } from "@/components/ui/popover";
 import { ROUTES } from "@/lib/routes";
@@ -49,7 +49,12 @@ export const SkillNodeCard = memo(function SkillNodeCard({ data }: NodeProps<Ski
       <p className="line-clamp-2 text-sm leading-snug font-semibold">{node.title}</p>
       <div className="flex items-center justify-between gap-2">
         <StatusBadge node={node} />
-        {node.status === "UNLOCKED" && <NodeLink nodeId={node.id}>Étudier →</NodeLink>}
+        {node.status === "UNLOCKED" && (
+          <span className="flex items-center gap-2">
+            {node.category === "BUT" && <QuizLink nodeId={node.id} />}
+            <NodeLink nodeId={node.id}>Étudier →</NodeLink>
+          </span>
+        )}
         {node.status === "COMPLETED" && <NodeLink nodeId={node.id}>Revoir →</NodeLink>}
       </div>
     </>
@@ -126,6 +131,22 @@ function NodeLink({ nodeId, children }: { nodeId: string; children: ReactNode })
       className="nodrag nopan rounded-sm text-xs font-medium text-primary underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
     >
       {children}
+    </Link>
+  );
+}
+
+/** Bypass BUT : accès direct au quiz de positionnement, sans passer par le cours. */
+function QuizLink({ nodeId }: { nodeId: string }) {
+  const label = "Évaluer mes acquis : quiz direct sans le cours";
+  return (
+    <Link
+      href={ROUTES.quiz(nodeId)}
+      title={label}
+      aria-label={label}
+      className="nodrag nopan flex items-center gap-0.5 rounded-sm text-[11px] font-medium text-muted-foreground hover:text-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+    >
+      <ClipboardCheck aria-hidden className="size-3" />
+      Quiz
     </Link>
   );
 }

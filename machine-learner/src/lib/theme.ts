@@ -3,6 +3,7 @@
  * `@custom-variant dark` de shadcn. Module neutre (ni "use client" ni "server-only") :
  * `themeInitScript` est injecté par le layout racine, les fonctions servent côté client.
  */
+
 export type ThemePreference = "light" | "dark" | "system";
 
 export const THEME_STORAGE_KEY = "engipath-theme";

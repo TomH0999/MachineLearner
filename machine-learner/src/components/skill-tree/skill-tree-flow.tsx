@@ -2,7 +2,7 @@
 
 import "@xyflow/react/dist/style.css";
 
-import { useCallback, useMemo, useSyncExternalStore } from "react";
+import { useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import {
   Background,
@@ -14,7 +14,8 @@ import {
   type NodeMouseHandler,
 } from "@xyflow/react";
 import { ROUTES } from "@/lib/routes";
-import { computeLayeredLayout } from "@/lib/skill-tree/graph";
+import { computeLayeredLayout, computeNodeDepths } from "@/lib/skill-tree/graph";
+import { useIsDarkMode } from "@/lib/use-is-dark-mode";
 import type { CalculatedNode, Domain } from "@/types/domain";
 import { SkillNodeCard, type SkillFlowNode } from "./skill-node";
 import { STATUS_COLOR_VARS } from "./styles";
@@ -30,25 +31,12 @@ export function getFlowKey(nodes: CalculatedNode[]): string {
   return nodes.map((node) => `${node.id}:${node.status}:${node.bestScore}`).join("|");
 }
 
-function subscribeToThemeClass(onChange: () => void): () => void {
-  const observer = new MutationObserver(onChange);
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
-  return () => observer.disconnect();
-}
-
-function useIsDarkMode(): boolean {
-  return useSyncExternalStore(
-    subscribeToThemeClass,
-    () => document.documentElement.classList.contains("dark"),
-    () => false,
-  );
-}
-
 function buildFlowElements(
   nodes: CalculatedNode[],
   highlightDomains: readonly Domain[],
 ): { flowNodes: SkillFlowNode[]; flowEdges: Edge[] } {
   const positions = computeLayeredLayout(nodes);
+  const depths = computeNodeDepths(nodes);
   const byId = new Map(nodes.map((node) => [node.id, node]));
   // Sélection vide : rien n'est estompé et le rendu reste identique.
   const highlighted = new Set(highlightDomains);
@@ -75,13 +63,21 @@ function buildFlowElements(
       const sourceCompleted = source?.status === "COMPLETED";
       const stroke = sourceCompleted ? STATUS_COLOR_VARS.COMPLETED : STATUS_COLOR_VARS.LOCKED;
       const dimmed = isDimmed(source) || isDimmed(target);
+      // Prérequis transversal (saute au moins une colonne) : Bézier en pointillés, qui contourne
+      // mieux les colonnes intermédiaires qu'un tracé en équerre.
+      const isLongEdge = (depths.get(target.id) ?? 0) - (depths.get(sourceId) ?? 0) >= 2;
       return {
         id: `${sourceId}->${target.id}`,
         source: sourceId,
         target: target.id,
-        type: "smoothstep",
+        type: isLongEdge ? "default" : "smoothstep",
         markerEnd: { type: MarkerType.ArrowClosed, color: stroke },
-        style: { stroke, strokeWidth: 1.5, ...(dimmed ? { opacity: 0.15 } : {}) },
+        style: {
+          stroke,
+          strokeWidth: 1.5,
+          ...(isLongEdge ? { strokeDasharray: "6 4" } : {}),
+          ...(dimmed ? { opacity: 0.15 } : {}),
+        },
         animated: sourceCompleted && target.status === "UNLOCKED",
       };
     }),
@@ -134,6 +130,8 @@ export function SkillTreeFlow({
         <MiniMap<SkillFlowNode>
           pannable
           zoomable
+          style={{ width: 168, height: 112 }}
+          className="hidden xl:block"
           nodeColor={(node) => STATUS_COLOR_VARS[node.data.node.status]}
         />
       </ReactFlow>

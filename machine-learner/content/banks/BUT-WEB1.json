@@ -1,0 +1,191 @@
+{
+  "nodeId": "BUT-WEB1",
+  "questions": [
+    {
+      "id": "BUT-WEB1-Q01",
+      "question": "Pourquoi préférer un élément « <button> » à une « <div> » munie d'un gestionnaire de clic pour un bouton d'action ?",
+      "options": [
+        "Parce que <button> reçoit le focus au clavier, s'active avec Entrée ou Espace et est annoncé comme un bouton par les lecteurs d'écran",
+        "Parce qu'une <div> ne peut pas recevoir d'événement click",
+        "Parce que <button> s'affiche plus vite qu'une <div>",
+        "Parce que la balise <div> est dépréciée en HTML5"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "Un élément natif apporte gratuitement le comportement attendu : focus, activation au clavier et rôle transmis aux technologies d'assistance. Une <div> reçoit bien les clics de souris, mais il faudrait lui ajouter à la main tabindex, un rôle et la gestion des touches pour qu'elle soit accessible."
+    },
+    {
+      "id": "BUT-WEB1-Q02",
+      "question": "Avec « box-sizing: content-box » (la valeur par défaut), quelle largeur occupe un élément « width: 300px; padding: 20px; border: 5px solid; margin: 10px », marges non comprises ?",
+      "options": [
+        "300px",
+        "350px",
+        "370px",
+        "325px"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "En content-box, width ne mesure que le contenu : on ajoute le padding et la bordure des deux côtés, soit 300 + 2 × 20 + 2 × 5 = 350 px. 370 px inclut aussi les marges, 325 px ne compte qu'un côté, et 300 px serait le résultat avec box-sizing: border-box."
+    },
+    {
+      "id": "BUT-WEB1-Q03",
+      "question": "Lequel de ces sélecteurs CSS a la plus grande spécificité ?",
+      "options": [
+        "« .menu .item a:hover »",
+        "« nav ul li a »",
+        "« .menu a »",
+        "« #nav a »"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "La spécificité se compare composante par composante (identifiants, puis classes et pseudo-classes, puis éléments) : « #nav a » vaut (1, 0, 1) et l'emporte grâce à son identifiant. « .menu .item a:hover » vaut (0, 3, 1), « .menu a » (0, 1, 1) et « nav ul li a » (0, 0, 4)."
+    },
+    {
+      "id": "BUT-WEB1-Q04",
+      "question": "En JavaScript, que valent « '0' == false » et « '0' === false » ?",
+      "options": [
+        "false et false",
+        "true et true",
+        "true et false",
+        "false et true"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "Avec ==, les deux opérandes sont convertis en nombres : false devient 0 et la chaîne '0' aussi, d'où true. === compare sans conversion une chaîne et un booléen, de types différents, d'où false ; c'est pourquoi on utilise ===."
+    },
+    {
+      "id": "BUT-WEB1-Q05",
+      "question": "Qu'affiche « for (var i = 1; i <= 3; i++) setTimeout(() => console.log(i), 0) » ?",
+      "options": [
+        "4, trois fois",
+        "1, puis 2, puis 3",
+        "3, trois fois",
+        "undefined, trois fois"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "var a une portée de fonction : les trois callbacks partagent la même variable i, et quand ils s'exécutent, la boucle est finie avec i = 4, la valeur qui a rendu la condition fausse. Avec let, chaque tour aurait sa propre variable, et on obtiendrait 1, 2, 3."
+    },
+    {
+      "id": "BUT-WEB1-Q06",
+      "question": "Dans quel ordre s'affichent les messages de « setTimeout(() => console.log('T'), 0); Promise.resolve().then(() => console.log('P')); console.log('S'); » ?",
+      "options": [
+        "T, P, S",
+        "S, P, T",
+        "S, T, P",
+        "P, S, T"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "Le code synchrone s'exécute d'abord (S). Une fois la pile vide, la boucle d'événements vide la file des microtâches, où se trouve le callback de la promesse (P), avant de passer à la macrotâche du minuteur (T), même avec un délai de 0 ms."
+    },
+    {
+      "id": "BUT-WEB1-Q07",
+      "question": "Laquelle de ces méthodes HTTP n'est pas idempotente ?",
+      "options": [
+        "PUT",
+        "DELETE",
+        "GET",
+        "POST"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "Deux requêtes POST identiques créent en général deux ressources : le résultat dépend du nombre d'envois. PUT remplace la ressource par le même contenu à chaque fois, et un second DELETE laisse la ressource supprimée : l'état final est le même, même si la réponse peut différer."
+    },
+    {
+      "id": "BUT-WEB1-Q08",
+      "question": "Quelle est la différence entre les codes HTTP 401 et 403 ?",
+      "options": [
+        "401 : le client n'est pas authentifié, ou ses identifiants sont invalides ; 403 : il est identifié, mais n'a pas le droit d'accéder à la ressource",
+        "401 : la ressource n'existe pas ; 403 : le serveur a rencontré une erreur interne",
+        "401 : le client est authentifié mais n'a pas les droits ; 403 : il n'est pas authentifié",
+        "Aucune : ce sont deux synonymes de 400 Bad Request"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "401 signifie que l'authentification manque ou a échoué : se connecter peut régler le problème. 403 signifie que le serveur sait qui fait la requête mais la refuse : se reconnecter avec le même compte n'y changera rien."
+    },
+    {
+      "id": "BUT-WEB1-Q09",
+      "question": "Une page servie par « https://app.exemple.fr » appelle avec fetch l'API « https://api.autre.fr ». Qu'est-ce qui permet au navigateur de laisser la page lire la réponse ?",
+      "options": [
+        "La page ajoute elle-même un en-tête Access-Control-Allow-Origin à sa requête",
+        "Rien : le navigateur bloque toujours les réponses venues d'un autre domaine",
+        "La réponse de l'API contient un en-tête Access-Control-Allow-Origin qui autorise « https://app.exemple.fr »",
+        "Le serveur de app.exemple.fr désactive CORS dans sa propre configuration"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "CORS assouplit la politique de même origine, et c'est le serveur visé, ici l'API, qui décide qui peut lire ses réponses grâce à ses en-têtes de réponse. Un en-tête ajouté à la requête ou une configuration du site appelant ne changent rien à cette décision."
+    },
+    {
+      "id": "BUT-WEB1-Q10",
+      "question": "Un commentaire contenant « <script>…</script> » est enregistré, puis affiché tel quel dans la page des autres visiteurs, où le script s'exécute. De quelle attaque s'agit-il, et quelle est la protection principale ?",
+      "options": [
+        "Une injection SQL ; on utilise des requêtes préparées",
+        "Une attaque CSRF ; on ajoute un jeton anti-CSRF aux formulaires",
+        "Une faille XSS stockée ; on échappe les données à l'affichage, en complétant si besoin par une Content-Security-Policy",
+        "Une attaque CORS ; on ajoute l'en-tête Access-Control-Allow-Origin"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "Le code injecté est conservé par le serveur puis exécuté dans le navigateur des visiteurs : c'est un XSS stocké. Échapper les caractères spéciaux à l'affichage (< devient &lt;) transforme le script en simple texte, et une Content-Security-Policy limite les scripts autorisés à s'exécuter."
+    },
+    {
+      "id": "BUT-WEB1-Q11",
+      "question": "Pourquoi un serveur vérifie-t-il l'en-tête Origin d'une requête POST qui modifie des données ?",
+      "options": [
+        "Pour empêcher un script injecté dans la page de lire le cookie de session",
+        "Pour refuser une requête émise depuis un autre site, qui serait partie avec les cookies de session joints automatiquement par le navigateur",
+        "Pour choisir la langue de la réponse selon le pays du visiteur",
+        "Pour compresser la réponse selon le navigateur utilisé"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "Dans une attaque CSRF, une page piégée fait envoyer une requête vers le site ciblé, et le navigateur y joint les cookies de la victime. L'en-tête Origin est rempli par le navigateur et ne peut pas être modifié par un script : s'il ne correspond pas au site, la requête est refusée. Protéger le cookie d'un script relève de l'attribut HttpOnly."
+    },
+    {
+      "id": "BUT-WEB1-Q12",
+      "question": "Sur une branche de fonctionnalité, quelle est la différence entre « git merge main » et « git rebase main » ?",
+      "options": [
+        "merge supprime la branche de fonctionnalité, alors que rebase la conserve",
+        "rebase envoie les commits vers le dépôt distant, alors que merge les garde en local",
+        "Aucune : rebase est un autre nom de merge",
+        "merge intègre main par un commit de fusion sans toucher aux commits existants ; rebase rejoue les commits de la branche par-dessus main, ce qui les recrée avec de nouveaux hachages"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "merge préserve l'historique tel qu'il s'est déroulé et relie les deux lignes par un commit de fusion. rebase produit un historique linéaire en réécrivant les commits de la branche, d'où la règle de ne pas rebaser une branche déjà partagée ; aucune des deux commandes ne pousse vers le dépôt distant."
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "BUT-WEB1-F01",
+      "front": "Flexbox ou Grid",
+      "back": "Flexbox répartit des éléments sur un seul axe, une ligne ou une colonne : barre de navigation, boutons alignés. Grid place les éléments sur des lignes et des colonnes à la fois : structure de page, galerie."
+    },
+    {
+      "id": "BUT-WEB1-F02",
+      "front": "Promesse et async/await",
+      "back": "Une promesse représente un résultat futur : en attente, puis tenue ou rompue. Dans une fonction async, await suspend la fonction jusqu'au règlement de la promesse sans bloquer la boucle d'événements, et les erreurs se rattrapent avec try/catch."
+    },
+    {
+      "id": "BUT-WEB1-F03",
+      "front": "API REST",
+      "back": "Des ressources identifiées par des URL, comme /notes/42, manipulées avec les méthodes HTTP : GET lit, POST crée, PUT remplace, PATCH modifie en partie, DELETE supprime. Le serveur est sans état : chaque requête porte tout ce qu'il faut, authentification comprise."
+    },
+    {
+      "id": "BUT-WEB1-F04",
+      "front": "Cookie de session",
+      "back": "Après la connexion, le serveur envoie l'identifiant de session dans un cookie, que le navigateur renvoie à chaque requête vers le site. HttpOnly le rend illisible en JavaScript, Secure le réserve à HTTPS, et SameSite limite son envoi depuis d'autres sites."
+    },
+    {
+      "id": "BUT-WEB1-F05",
+      "front": "CI/CD",
+      "back": "Intégration continue : à chaque push ou pull request, un serveur installe le projet, lance le lint, les tests et le build, et signale tout échec avant la fusion. Livraison ou déploiement continu : chaque version qui passe ces étapes est prête pour la production, ou y est déployée automatiquement."
+    },
+    {
+      "id": "BUT-WEB1-F06",
+      "front": "Résoudre un conflit Git",
+      "back": "Git encadre les deux versions par des marqueurs <<<<<<<, ======= et >>>>>>>. On édite le fichier pour garder le bon contenu, on le marque comme résolu avec « git add », puis on termine par « git commit » ou « git rebase --continue »."
+    },
+    {
+      "id": "BUT-WEB1-F07",
+      "front": "Test unitaire et test d'intégration",
+      "back": "Un test unitaire vérifie une fonction isolée, sans base de données ni réseau : rapide et précis. Un test d'intégration vérifie que plusieurs composants fonctionnent ensemble, comme une route d'API et sa base : plus lent, mais plus proche du réel."
+    },
+    {
+      "id": "BUT-WEB1-F08",
+      "front": "TDD (développement piloté par les tests)",
+      "back": "Un cycle en trois temps : écrire un test qui échoue (rouge), écrire le code minimal qui le fait passer (vert), puis remanier le code en gardant tous les tests verts (refactor)."
+    }
+  ]
+}

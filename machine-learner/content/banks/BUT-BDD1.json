@@ -1,0 +1,191 @@
+{
+  "nodeId": "BUT-BDD1",
+  "questions": [
+    {
+      "id": "BUT-BDD1-Q01",
+      "question": "Dans un MCD, un étudiant peut suivre plusieurs modules et un module accueille plusieurs étudiants. Comment traduit-on cette association dans le modèle logique (les tables) ?",
+      "options": [
+        "Par une table d'association dont la clé primaire combine une clé étrangère vers etudiant et une clé étrangère vers module",
+        "Par une clé étrangère module_id ajoutée dans la table etudiant",
+        "Par une colonne de la table etudiant qui contient la liste des modules suivis",
+        "En fusionnant les tables etudiant et module en une seule table"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "Une association N:N ne peut pas tenir dans une seule clé étrangère : il faut une table dont chaque ligne relie un étudiant à un module, et dont la clé composite interdit les doublons. Une colonne module_id dans etudiant ne permettrait qu'un seul module par étudiant, et une liste dans une cellule viole la 1NF."
+    },
+    {
+      "id": "BUT-BDD1-Q02",
+      "question": "La table note référence etudiant(id) avec « ON DELETE CASCADE ». Que se passe-t-il quand on supprime un étudiant qui a 3 notes ?",
+      "options": [
+        "La suppression est refusée tant que les 3 notes existent",
+        "L'étudiant est supprimé et les 3 notes restent, avec etudiant_id mis à NULL",
+        "L'étudiant et ses 3 notes sont supprimés",
+        "L'étudiant est supprimé et les 3 notes restent, avec une référence vers une ligne qui n'existe plus"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "CASCADE propage la suppression aux lignes qui référencent la ligne supprimée. Le refus correspond au comportement par défaut (NO ACTION ou RESTRICT), la mise à NULL à ON DELETE SET NULL, et des notes orphelines sont justement ce que l'intégrité référentielle interdit."
+    },
+    {
+      "id": "BUT-BDD1-Q03",
+      "question": "La table « ligne(num_commande, produit, quantite, date_commande) » a pour clé (num_commande, produit), et la date ne dépend que de num_commande. Quelle forme normale n'est pas respectée ?",
+      "options": [
+        "La 1NF, car une date n'est pas une valeur atomique",
+        "La 3NF seulement, à cause d'une dépendance transitive",
+        "Aucune : la table est déjà en 3NF",
+        "La 2NF, à cause d'une dépendance partielle à la clé"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "La 2NF exige que chaque attribut non clé dépende de toute la clé ; or la date ne dépend que d'une partie de la clé, num_commande. Elle est donc recopiée sur chaque ligne de la même commande, et on la déplace dans une table commande(num_commande, date_commande)."
+    },
+    {
+      "id": "BUT-BDD1-Q04",
+      "question": "Dans « employe(id, nom, num_service, nom_service) » de clé id, nom_service se déduit de num_service. Quel problème cela pose-t-il ?",
+      "options": [
+        "Une dépendance transitive id → num_service → nom_service : renommer un service oblige à modifier la ligne de chacun de ses employés, et la 3NF n'est pas respectée",
+        "Une dépendance partielle à la clé, car la clé est composée de plusieurs colonnes",
+        "Une violation de la 1NF, car nom_service contient plusieurs valeurs",
+        "Aucun problème, puisque chaque colonne dépend de la clé id"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "nom_service dépend d'un attribut non clé, num_service, et seulement par lui de la clé : c'est une dépendance transitive, interdite en 3NF, qui recopie le nom du service sur chaque employé. On extrait service(num_service, nom_service) ; il ne peut pas y avoir de dépendance partielle, car la clé id ne compte qu'une colonne."
+    },
+    {
+      "id": "BUT-BDD1-Q05",
+      "question": "On veut les modules dont la moyenne des notes est supérieure à 12. Quelle requête est correcte ?",
+      "options": [
+        "« SELECT module_id, AVG(valeur) FROM note WHERE AVG(valeur) > 12 GROUP BY module_id »",
+        "« SELECT module_id, AVG(valeur) FROM note GROUP BY module_id HAVING AVG(valeur) > 12 »",
+        "« SELECT module_id, AVG(valeur) FROM note WHERE valeur > 12 GROUP BY module_id »",
+        "« SELECT module_id, AVG(valeur) FROM note GROUP BY valeur HAVING AVG(valeur) > 12 »"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "HAVING filtre les groupes après le calcul des agrégats, alors que WHERE filtre les lignes avant le regroupement et ne peut pas contenir d'agrégat. La version avec WHERE valeur > 12 calcule la moyenne des seules notes supérieures à 12, ce qui répond à une autre question."
+    },
+    {
+      "id": "BUT-BDD1-Q06",
+      "question": "Avec « FROM etudiant e LEFT JOIN note n ON n.etudiant_id = e.id », que contient le résultat pour un étudiant qui n'a aucune note ?",
+      "options": [
+        "Rien : l'étudiant n'apparaît pas dans le résultat",
+        "Une ligne avec ses colonnes, et NULL dans toutes les colonnes de note",
+        "Une ligne avec ses colonnes, et 0 dans la colonne valeur",
+        "Une ligne par note existante dans la table, toutes associées à cet étudiant"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "LEFT JOIN garde chaque ligne de la table de gauche ; quand aucune ligne de droite ne correspond, les colonnes de droite valent NULL, pas 0. C'est INNER JOIN qui ferait disparaître l'étudiant, et associer chaque note à chaque étudiant serait un produit cartésien."
+    },
+    {
+      "id": "BUT-BDD1-Q07",
+      "question": "La colonne note.etudiant_id est déclarée NOT NULL. Que renvoie « SELECT nom FROM etudiant WHERE id NOT IN (SELECT etudiant_id FROM note) » ?",
+      "options": [
+        "Le nom des étudiants qui n'ont aucune note",
+        "Le nom des étudiants dont toutes les notes valent 0",
+        "Les notes qui ne sont rattachées à aucun étudiant",
+        "Une erreur, car une sous-requête ne peut pas apparaître dans un WHERE"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "La sous-requête renvoie la liste des identifiants d'étudiants qui ont au moins une note, et NOT IN garde les étudiants absents de cette liste. La précision NOT NULL compte : si la sous-requête renvoyait un NULL, NOT IN ne renverrait plus aucune ligne, d'où l'usage fréquent de NOT EXISTS."
+    },
+    {
+      "id": "BUT-BDD1-Q08",
+      "question": "Une table d'utilisateurs compte 2 millions de lignes. Pour un filtre « WHERE colonne = valeur », sur quelle colonne un index B-tree apporte-t-il le plus de gain ?",
+      "options": [
+        "« est_actif », un booléen vrai pour 95 % des lignes",
+        "« pays », qui ne prend que 3 valeurs différentes",
+        "« email », dont chaque valeur est unique",
+        "Le gain est le même pour toutes, car un index divise toujours le temps de recherche par deux"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "Un index rapporte quand la condition est sélective, c'est-à-dire qu'elle ne retient que peu de lignes : un email unique désigne au plus une ligne, trouvée en quelques étapes. Pour est_actif = vrai, il faudrait lire 95 % de la table, et un parcours complet est alors plus rapide que des accès par l'index."
+    },
+    {
+      "id": "BUT-BDD1-Q09",
+      "question": "Une transaction T1 lit une ligne ; une transaction T2 modifie cette ligne et valide (COMMIT) ; T1 relit la même ligne et obtient une valeur différente. Comment s'appelle cette anomalie ?",
+      "options": [
+        "Une lecture sale",
+        "Une lecture non répétable",
+        "Une lecture fantôme",
+        "Une perte de durabilité"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "Relire la même ligne et la trouver modifiée par une transaction validée entre-temps, c'est une lecture non répétable, que le niveau REPEATABLE READ évite. Une lecture sale porterait sur une modification non encore validée, et une lecture fantôme sur des lignes qui apparaissent ou disparaissent dans un ensemble."
+    },
+    {
+      "id": "BUT-BDD1-Q10",
+      "question": "Un virement débite le compte A puis crédite le compte B dans une même transaction. Le serveur tombe en panne entre les deux UPDATE. Quelle propriété ACID garantit que A ne reste pas débité sans que B soit crédité ?",
+      "options": [
+        "La durabilité",
+        "La cohérence",
+        "L'isolation",
+        "L'atomicité"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "L'atomicité impose le tout ou rien : la transaction n'a pas été validée, donc au redémarrage le SGBD annule le débit déjà effectué. La durabilité ne concerne que les transactions validées, qui doivent survivre à une panne, et l'isolation les interactions entre transactions concurrentes."
+    },
+    {
+      "id": "BUT-BDD1-Q11",
+      "question": "Pourquoi une requête préparée comme « SELECT * FROM compte WHERE email = ? » protège-t-elle de l'injection SQL ?",
+      "options": [
+        "Parce qu'elle chiffre les valeurs envoyées au serveur de base de données",
+        "Parce qu'elle retire automatiquement les apostrophes de la saisie",
+        "Parce que le texte SQL est transmis séparément des valeurs : la saisie reste une donnée et n'est jamais interprétée comme du SQL",
+        "Parce qu'elle refuse les saisies de plus de 255 caractères"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "Avec une requête préparée, la structure de la requête est fixée par le texte SQL, et la saisie n'est fournie qu'ensuite, comme valeur du paramètre : « ' OR '1'='1 » est alors cherché comme un email, littéralement. Aucune modification de la saisie n'a lieu, et aucun chiffrement n'entre en jeu."
+    },
+    {
+      "id": "BUT-BDD1-Q12",
+      "question": "Dans quel cas une base orientée documents, comme MongoDB, est-elle un choix plus naturel qu'une base relationnelle ?",
+      "options": [
+        "Une comptabilité où chaque écriture doit respecter des contraintes entre de nombreuses tables",
+        "Des données très liées entre elles, sur lesquelles on veut garantir l'intégrité référentielle",
+        "Des rapports ad hoc qui croisent de nombreuses tables par des jointures",
+        "Un catalogue de fiches produits dont les attributs varient beaucoup d'une catégorie à l'autre, chaque fiche étant lue d'un bloc"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "Le modèle document accepte un schéma souple et regroupe dans un même document les données lues ensemble, ce qui convient à des fiches aux attributs variables. Contraintes fortes, intégrité référentielle et jointures nombreuses sont au contraire les points forts du relationnel."
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "BUT-BDD1-F01",
+      "front": "Association 1:N dans le modèle logique",
+      "back": "La clé étrangère va dans la table du côté N : chaque commande porte client_id, qui référence client(id). Un client peut alors avoir autant de commandes que nécessaire, et chaque commande n'a qu'un client."
+    },
+    {
+      "id": "BUT-BDD1-F02",
+      "front": "Clé primaire et clé étrangère",
+      "back": "La clé primaire identifie chaque ligne : unique et non nulle. Une clé étrangère contient la clé d'une ligne d'une autre table, et le SGBD refuse toute valeur qui ne correspond à aucune ligne existante : c'est l'intégrité référentielle."
+    },
+    {
+      "id": "BUT-BDD1-F03",
+      "front": "1NF, 2NF et 3NF",
+      "back": "1NF : des valeurs atomiques, sans liste dans une cellule. 2NF : 1NF, et chaque attribut non clé dépend de toute la clé. 3NF : 2NF, et aucun attribut non clé ne dépend d'un autre attribut non clé."
+    },
+    {
+      "id": "BUT-BDD1-F04",
+      "front": "Index B-tree",
+      "back": "Arbre équilibré qui garde les valeurs d'une colonne triées : une valeur se trouve en un nombre d'étapes logarithmique au lieu d'un parcours de toute la table. Il accélère les recherches, tris et intervalles, mais chaque écriture doit aussi le mettre à jour."
+    },
+    {
+      "id": "BUT-BDD1-F05",
+      "front": "ACID",
+      "back": "Atomicité : tout ou rien. Cohérence : les contraintes restent respectées. Isolation : une transaction ne voit pas les états intermédiaires des autres. Durabilité : une transaction validée survit à une panne."
+    },
+    {
+      "id": "BUT-BDD1-F06",
+      "front": "Lecture fantôme",
+      "back": "Une transaction relance une requête avec la même condition et voit apparaître ou disparaître des lignes, insérées ou supprimées entre-temps par une autre transaction validée. Selon la norme SQL, seul le niveau SERIALIZABLE l'évite."
+    },
+    {
+      "id": "BUT-BDD1-F07",
+      "front": "COUNT(*) et COUNT(colonne)",
+      "back": "COUNT(*) compte les lignes, COUNT(colonne) seulement celles où la colonne n'est pas NULL. Après un LEFT JOIN, COUNT(n.valeur) donne 0 pour un étudiant sans note, alors que COUNT(*) donne 1."
+    },
+    {
+      "id": "BUT-BDD1-F08",
+      "front": "Base clé-valeur",
+      "back": "Associe à chaque clé une valeur, lue ou écrite directement par sa clé, comme Redis. Idéale pour un cache, des sessions ou des compteurs ; on n'y fait en revanche ni jointure ni recherche efficace sur le contenu des valeurs."
+    }
+  ]
+}

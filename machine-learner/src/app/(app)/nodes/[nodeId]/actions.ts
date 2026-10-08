@@ -23,6 +23,5 @@ export async function markCourseViewed(nodeId: string): Promise<void> {
     update: { courseViewedAt: now },
   });
 
-  // Étape 18 : inscription des flashcards du nœud ici.
   // Pas de revalidation : rien de visible ne dépend encore de courseViewedAt.
 }

@@ -153,8 +153,6 @@ export async function submitQuizAttempt(
     revalidatePath("/", "layout");
   }
 
-  // Étape 18 : inscription des flashcards du nœud à la réussite (cas du bypass).
-
   return {
     ok: true,
     data: {

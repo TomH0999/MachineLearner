@@ -146,3 +146,33 @@ describe("dates", () => {
     expect(next.getTime()).toBe(new Date(2026, 2, 29, 10, 0).getTime());
   });
 });
+
+// Entrées et sorties en instants UTC explicites : indépendant de process.env.TZ.
+describe("fuseau horaire", () => {
+  it.each([
+    { label: "23:30 à Paris en hiver → fin du même jour", input: "2026-01-15T22:30:00Z", expected: "2026-01-15T22:59:59.999Z" },
+    { label: "déjà le 16 à Paris → fin du 16", input: "2026-01-15T23:30:00Z", expected: "2026-01-16T22:59:59.999Z" },
+    { label: "heure d'été (CEST)", input: "2026-07-01T10:00:00Z", expected: "2026-07-01T21:59:59.999Z" },
+    { label: "jour du passage à l'heure d'été", input: "2026-03-29T12:00:00Z", expected: "2026-03-29T21:59:59.999Z" },
+    { label: "jour du passage à l'heure d'hiver", input: "2026-10-25T12:00:00Z", expected: "2026-10-25T22:59:59.999Z" },
+  ])("endOfDay (Europe/Paris par défaut) : $label", ({ input, expected }) => {
+    expect(endOfDay(new Date(input)).toISOString()).toBe(expected);
+  });
+
+  it("endOfDay avec le fuseau explicite UTC", () => {
+    expect(endOfDay(new Date("2026-01-15T22:30:00Z"), "UTC").toISOString()).toBe("2026-01-15T23:59:59.999Z");
+  });
+
+  it("isDue juge « aujourd'hui » à l'heure de Paris", () => {
+    const now = new Date("2026-01-15T08:00:00Z");
+
+    expect(isDue(new Date("2026-01-15T22:00:00Z"), now)).toBe(true);
+    expect(isDue(new Date("2026-01-16T00:00:00Z"), now)).toBe(false); // 01:00 à Paris le 16
+  });
+
+  it("isDue avec le fuseau explicite UTC", () => {
+    const now = new Date("2026-01-15T08:00:00Z");
+
+    expect(isDue(new Date("2026-01-16T00:00:00Z"), now, "UTC")).toBe(false);
+  });
+});

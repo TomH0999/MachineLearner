@@ -34,16 +34,76 @@ export function addDays(date: Date, days: number): Date {
   return result;
 }
 
-/** Nouvelle Date à 23:59:59.999 le même jour (heure locale du runtime). */
-export function endOfDay(date: Date): Date {
-  const result = new Date(date.getTime());
-  result.setHours(23, 59, 59, 999);
-  return result;
+/** Fuseau des échéances : « aujourd'hui » se juge à l'heure de Paris, quel que soit le fuseau du serveur. */
+export const APP_TIME_ZONE = "Europe/Paris";
+
+interface ZonedParts {
+  year: number;
+  month: number; // 1..12
+  day: number;
+  hour: number;
+  minute: number;
+  second: number;
 }
 
-/** Une carte est due toute la journée de sa date d'échéance. */
-export function isDue(dueDate: Date, now: Date = new Date()): boolean {
-  return dueDate.getTime() <= endOfDay(now).getTime();
+const zonedFormatters = new Map<string, Intl.DateTimeFormat>();
+
+function getZonedFormatter(timeZone: string): Intl.DateTimeFormat {
+  let formatter = zonedFormatters.get(timeZone);
+  if (!formatter) {
+    formatter = new Intl.DateTimeFormat("en-US", {
+      timeZone,
+      hourCycle: "h23",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+    zonedFormatters.set(timeZone, formatter);
+  }
+  return formatter;
+}
+
+/** Date et heure murales de `date` dans `timeZone`. */
+function getZonedParts(date: Date, timeZone: string): ZonedParts {
+  const values: Partial<Record<Intl.DateTimeFormatPartTypes, number>> = {};
+  for (const part of getZonedFormatter(timeZone).formatToParts(date)) {
+    if (part.type !== "literal") values[part.type] = Number(part.value);
+  }
+  return {
+    year: values.year ?? 0,
+    month: values.month ?? 1,
+    day: values.day ?? 1,
+    hour: values.hour ?? 0,
+    minute: values.minute ?? 0,
+    second: values.second ?? 0,
+  };
+}
+
+/** Décalage de `timeZone` par rapport à UTC à l'instant `date`, en ms (ex. +3 600 000 à Paris en hiver). */
+function getTimeZoneOffsetMs(date: Date, timeZone: string): number {
+  const { year, month, day, hour, minute, second } = getZonedParts(date, timeZone);
+  const wallClockAsUtc = Date.UTC(year, month - 1, day, hour, minute, second);
+  return wallClockAsUtc - (date.getTime() - date.getUTCMilliseconds());
+}
+
+/**
+ * Instant correspondant à 23:59:59.999 dans `timeZone`, le jour où tombe `date` dans ce fuseau.
+ * Ne dépend pas du fuseau du runtime : sur Vercel le serveur tourne en UTC et `TZ` est réservée.
+ * Le décalage est mesuré à l'instant 23:59:59.999 UTC du même jour, soit 1 à 2 h d'écart avec l'instant
+ * visé : sans effet en Europe, où le changement d'heure a lieu à 01:00 UTC, jamais près de 23:59 heure locale.
+ */
+export function endOfDay(date: Date, timeZone: string = APP_TIME_ZONE): Date {
+  const { year, month, day } = getZonedParts(date, timeZone);
+  const candidate = Date.UTC(year, month - 1, day, 23, 59, 59, 999);
+  return new Date(candidate - getTimeZoneOffsetMs(new Date(candidate), timeZone));
+}
+
+/** Une carte est due toute la journée (dans `timeZone`) de sa date d'échéance. */
+export function isDue(dueDate: Date, now: Date = new Date(), timeZone: string = APP_TIME_ZONE): boolean {
+  return dueDate.getTime() <= endOfDay(now, timeZone).getTime();
 }
 
 function roundTo2(value: number): number {

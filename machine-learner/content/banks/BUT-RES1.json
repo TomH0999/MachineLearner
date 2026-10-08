@@ -1,0 +1,181 @@
+{
+  "nodeId": "BUT-RES1",
+  "questions": [
+    {
+      "id": "BUT-RES1-Q01",
+      "question": "Dans le modèle OSI, à quelle couche appartient le routage des paquets IP d'un réseau vers un autre ?",
+      "options": [
+        "La couche 3, réseau",
+        "La couche 2, liaison de données",
+        "La couche 4, transport",
+        "La couche 7, application"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "La couche réseau gère l'adressage logique (IP) et le choix du chemin entre réseaux : c'est le domaine des routeurs. La couche liaison n'adresse que les machines d'un même réseau local, par leurs adresses MAC, et la couche transport relie deux processus de bout en bout sans s'occuper du chemin."
+    },
+    {
+      "id": "BUT-RES1-Q02",
+      "question": "Pourquoi la voix sur IP ou le jeu en ligne utilisent-ils souvent UDP plutôt que TCP ?",
+      "options": [
+        "Parce qu'UDP chiffre les données, contrairement à TCP",
+        "Parce qu'UDP garantit que les paquets arrivent dans l'ordre d'envoi",
+        "Parce qu'UDP n'établit pas de connexion et ne retransmet rien : un paquet perdu ne retarde pas les suivants",
+        "Parce que TCP ne peut pas transporter de données audio"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "TCP garantit la livraison dans l'ordre en retransmettant les segments perdus, et les données suivantes attendent pendant ce temps ; pour un flux en temps réel, une donnée en retard ne sert plus à rien. UDP n'offre ni ordre ni retransmission, ni chiffrement : il est simplement plus léger et sans attente."
+    },
+    {
+      "id": "BUT-RES1-Q03",
+      "question": "Un client envoie SYN à un serveur dont le port est en écoute. Quelle suite complète la poignée de main en 3 temps de TCP ?",
+      "options": [
+        "Le serveur répond ACK, puis le client envoie SYN",
+        "Le serveur répond SYN-ACK, puis le client envoie ACK",
+        "Le serveur répond SYN-ACK, puis le client envoie FIN",
+        "Le serveur répond ACK, et la connexion est ouverte en 2 temps"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "Le serveur acquitte le SYN du client et envoie son propre SYN dans le même segment (SYN-ACK), puis le client acquitte ce SYN par un ACK. Chaque côté a alors annoncé son numéro de séquence initial et reçu l'acquittement de l'autre ; FIN sert à fermer la connexion, pas à l'ouvrir."
+    },
+    {
+      "id": "BUT-RES1-Q04",
+      "question": "Une machine joint « 8.8.8.8 » avec « ping », mais aucun nom de domaine ne se résout. Quel service, et sur quel port, faut-il vérifier en priorité ?",
+      "options": [
+        "HTTP, port 80",
+        "SSH, port 22",
+        "HTTPS, port 443",
+        "DNS, port 53"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "La connectivité IP fonctionne, seule la traduction des noms en adresses échoue : c'est le rôle du DNS, qui écoute sur le port 53, surtout en UDP. Les ports 80 et 443 servent au web, et le port 22 à SSH."
+    },
+    {
+      "id": "BUT-RES1-Q05",
+      "question": "Quel masque de sous-réseau correspond au préfixe « /26 » ?",
+      "options": [
+        "« 255.255.255.192 »",
+        "« 255.255.255.224 »",
+        "« 255.255.255.128 »",
+        "« 255.255.192.0 »"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "/26 signifie 26 bits à 1 : 24 pour les trois premiers octets (255.255.255), puis 2 bits en tête du dernier octet, soit 11000000 en binaire, c'est-à-dire 128 + 64 = 192. « 255.255.255.224 » correspond à /27, « 255.255.255.128 » à /25 et « 255.255.192.0 » à /18."
+    },
+    {
+      "id": "BUT-RES1-Q06",
+      "question": "Combien de machines peut-on adresser dans un sous-réseau IPv4 « /27 » ?",
+      "options": ["32", "64", "30", "62"],
+      "correctOptionIndex": 2,
+      "explanation": "Il reste 32 − 27 = 5 bits pour la partie machine, soit 2⁵ = 32 adresses ; on retire l'adresse du réseau (bits machine tous à 0) et celle de diffusion (tous à 1), d'où 30 machines. 32 oublie ces deux adresses réservées, et 62 correspond à un /26."
+    },
+    {
+      "id": "BUT-RES1-Q07",
+      "question": "Une machine a l'adresse « 172.16.5.200/28 ». Quelle est l'adresse de diffusion (broadcast) de son sous-réseau ?",
+      "options": [
+        "« 172.16.5.255 »",
+        "« 172.16.5.208 »",
+        "« 172.16.5.206 »",
+        "« 172.16.5.207 »"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "Un /28 laisse 4 bits machine : les sous-réseaux avancent par blocs de 16 (.176, .192, .208…), et 200 tombe dans le bloc qui va de .192 à .207. Sa dernière adresse, 172.16.5.207, est la diffusion ; .206 est la dernière machine, et .208 ouvre le bloc suivant."
+    },
+    {
+      "id": "BUT-RES1-Q08",
+      "question": "Sur un réseau local, quel protocole permet à une machine de trouver l'adresse MAC qui correspond à l'adresse IP de sa passerelle ?",
+      "options": ["DHCP", "ARP", "DNS", "ICMP"],
+      "correctOptionIndex": 1,
+      "explanation": "ARP diffuse sur le réseau local la question « qui possède cette adresse IP ? », et la machine concernée répond avec son adresse MAC, que l'émetteur garde en cache. DNS traduit un nom en adresse IP, DHCP attribue l'adresse IP elle-même, et ICMP transporte des messages de contrôle comme ceux de « ping »."
+    },
+    {
+      "id": "BUT-RES1-Q09",
+      "question": "Que fait la commande « ./build.sh > build.log 2>&1 » ?",
+      "options": [
+        "Elle écrit la sortie standard et la sortie d'erreur dans build.log, en écrasant son contenu",
+        "Elle ajoute la sortie standard à la fin de build.log et affiche les erreurs à l'écran",
+        "Elle écrit seulement les messages d'erreur dans build.log",
+        "Elle écrit la sortie standard dans build.log et les erreurs dans un fichier nommé « 1 »"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "« > » redirige la sortie standard (descripteur 1) vers build.log en le vidant d'abord, puis « 2>&1 » envoie la sortie d'erreur (descripteur 2) là où pointe déjà le descripteur 1. Pour ajouter à la fin du fichier sans l'écraser, on écrirait « >> »."
+    },
+    {
+      "id": "BUT-RES1-Q10",
+      "question": "Après « chmod 640 rapport.txt », quels sont les droits du fichier ?",
+      "options": [
+        "« rw-r--r-- »",
+        "« rwxr-x--- »",
+        "« r--r----- »",
+        "« rw-r----- »"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "Chaque chiffre code un triplet, dans l'ordre propriétaire, groupe, autres, avec r = 4, w = 2 et x = 1 : 6 = 4 + 2 donne rw-, 4 donne r-- et 0 donne ---. Le propriétaire lit et modifie, le groupe lit seulement, les autres n'ont aucun droit."
+    },
+    {
+      "id": "BUT-RES1-Q11",
+      "question": "Quelle est la différence entre « kill 1234 » et « kill -9 1234 » ?",
+      "options": [
+        "Aucune : les deux commandes arrêtent le processus immédiatement",
+        "« kill 1234 » met le processus en pause, et « kill -9 1234 » le relance",
+        "« kill 1234 » envoie SIGTERM, que le processus peut intercepter pour s'arrêter proprement ; « kill -9 1234 » envoie SIGKILL, qui le termine sans qu'il puisse réagir",
+        "« kill -9 1234 » envoie le signal à 9 processus à la fois"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "Sans option, kill envoie SIGTERM (15), une demande d'arrêt que le programme peut traiter, par exemple pour fermer ses fichiers, ou même ignorer. SIGKILL (9) ne peut être ni intercepté ni ignoré : le noyau termine le processus, au risque de laisser des données incohérentes, d'où son usage en dernier recours."
+    },
+    {
+      "id": "BUT-RES1-Q12",
+      "question": "Avec systemd, quelle commande fait démarrer automatiquement le service nginx à chaque démarrage de la machine ?",
+      "options": [
+        "« systemctl start nginx »",
+        "« systemctl enable nginx »",
+        "« systemctl status nginx »",
+        "« systemctl restart nginx »"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "« enable » rattache l'unité à une cible de démarrage, le plus souvent multi-user.target, par des liens symboliques : le service sera lancé aux prochains démarrages. « start » le lance tout de suite, sans effet sur le démarrage suivant ; « systemctl enable --now » fait les deux."
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "BUT-RES1-F01",
+      "front": "Modèle TCP/IP",
+      "back": "Quatre couches : accès réseau (couches 1 et 2 d'OSI), Internet (IP), transport (TCP, UDP) et application (HTTP, DNS, SSH…), qui regroupe les couches 5 à 7 d'OSI. C'est le modèle réellement implémenté ; OSI sert surtout de vocabulaire de référence."
+    },
+    {
+      "id": "BUT-RES1-F02",
+      "front": "Encapsulation",
+      "back": "À l'émission, chaque couche ajoute son en-tête aux données de la couche du dessus : segment TCP, puis paquet IP, puis trame Ethernet. Le destinataire retire ces en-têtes dans l'ordre inverse."
+    },
+    {
+      "id": "BUT-RES1-F03",
+      "front": "Notation CIDR « a.b.c.d/p »",
+      "back": "Les p premiers bits désignent le réseau et les 32 − p bits restants la machine. Le sous-réseau compte 2 puissance (32 − p) adresses, dont deux réservées : l'adresse du réseau (bits machine à 0) et celle de diffusion (bits machine à 1)."
+    },
+    {
+      "id": "BUT-RES1-F04",
+      "front": "DHCP",
+      "back": "Attribue automatiquement à une machine qui arrive sur le réseau son adresse IP, son masque, sa passerelle et ses serveurs DNS, pour une durée limitée appelée bail. L'échange compte 4 messages : DISCOVER, OFFER, REQUEST, ACK."
+    },
+    {
+      "id": "BUT-RES1-F05",
+      "front": "Pipe « | »",
+      "back": "Branche la sortie standard d'une commande sur l'entrée standard de la suivante. Par exemple, « ps aux | grep nginx » ne garde, dans la liste des processus, que les lignes qui contiennent nginx."
+    },
+    {
+      "id": "BUT-RES1-F06",
+      "front": "« grep » et « find »",
+      "back": "grep cherche un motif dans le contenu de fichiers ou d'un flux, comme « grep -rn 'TODO' src ». find cherche des fichiers dans une arborescence d'après leur nom, leur type, leur taille ou leur date, comme « find /var/log -name '*.log' »."
+    },
+    {
+      "id": "BUT-RES1-F07",
+      "front": "Droits r, w et x sur un répertoire",
+      "back": "r permet de lister son contenu, w, combiné à x, d'y créer, renommer ou supprimer des entrées, et x de le traverser pour accéder à ce qu'il contient. Sans x, on ne peut même pas y entrer avec « cd »."
+    },
+    {
+      "id": "BUT-RES1-F08",
+      "front": "Journaux d'un service systemd",
+      "back": "« journalctl -u nginx » affiche les journaux du service nginx collectés par systemd ; l'option « -f » les suit en direct. « systemctl status nginx » montre l'état du service et ses dernières lignes de journal."
+    }
+  ]
+}

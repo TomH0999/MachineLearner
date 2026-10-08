@@ -1,0 +1,186 @@
+{
+  "nodeId": "ING-ARCH1",
+  "questions": [
+    {
+      "id": "ING-ARCH1-Q01",
+      "question": "Dans une architecture en couches (présentation, métier, accès aux données), quelle règle de dépendance faut-il respecter ?",
+      "options": [
+        "Chaque couche peut appeler n'importe quelle autre, dans les deux sens",
+        "Une couche n'appelle que les couches situées en dessous d'elle, jamais celles du dessus",
+        "La couche d'accès aux données pilote la couche métier",
+        "La présentation interroge directement la base pour aller plus vite"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "Les dépendances descendent : l'interface appelle le métier, qui appelle l'accès aux données. Une couche basse qui connaîtrait l'interface créerait un couplage circulaire et empêcherait de la remplacer ou de la tester isolément."
+    },
+    {
+      "id": "ING-ARCH1-Q02",
+      "question": "Dans une architecture hexagonale (ports et adaptateurs), où se trouve le code qui exécute les requêtes SQL vers PostgreSQL ?",
+      "options": [
+        "Dans le cœur métier, qui manipule directement la base",
+        "Dans le port, c'est-à-dire l'interface définie par le domaine",
+        "Dans le contrôleur HTTP qui reçoit la requête",
+        "Dans un adaptateur de sortie qui implémente le port de persistance défini par le domaine"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "Le domaine déclare ce dont il a besoin sous forme de port, par exemple une interface de dépôt, sans connaître la technologie ; l'adaptateur PostgreSQL implémente ce port. On peut ainsi changer de base, ou la remplacer par un adaptateur en mémoire dans les tests, sans toucher au métier."
+    },
+    {
+      "id": "ING-ARCH1-Q03",
+      "question": "Quel est le principal coût des microservices par rapport à un monolithe modulaire ?",
+      "options": [
+        "La complexité opérationnelle : appels réseau qui peuvent échouer, déploiements multiples, supervision et cohérence des données entre services",
+        "Ils empêchent de faire évoluer et de déployer les services indépendamment",
+        "Ils imposent un seul langage de programmation pour toute l'application",
+        "Ils ne peuvent pas être mis à l'échelle horizontalement"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "Découper en services transforme des appels de fonctions en appels réseau, plus lents et faillibles, et chaque service apporte son pipeline, sa supervision et souvent sa base. Les trois autres options contredisent au contraire leurs avantages : déploiement indépendant, liberté technologique et mise à l'échelle service par service."
+    },
+    {
+      "id": "ING-ARCH1-Q04",
+      "question": "Un service de commandes publie un événement « CommandeValidée » dans un broker de messages, au lieu d'appeler directement les services de facturation et d'e-mail. Qu'y gagne-t-il ?",
+      "options": [
+        "Le producteur attend la réponse de chaque consommateur, ce qui garantit leur traitement",
+        "Tous les services voient immédiatement le même état : la cohérence devient forte",
+        "Le producteur ne connaît pas ses consommateurs, et un consommateur indisponible traitera l'événement à son retour",
+        "Aucun message ne peut plus jamais être livré en double"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "Le broker découple dans l'espace, car on ajoute un consommateur sans modifier le producteur, et dans le temps, car les messages attendent dans une file ou un journal. En contrepartie, la cohérence devient à terme, et la livraison « au moins une fois » de la plupart des brokers impose des consommateurs idempotents."
+    },
+    {
+      "id": "ING-ARCH1-Q05",
+      "question": "Selon le théorème CAP, quel choix un système réparti doit-il faire pendant une partition réseau ?",
+      "options": [
+        "Entre cohérence et latence",
+        "Entre cohérence et disponibilité : refuser certaines requêtes pour rester cohérent, ou répondre au risque de renvoyer des données périmées",
+        "Aucun : avec assez de réplicas, il garantit à la fois cohérence, disponibilité et tolérance aux partitions",
+        "Il doit renoncer à la tolérance aux partitions et arrêter tous les nœuds"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "Une partition ne se choisit pas, elle arrive : un nœud coupé des autres doit alors soit refuser de répondre (système CP), soit répondre avec ses données locales, peut-être périmées (système AP). Le compromis entre cohérence et latence concerne le fonctionnement hors partition, que décrit l'extension PACELC."
+    },
+    {
+      "id": "ING-ARCH1-Q06",
+      "question": "Une requête traverse en série une API disponible à 99,9 % et une base de données disponible à 99 %. Quelle est la disponibilité de l'ensemble ?",
+      "options": [
+        "Environ 98,9 %",
+        "99 %, celle du maillon le plus faible",
+        "99,9 %, celle du meilleur composant",
+        "99,45 %, la moyenne des deux"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "En série, la requête n'aboutit que si les deux composants fonctionnent : on multiplie les disponibilités, 0,999 × 0,99 = 0,98901, soit environ 98,9 %. Une chaîne est donc toujours moins disponible que son maillon le plus faible ; pour faire mieux, il faut de la redondance en parallèle."
+    },
+    {
+      "id": "ING-ARCH1-Q07",
+      "question": "Une base répliquée sur N = 5 nœuds attend W = 3 acquittements par écriture. Quel est le plus petit nombre R de réponses à attendre en lecture pour toujours lire la dernière écriture ?",
+      "options": ["1", "2", "5", "3"],
+      "correctOptionIndex": 3,
+      "explanation": "Il faut W + R > N, soit 3 + R > 5, donc R ≥ 3 : tout ensemble de 3 nœuds lus recoupe alors les 3 nœuds écrits, et au moins une réponse porte la dernière version. Avec R = 2, on pourrait interroger exactement les 2 nœuds qui n'ont pas reçu l'écriture."
+    },
+    {
+      "id": "ING-ARCH1-Q08",
+      "question": "Un serveur web atteint ses limites. Quelle solution relève de la scalabilité horizontale ?",
+      "options": [
+        "Passer à un processeur plus rapide",
+        "Ajouter de la mémoire et des cœurs à la machine existante",
+        "Ajouter des instances identiques derrière un répartiteur de charge",
+        "Optimiser la requête SQL la plus lente"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "La scalabilité horizontale ajoute des machines et répartit la charge entre elles ; elle suppose des instances sans état, avec les sessions en base ou dans un cache partagé. Grossir une seule machine relève de la scalabilité verticale, simple mais plafonnée et sans redondance ; optimiser une requête n'ajoute aucune capacité."
+    },
+    {
+      "id": "ING-ARCH1-Q09",
+      "question": "Lequel de ces traitements est idempotent, c'est-à-dire sans effet supplémentaire s'il est rejoué ?",
+      "options": [
+        "Passer le statut de la commande 42 à « EXPÉDIÉE »",
+        "Ajouter 10 € au solde du compte 7",
+        "Insérer une nouvelle ligne dans un journal",
+        "Envoyer un e-mail de confirmation"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "Rejouer l'affectation d'un statut laisse l'état inchangé après la première fois, alors qu'un ajout de 10 € rejoué crédite deux fois le compte. Pour rendre un tel traitement idempotent, on lui associe une clé de requête unique et l'on ignore les clés déjà traitées."
+    },
+    {
+      "id": "ING-ARCH1-Q10",
+      "question": "À quoi sert un disjoncteur (circuit breaker) placé devant un service distant ?",
+      "options": [
+        "À chiffrer les échanges avec ce service",
+        "Après une série d'échecs, à rejeter immédiatement les appels pendant un délai, pour ne plus attendre un service en panne ni le surcharger",
+        "À répartir les requêtes entre plusieurs instances de ce service",
+        "À réessayer chaque appel indéfiniment jusqu'à ce qu'il réussisse"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "Ouvert, le disjoncteur échoue vite, ou renvoie une valeur de repli, au lieu d'accumuler des appels qui expirent en bloquant des ressources ; après le délai, il passe en semi-ouvert et laisse passer quelques appels d'essai avant de se refermer. Des nouvelles tentatives sans limite aggraveraient au contraire la surcharge."
+    },
+    {
+      "id": "ING-ARCH1-Q11",
+      "question": "Quelle est la différence fondamentale entre un conteneur et une machine virtuelle ?",
+      "options": [
+        "Un conteneur embarque son propre noyau, une machine virtuelle non",
+        "Une machine virtuelle démarre en général plus vite qu'un conteneur",
+        "Un conteneur ne peut exécuter qu'un seul langage de programmation",
+        "Un conteneur partage le noyau de l'hôte et isole des processus, alors qu'une machine virtuelle émule une machine complète avec son propre système d'exploitation"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "Le conteneur isole des processus d'un même noyau grâce aux namespaces et aux cgroups de Linux : il est léger et démarre vite. La machine virtuelle virtualise le matériel au moyen d'un hyperviseur et fait tourner un noyau invité complet, avec une isolation plus forte mais plus coûteuse."
+    },
+    {
+      "id": "ING-ARCH1-Q12",
+      "question": "Dans Kubernetes, quel est le rôle d'un objet Deployment ?",
+      "options": [
+        "Exécuter un seul conteneur, sans jamais le redémarrer",
+        "Exposer un ensemble de pods sous une adresse stable, avec répartition de charge",
+        "Maintenir le nombre voulu de réplicas d'un pod et gérer leurs mises à jour progressives (rolling update)",
+        "Stocker les images de conteneurs de l'application"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "On déclare l'état voulu, image et nombre de réplicas, et le Deployment, via un ReplicaSet, recrée les pods qui tombent et remplace progressivement les anciens lors d'une mise à jour. L'adresse stable est le rôle d'un Service, et les images vivent dans un registre."
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "ING-ARCH1-F01",
+      "front": "Monolithe modulaire",
+      "back": "Une seule application, déployée d'un bloc, mais découpée en modules aux frontières nettes, chacun avec son domaine et son interface publique. Il garde la simplicité d'un seul déploiement et des transactions locales, et prépare un éventuel découpage en services."
+    },
+    {
+      "id": "ING-ARCH1-F02",
+      "front": "Ports et adaptateurs",
+      "back": "Le domaine définit des ports : des ports d'entrée (ses cas d'usage) et des ports de sortie (persistance, envoi d'e-mails). Les adaptateurs relient ces ports aux technologies concrètes (HTTP, SQL, broker), et les dépendances pointent toujours vers le domaine."
+    },
+    {
+      "id": "ING-ARCH1-F03",
+      "front": "Théorème CAP",
+      "back": "Pendant une partition réseau (P), un système réparti ne peut garantir à la fois la cohérence (C : chaque lecture voit la dernière écriture) et la disponibilité (A : chaque requête reçoit une réponse). Un système CP refuse des requêtes, un système AP peut renvoyer des données périmées."
+    },
+    {
+      "id": "ING-ARCH1-F04",
+      "front": "Cohérence forte et cohérence à terme",
+      "back": "Forte : une lecture voit toujours la dernière écriture validée, au prix de coordination et de latence. À terme (eventual consistency) : si les écritures cessent, les répliques convergent, mais une lecture peut renvoyer une valeur périmée entre-temps."
+    },
+    {
+      "id": "ING-ARCH1-F05",
+      "front": "Quorum « W + R > N »",
+      "back": "Avec N réplicas, une écriture attend W acquittements et une lecture R réponses. Si W + R > N, tout ensemble lu recoupe le dernier ensemble écrit, et l'on garde la réponse de version la plus récente."
+    },
+    {
+      "id": "ING-ARCH1-F06",
+      "front": "Cache « cache-aside »",
+      "back": "L'application cherche d'abord la donnée dans le cache ; en cas d'absence, elle lit la base puis remplit le cache avec une durée de vie (TTL). Après une écriture, il faut invalider l'entrée pour ne pas servir une valeur périmée."
+    },
+    {
+      "id": "ING-ARCH1-F07",
+      "front": "Répartiteur de charge (load balancer)",
+      "back": "Distribue les requêtes entre plusieurs instances, par tourniquet ou vers la moins chargée, et écarte celles qui échouent aux contrôles de santé. Il rend possible la scalabilité horizontale et évite qu'une instance en panne reçoive du trafic."
+    },
+    {
+      "id": "ING-ARCH1-F08",
+      "front": "Pod Kubernetes",
+      "back": "Plus petite unité déployable : un ou plusieurs conteneurs qui partagent la même adresse IP et peuvent partager des volumes. Un pod est éphémère ; on le gère rarement seul, mais au travers d'un objet qui en maintient le nombre voulu."
+    }
+  ]
+}

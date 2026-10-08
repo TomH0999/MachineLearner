@@ -1,0 +1,161 @@
+{
+  "nodeId": "ING-IA1",
+  "questions": [
+    {
+      "id": "ING-IA1-Q01",
+      "question": "Lequel de ces problèmes relève de l'apprentissage non supervisé ?",
+      "options": [
+        "Prédire le prix d'un appartement à partir de ventes passées dont le prix est connu",
+        "Détecter les spams à partir d'e-mails déjà étiquetés « spam » ou « non spam »",
+        "Regrouper des clients selon leurs habitudes d'achat, sans catégories définies à l'avance",
+        "Prédire si un patient est malade à partir de dossiers dont le diagnostic est connu"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "En apprentissage non supervisé, les données n'ont pas d'étiquette : on cherche une structure, ici des groupes (clustering). Les trois autres cas fournissent la réponse attendue pour chaque exemple d'entraînement, c'est donc de l'apprentissage supervisé."
+    },
+    {
+      "id": "ING-IA1-Q02",
+      "question": "Un modèle prédit (2, 4, 6) pour des valeurs réelles (3, 4, 8). Quelle est son erreur quadratique moyenne (MSE) ?",
+      "options": ["1", "5/3 ≈ 1,67", "5", "≈ 1,29"],
+      "correctOptionIndex": 1,
+      "explanation": "Les erreurs valent −1, 0 et −2, leurs carrés 1, 0 et 4 : MSE = (1 + 0 + 4)/3 = 5/3. La valeur 1 est l'erreur absolue moyenne (MAE), 5 la somme des carrés sans moyenne, et 1,29 sa racine (RMSE)."
+    },
+    {
+      "id": "ING-IA1-Q03",
+      "question": "En régression logistique, un exemple de classe 1 a un score linéaire wᵀx + b = 0. Que vaut sa log-loss (logarithme népérien) ?",
+      "options": ["0, car le score est nul", "0,5", "0,25", "ln 2 ≈ 0,693"],
+      "correctOptionIndex": 3,
+      "explanation": "La sigmoïde donne p = σ(0) = 1/(1 + exp(0)) = 0,5, et la log-loss d'un exemple de classe 1 vaut −ln(p) = −ln(0,5) = ln 2. La valeur 0,5 s'arrête à la probabilité, et 0,25 = (1 − 0,5)² est une erreur quadratique."
+    },
+    {
+      "id": "ING-IA1-Q04",
+      "question": "Un KNN utilise deux variables non normalisées : l'âge (de 18 à 80 ans) et le revenu annuel (de 15 000 à 150 000 €). Quel est l'effet sur la distance euclidienne entre deux personnes ?",
+      "options": [
+        "Elle est presque entièrement déterminée par le revenu",
+        "Elle est presque entièrement déterminée par l'âge, dont les valeurs sont plus petites",
+        "Les deux variables pèsent autant, car la distance euclidienne traite chaque axe de la même façon",
+        "Aucun : le KNN met automatiquement les variables à la même échelle"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "Un écart de quelques milliers d'euros dépasse de loin le plus grand écart d'âge possible (62 ans) : le revenu écrase l'âge dans la distance. Il faut mettre les variables à la même échelle, par exemple en standardisant chacune : (x − moyenne)/écart-type."
+    },
+    {
+      "id": "ING-IA1-Q05",
+      "question": "Dans un SVM linéaire à marge maximale, on retire du jeu d'entraînement un point bien classé, situé loin de la frontière et hors de la marge. Que devient la frontière après un nouvel entraînement ?",
+      "options": [
+        "Elle se rapproche de l'emplacement du point retiré",
+        "Elle reste identique",
+        "La marge devient nulle",
+        "Elle change, car tous les points contribuent à parts égales à la frontière"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "La frontière ne dépend que des vecteurs de support, les points situés sur la marge (ou à l'intérieur pour une marge souple). Un point loin de la frontière a un poids nul dans la solution : le retirer ne change rien."
+    },
+    {
+      "id": "ING-IA1-Q06",
+      "question": "Un nœud d'arbre de décision contient 6 exemples de la classe A et 4 de la classe B. Quelle est son impureté de Gini ?",
+      "options": ["0,52", "0,24", "≈ 0,971", "0,48"],
+      "correctOptionIndex": 3,
+      "explanation": "Gini = 1 − Σ pₖ² = 1 − (0,6² + 0,4²) = 1 − 0,52 = 0,48. La valeur 0,52 oublie de soustraire à 1, 0,24 = 0,6 × 0,4 oublie le facteur 2 de la formule 2p(1 − p), et 0,971 est l'entropie (en bits) du même nœud."
+    },
+    {
+      "id": "ING-IA1-Q07",
+      "question": "Qu'est-ce qui caractérise une forêt aléatoire (random forest) ?",
+      "options": [
+        "Chaque arbre apprend sur un échantillon bootstrap, tiré avec remise, et ne considère qu'un sous-ensemble aléatoire de variables à chaque division",
+        "Les arbres sont entraînés les uns après les autres, chacun corrigeant les erreurs du précédent",
+        "Un seul arbre très profond est entraîné plusieurs fois, puis on garde le meilleur",
+        "Chaque arbre est limité à une seule division, et les arbres votent avec un poids égal à leur exactitude"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "Le bagging (bootstrap puis agrégation des votes) et le tirage aléatoire des variables rendent les arbres peu corrélés, si bien que leur moyenne réduit fortement la variance. L'entraînement séquentiel qui corrige les erreurs du modèle précédent décrit le boosting."
+    },
+    {
+      "id": "ING-IA1-Q08",
+      "question": "Pendant K-Means, un groupe reçoit les points (1, 2), (3, 4) et (5, 0). Où l'étape de mise à jour place-t-elle son centre ?",
+      "options": ["(9, 6)", "(2, 3)", "(3, 2)", "(5, 4)"],
+      "correctOptionIndex": 2,
+      "explanation": "Le nouveau centre est le barycentre du groupe, moyenne coordonnée par coordonnée : ((1 + 3 + 5)/3, (2 + 4 + 0)/3) = (3, 2). (9, 6) est la somme sans division, et (2, 3) inverse les deux coordonnées."
+    },
+    {
+      "id": "ING-IA1-Q09",
+      "question": "Une ACP (PCA) sur 4 variables donne les valeurs propres 5, 2, 2 et 1. Quelle part de la variance totale les deux premières composantes principales expliquent-elles ?",
+      "options": ["50 %", "70 %", "20 %", "7 %"],
+      "correctOptionIndex": 1,
+      "explanation": "La variance totale est la somme des valeurs propres, 5 + 2 + 2 + 1 = 10, et les deux premières composantes en portent 5 + 2 = 7, soit 70 %. 50 % correspond à la première composante seule, ou au ratio « 2 composantes sur 4 », qui ignore les variances."
+    },
+    {
+      "id": "ING-IA1-Q10",
+      "question": "On évalue un modèle par validation croisée à 5 plis (5-fold) sur 1 000 exemples. Combien d'entraînements faut-il, et sur combien d'exemples chacun ?",
+      "options": [
+        "5 entraînements sur 200 exemples",
+        "1 entraînement sur 800 exemples",
+        "1 000 entraînements sur 999 exemples",
+        "5 entraînements sur 800 exemples"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "Les données sont coupées en 5 plis de 200 exemples ; chaque pli sert une fois de validation pendant que le modèle apprend sur les 4 autres, soit 800 exemples. Le score final est la moyenne des 5 scores ; 1 000 entraînements sur 999 exemples décrit le leave-one-out."
+    },
+    {
+      "id": "ING-IA1-Q11",
+      "question": "Un modèle atteint 99 % d'exactitude sur l'entraînement mais seulement 70 % sur la validation. Quel est le diagnostic, et quelle correction est adaptée ?",
+      "options": [
+        "Surapprentissage (overfitting) : simplifier le modèle, le régulariser ou ajouter des données",
+        "Sous-apprentissage (underfitting) : augmenter la complexité du modèle",
+        "Aucun problème : un tel écart entre entraînement et validation est normal",
+        "Entraînement trop court : le prolonger jusqu'à 100 % sur l'entraînement"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "Un modèle presque parfait sur ses données d'entraînement mais nettement moins bon sur des données nouvelles a appris le bruit : c'est une variance élevée. Le sous-apprentissage donnerait au contraire de mauvais scores sur les deux jeux."
+    },
+    {
+      "id": "ING-IA1-Q12",
+      "question": "Un classifieur obtient VP = 30, FP = 10 et FN = 30. Quel est son score F1 ?",
+      "options": ["0,75", "0,625", "0,6", "0,5"],
+      "correctOptionIndex": 2,
+      "explanation": "Précision = 30/40 = 0,75 et rappel = 30/60 = 0,5, donc F1 = 2 × 0,75 × 0,5/(0,75 + 0,5) = 0,6. Cette moyenne harmonique pénalise l'écart entre les deux scores, contrairement à la moyenne arithmétique 0,625."
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "ING-IA1-F01",
+      "front": "Apprentissage supervisé",
+      "back": "On apprend une fonction qui associe une entrée x à une étiquette y, connue pour chaque exemple d'entraînement. On parle de régression si y est un nombre, et de classification si y est une catégorie."
+    },
+    {
+      "id": "ING-IA1-F02",
+      "front": "Moindres carrés en régression linéaire simple",
+      "back": "On choisit la droite y = ax + b qui minimise la somme des carrés des résidus. Solution : a = cov(x, y)/var(x) et b = ȳ − a·x̄, donc la droite passe toujours par le point moyen (x̄, ȳ)."
+    },
+    {
+      "id": "ING-IA1-F03",
+      "front": "Fonction sigmoïde σ(z)",
+      "back": "σ(z) = 1/(1 + exp(−z)), à valeurs dans ]0, 1[, avec σ(0) = 0,5. En régression logistique, elle transforme le score wᵀx + b en probabilité de la classe positive."
+    },
+    {
+      "id": "ING-IA1-F04",
+      "front": "Astuce du noyau (kernel trick)",
+      "back": "Un SVM n'utilise les données qu'à travers des produits scalaires ; on les remplace par un noyau K(x, x'), par exemple gaussien (RBF). On obtient une frontière non linéaire, comme dans un espace de plus grande dimension, sans jamais calculer la projection."
+    },
+    {
+      "id": "ING-IA1-F05",
+      "front": "Algorithme K-Means",
+      "back": "On choisit k centres initiaux, puis on alterne : affecter chaque point au centre le plus proche, puis déplacer chaque centre au barycentre de son groupe. On s'arrête quand les centres ne bougent plus ; le résultat dépend de l'initialisation."
+    },
+    {
+      "id": "ING-IA1-F06",
+      "front": "Analyse en composantes principales (ACP, PCA)",
+      "back": "Méthode non supervisée qui projette les données centrées sur les directions de plus grande variance : les vecteurs propres de la matrice de covariance. La valeur propre associée à chaque direction mesure la variance qu'elle explique."
+    },
+    {
+      "id": "ING-IA1-F07",
+      "front": "Compromis biais/variance",
+      "back": "Un modèle trop simple a un biais élevé : il sous-apprend et se trompe déjà sur l'entraînement. Un modèle trop complexe a une variance élevée : il colle au bruit et généralise mal. On cherche la complexité qui minimise l'erreur de validation."
+    },
+    {
+      "id": "ING-IA1-F08",
+      "front": "Précision et rappel",
+      "back": "Précision = VP/(VP + FP) : parmi les prédictions positives, la part qui est juste. Rappel = VP/(VP + FN) : parmi les exemples réellement positifs, la part détectée. Le score F1 est leur moyenne harmonique."
+    }
+  ]
+}

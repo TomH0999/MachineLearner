@@ -1,0 +1,156 @@
+{
+  "nodeId": "ING-IA2",
+  "questions": [
+    {
+      "id": "ING-IA2-Q01",
+      "question": "Un neurone à activation ReLU a pour poids w = (2, −1) et pour biais b = −1. Quelle est sa sortie pour l'entrée x = (1, 3) ?",
+      "options": ["−2", "0", "2", "≈ 0,12"],
+      "correctOptionIndex": 1,
+      "explanation": "La somme pondérée vaut z = 2 × 1 + (−1) × 3 + (−1) = −2, et ReLU(z) = max(0, z) donne 0. La valeur −2 oublie l'activation, et 0,12 correspond à σ(−2), une sigmoïde au lieu de ReLU."
+    },
+    {
+      "id": "ING-IA2-Q02",
+      "question": "Dans un perceptron multicouche, une couche dense relie 3 entrées à 4 neurones. Combien de paramètres entraînables compte-t-elle ?",
+      "options": ["12", "7", "15", "16"],
+      "correctOptionIndex": 3,
+      "explanation": "Chacun des 4 neurones a 3 poids et 1 biais : 4 × (3 + 1) = 16 paramètres. La valeur 12 oublie les biais, et 15 compte un biais par entrée au lieu d'un par neurone."
+    },
+    {
+      "id": "ING-IA2-Q03",
+      "question": "Que deviennent les probabilités de sortie d'une softmax si l'on ajoute la même constante c à tous les scores (logits) ?",
+      "options": [
+        "Elles ne changent pas",
+        "Elles sont toutes multipliées par exp(c)",
+        "La classe de plus grand score gagne en probabilité si c > 0",
+        "Elles ne somment plus à 1"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "exp(zᵢ + c) = exp(c)·exp(zᵢ), et le facteur exp(c) se simplifie entre le numérateur et le dénominateur. C'est ce qui permet de soustraire le maximum des scores pour éviter un dépassement de capacité (softmax stable)."
+    },
+    {
+      "id": "ING-IA2-Q04",
+      "question": "Un classifieur à 3 classes prédit les probabilités (0,1 ; 0,7 ; 0,2) pour un exemple dont la vraie classe est la deuxième. Que vaut la perte d'entropie croisée (logarithme népérien) ?",
+      "options": ["0,3", "0,7", "≈ 0,357", "≈ 2,303"],
+      "correctOptionIndex": 2,
+      "explanation": "Avec une cible one-hot, l'entropie croisée −Σ yₖ ln(pₖ) se réduit à −ln de la probabilité de la vraie classe : −ln(0,7) ≈ 0,357. 0,3 = 1 − 0,7 n'est pas un logarithme, et 2,303 = −ln(0,1) prend la mauvaise classe."
+    },
+    {
+      "id": "ING-IA2-Q05",
+      "question": "Dans un petit graphe de calcul, z = 3x, a = z² et L = 2a. Par la règle de dérivation en chaîne, que vaut dL/dx en x = 1 ?",
+      "options": ["12", "18", "6", "36"],
+      "correctOptionIndex": 3,
+      "explanation": "dL/dx = dL/da × da/dz × dz/dx = 2 × 2z × 3, avec z = 3 en x = 1 : 2 × 6 × 3 = 36, ce que confirme L = 18x². La valeur 12 oublie le facteur dz/dx = 3, et 18 est la valeur de L."
+    },
+    {
+      "id": "ING-IA2-Q06",
+      "question": "Un jeu de 10 000 exemples est parcouru par mini-lots (mini-batches) de 100 exemples. Combien de mises à jour des poids une époque comporte-t-elle ?",
+      "options": ["1", "100", "10 000", "1 000 000"],
+      "correctOptionIndex": 1,
+      "explanation": "Une époque est un passage complet sur les données : 10 000/100 = 100 mini-lots, donc 100 pas de gradient. Une seule mise à jour correspond à la descente de gradient sur tout le jeu, et 10 000 à la descente stochastique pure, exemple par exemple."
+    },
+    {
+      "id": "ING-IA2-Q07",
+      "question": "La dérivée de la sigmoïde vaut au plus 0,25. Dans un réseau profond n'utilisant que des sigmoïdes, que risque le gradient qui arrive aux premières couches ?",
+      "options": [
+        "Devenir minuscule, car la rétropropagation le multiplie par de nombreux facteurs ≤ 0,25",
+        "Devenir infini, car on divise par 0,25 à chaque couche",
+        "Rester égal au gradient des dernières couches",
+        "S'annuler exactement dès la deuxième couche"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "La règle de la chaîne multiplie les dérivées des activations couche après couche : sur 10 couches, 0,25¹⁰ ≈ 10⁻⁶. C'est la disparition du gradient (vanishing gradient), que limitent ReLU, de dérivée 1 pour z > 0, et une bonne initialisation."
+    },
+    {
+      "id": "ING-IA2-Q08",
+      "question": "Que fait le dropout pendant l'entraînement d'un réseau de neurones ?",
+      "options": [
+        "Il supprime définitivement les neurones dont les poids sont les plus faibles",
+        "Il arrête l'entraînement dès que la perte de validation remonte",
+        "Il met à zéro des neurones tirés au hasard à chaque pas d'entraînement",
+        "Il divise le taux d'apprentissage par deux à chaque époque"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "En éteignant aléatoirement des neurones, le dropout empêche le réseau de dépendre de quelques neurones précis, ce qui réduit le surapprentissage ; il est désactivé à la prédiction. Supprimer les petits poids est de l'élagage (pruning), et s'arrêter quand la validation se dégrade est l'arrêt précoce (early stopping)."
+    },
+    {
+      "id": "ING-IA2-Q09",
+      "question": "Une image 32 × 32 passe dans une convolution de noyau 4 × 4, avec un remplissage (padding) p = 1 et un pas (stride) s = 2. Quelle est la taille de la carte de sortie ?",
+      "options": ["16 × 16", "15 × 15", "31 × 31", "32 × 32"],
+      "correctOptionIndex": 0,
+      "explanation": "(n + 2p − k)/s + 1 = (32 + 2 − 4)/2 + 1 = 15 + 1 = 16. Oublier le +1 ou le remplissage donne 15, et ignorer le pas donne 31."
+    },
+    {
+      "id": "ING-IA2-Q10",
+      "question": "Une couche convolutive applique 10 filtres 3 × 3 à une image en niveaux de gris (1 canal) de 100 × 100 pixels. Combien de paramètres entraînables a-t-elle, biais compris ?",
+      "options": ["90", "100", "100 000", "900 000"],
+      "correctOptionIndex": 1,
+      "explanation": "Chaque filtre a 3 × 3 × 1 = 9 poids et 1 biais, soit 10 × 10 = 100 paramètres, partagés par toutes les positions de l'image. La taille de l'image n'intervient donc pas, et 90 oublie les biais."
+    },
+    {
+      "id": "ING-IA2-Q11",
+      "question": "Quel est l'apport principal d'un LSTM par rapport à un RNN simple ?",
+      "options": [
+        "Il traite tous les éléments de la séquence en parallèle, sans récurrence",
+        "Il utilise des poids différents à chaque pas de temps",
+        "Sa cellule mémoire et ses portes conservent l'information sur de longues séquences",
+        "Il n'a plus besoin de rétropropagation pour apprendre"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "Les portes d'oubli, d'entrée et de sortie décident quoi effacer, ajouter ou lire dans la cellule mémoire, mise à jour de façon additive : le gradient traverse mieux les nombreux pas de temps. Comme le RNN simple, le LSTM reste séquentiel et partage ses poids entre les pas de temps."
+    },
+    {
+      "id": "ING-IA2-Q12",
+      "question": "Dans l'attention softmax(QKᵀ/√d)·V d'un Transformer, à quoi sert la division par √d ?",
+      "options": [
+        "À garantir que les poids d'attention somment à 1",
+        "À normaliser les vecteurs de valeurs V",
+        "À réduire le nombre de paramètres du modèle",
+        "À empêcher les produits scalaires, qui grandissent avec la dimension d, de saturer la softmax"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "Si les composantes de q et k sont centrées, indépendantes et de variance 1, le produit scalaire q·k a une variance d ; diviser par √d la ramène à 1 et évite une softmax presque one-hot aux gradients quasi nuls. C'est la softmax elle-même qui fait sommer les poids à 1."
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "ING-IA2-F01",
+      "front": "Perceptron multicouche (MLP)",
+      "back": "Empilement de couches denses : chaque neurone calcule une somme pondérée de toutes les sorties de la couche précédente, ajoute un biais, puis applique une activation. Avec une couche cachée non linéaire assez large, il peut approcher aussi finement qu'on veut toute fonction continue sur un domaine borné."
+    },
+    {
+      "id": "ING-IA2-F02",
+      "front": "Rôle des activations non linéaires",
+      "back": "Sans elles, une composition de couches linéaires reste une seule transformation affine : la profondeur n'apporterait rien. ReLU(z) = max(0, z) est le choix par défaut dans les couches cachées."
+    },
+    {
+      "id": "ING-IA2-F03",
+      "front": "Choisir la fonction de perte",
+      "back": "Régression : MSE, moyenne des carrés des erreurs. Classification : entropie croisée −Σ yₖ ln(pₖ), après une sigmoïde (2 classes) ou une softmax (plusieurs classes) ; elle pénalise fortement une forte confiance dans une mauvaise classe."
+    },
+    {
+      "id": "ING-IA2-F04",
+      "front": "Rétropropagation (backpropagation)",
+      "back": "Calcul de tous les gradients ∂L/∂w par la règle de la chaîne, de la sortie vers l'entrée. Chaque couche reçoit le gradient de sa sortie, le multiplie par sa dérivée locale et le transmet à la couche précédente ; le coût est du même ordre qu'une propagation avant."
+    },
+    {
+      "id": "ING-IA2-F05",
+      "front": "Descente de gradient par mini-lots",
+      "back": "À chaque pas, on estime le gradient sur un mini-lot de quelques dizaines à quelques centaines d'exemples, puis w ← w − η·∇L. C'est un compromis entre le gradient exact mais coûteux sur tout le jeu et le gradient très bruité d'un seul exemple."
+    },
+    {
+      "id": "ING-IA2-F06",
+      "front": "Weight decay (régularisation L2)",
+      "back": "On ajoute (λ/2)·‖w‖² à la perte : le gradient gagne un terme λw qui tire chaque poids vers 0 à chaque pas. Des poids plus petits donnent un modèle plus lisse, moins sujet au surapprentissage."
+    },
+    {
+      "id": "ING-IA2-F07",
+      "front": "Pooling (sous-échantillonnage) dans un CNN",
+      "back": "Chaque fenêtre de la carte de caractéristiques est résumée par une seule valeur, son maximum (max pooling) ou sa moyenne. Un max pooling 2 × 2 de pas 2 divise la hauteur et la largeur par 2, sans paramètre à apprendre, et rend le réseau plus tolérant aux petites translations."
+    },
+    {
+      "id": "ING-IA2-F08",
+      "front": "Self-attention d'un Transformer",
+      "back": "Chaque élément de la séquence produit une requête q, une clé k et une valeur v. Sa sortie est une moyenne des valeurs de tous les éléments, pondérée par la softmax des scores q·k/√d ; tous les éléments sont traités en parallèle, sans récurrence."
+    }
+  ]
+}

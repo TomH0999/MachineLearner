@@ -1,0 +1,151 @@
+{
+  "nodeId": "ING-MAT2",
+  "questions": [
+    {
+      "id": "ING-MAT2-Q01",
+      "question": "Quelle est la dimension du sous-espace F = {(x, y, z) ∈ ℝ³ : x + y + z = 0} ?",
+      "options": ["1", "2", "3", "0"],
+      "correctOptionIndex": 1,
+      "explanation": "F est le noyau de la forme linéaire non nulle (x, y, z) ↦ x + y + z, de rang 1 : dim F = 3 − 1 = 2. Les vecteurs (1, −1, 0) et (1, 0, −1) en forment une base."
+    },
+    {
+      "id": "ING-MAT2-Q02",
+      "question": "Les vecteurs u = (1, 2, 3), v = (2, 4, 6) et w = (0, 1, 1) de ℝ³ sont-ils linéairement indépendants ?",
+      "options": [
+        "Oui, car aucun des trois n'est nul",
+        "Oui, car trois vecteurs de ℝ³ forment toujours une famille libre",
+        "Non, car trois vecteurs de ℝ³ sont toujours liés",
+        "Non, car v = 2u"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "Une famille est liée dès qu'un vecteur est combinaison linéaire des autres : ici 2u − v + 0w = 0. Trois vecteurs de ℝ³ peuvent former une base, mais ce n'est jamais automatique."
+    },
+    {
+      "id": "ING-MAT2-Q03",
+      "question": "Une application linéaire f : ℝ⁵ → ℝ³ est surjective. Quelle est la dimension de son noyau ?",
+      "options": ["2", "3", "0", "5"],
+      "correctOptionIndex": 0,
+      "explanation": "Surjective signifie Im f = ℝ³, donc rg f = 3. Le théorème du rang donne dim Ker f = dim ℝ⁵ − rg f = 5 − 3 = 2."
+    },
+    {
+      "id": "ING-MAT2-Q04",
+      "question": "Soit f : ℝ³ → ℝ² définie par f(x, y, z) = (x + y, y + z). Quel est le noyau de f ?",
+      "options": [
+        "{0}, car f est linéaire",
+        "La droite engendrée par (1, 1, 1)",
+        "La droite engendrée par (1, −1, 1)",
+        "Le plan engendré par (1, −1, 0) et (0, 1, −1)"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "Ker f est l'ensemble des solutions de x + y = 0 et y + z = 0, soit x = z = −y : c'est la droite engendrée par (1, −1, 1). Le théorème du rang le confirme : f est surjective, donc dim Ker f = 3 − 2 = 1."
+    },
+    {
+      "id": "ING-MAT2-Q05",
+      "question": "A est la matrice d'un endomorphisme f dans la base canonique, et P la matrice de passage vers une nouvelle base B' (ses colonnes sont les vecteurs de B'). Quelle est la matrice de f dans B' ?",
+      "options": ["PAP⁻¹", "P⁻¹AP", "PᵀAP", "AP"],
+      "correctOptionIndex": 1,
+      "explanation": "Les coordonnées vérifient X = PX' ; l'égalité Y = AX devient PY' = APX', soit Y' = P⁻¹APX'. PᵀAP ne coïncide avec P⁻¹AP que si P est orthogonale."
+    },
+    {
+      "id": "ING-MAT2-Q06",
+      "question": "On pose B = P⁻¹AP, avec P inversible. Laquelle de ces caractéristiques peut différer entre A et B ?",
+      "options": ["Le déterminant", "La trace", "Les valeurs propres", "Les vecteurs propres"],
+      "correctOptionIndex": 3,
+      "explanation": "A et B représentent le même endomorphisme dans deux bases : même polynôme caractéristique, donc mêmes valeurs propres, même trace et même déterminant. Si Av = λv, alors B(P⁻¹v) = λP⁻¹v : les vecteurs propres de B sont les P⁻¹v, en général différents."
+    },
+    {
+      "id": "ING-MAT2-Q07",
+      "question": "A et B sont deux matrices 3×3 avec det(A) = 2 et det(B) = −3. Que vaut det(2AB) ?",
+      "options": ["−48", "−12", "−6", "48"],
+      "correctOptionIndex": 0,
+      "explanation": "Pour une matrice n×n, det(cM) = cⁿ·det(M), et det(AB) = det(A)·det(B) : det(2AB) = 2³ × 2 × (−3) = −48. Oublier la puissance 3 donne −12."
+    },
+    {
+      "id": "ING-MAT2-Q08",
+      "question": "Dans ℝ², l'application linéaire de matrice de lignes (3, 1) et (1, 2) transforme le carré unité en un parallélogramme. Quelle est l'aire de ce parallélogramme ?",
+      "options": ["7", "6", "5", "1, car une application linéaire conserve les aires"],
+      "correctOptionIndex": 2,
+      "explanation": "Une application linéaire multiplie les aires par la valeur absolue du déterminant : det = 3×2 − 1×1 = 5, et le carré unité a une aire de 1. La réponse 7 vient de l'erreur ad + bc."
+    },
+    {
+      "id": "ING-MAT2-Q09",
+      "question": "Quelles sont les valeurs propres de la matrice de lignes (2, 1) et (1, 2) ?",
+      "options": ["2 et 2", "0 et 4", "−1 et 3", "1 et 3"],
+      "correctOptionIndex": 3,
+      "explanation": "Le polynôme caractéristique vaut (2 − λ)² − 1 = λ² − 4λ + 3 = (λ − 1)(λ − 3). Contrôle : la somme 1 + 3 égale la trace 4, et le produit 1 × 3 égale le déterminant 3."
+    },
+    {
+      "id": "ING-MAT2-Q10",
+      "question": "La matrice de lignes (1, 1) et (0, 1) est-elle diagonalisable dans ℝ ?",
+      "options": [
+        "Non : 1 est valeur propre double, mais son sous-espace propre est de dimension 1",
+        "Oui : elle est triangulaire, donc diagonalisable",
+        "Oui : son déterminant est non nul",
+        "Non : elle n'a aucune valeur propre réelle"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "Le polynôme caractéristique vaut (1 − λ)², donc 1 est la seule valeur propre. A − I a pour lignes (0, 1) et (0, 0) : son noyau est la seule droite engendrée par (1, 0), insuffisante pour former une base de vecteurs propres de ℝ²."
+    },
+    {
+      "id": "ING-MAT2-Q11",
+      "question": "Dans la décomposition en valeurs singulières A = UΣVᵀ, comment obtient-on les valeurs singulières de A ?",
+      "options": [
+        "Ce sont les valeurs propres de A",
+        "Ce sont les racines carrées des valeurs propres de AᵀA",
+        "Ce sont les coefficients diagonaux de A",
+        "Ce sont les carrés des valeurs propres de AᵀA"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "AᵀA = VΣᵀΣVᵀ est symétrique positive et ses valeurs propres sont les σᵢ², donc σᵢ = √λᵢ. Les valeurs singulières sont ainsi réelles et positives, même quand A n'est pas carrée."
+    },
+    {
+      "id": "ING-MAT2-Q12",
+      "question": "Une matrice A de taille 4×3 a pour valeurs singulières 5, 2 et 0. Quel est son rang ?",
+      "options": ["3", "4", "2", "7"],
+      "correctOptionIndex": 2,
+      "explanation": "Le rang est égal au nombre de valeurs singulières non nulles, ici 5 et 2 : rg A = 2. Les deux colonnes de U associées à ces valeurs forment une base de Im A."
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "ING-MAT2-F01",
+      "front": "Base d'un espace vectoriel",
+      "back": "Famille à la fois libre et génératrice ; toutes les bases ont le même nombre de vecteurs, la dimension. En dimension n, une famille libre de n vecteurs est automatiquement une base."
+    },
+    {
+      "id": "ING-MAT2-F02",
+      "front": "Théorème du rang",
+      "back": "Pour f : E → F linéaire avec E de dimension finie : dim E = dim Ker f + rg f, où rg f = dim Im f. En particulier, f est injective si et seulement si Ker f = {0}."
+    },
+    {
+      "id": "ING-MAT2-F03",
+      "front": "Matrice de passage P",
+      "back": "Ses colonnes contiennent les coordonnées des vecteurs de la nouvelle base, exprimées dans l'ancienne. Ancienne et nouvelles coordonnées d'un même vecteur sont liées par X = PX'."
+    },
+    {
+      "id": "ING-MAT2-F04",
+      "front": "Déterminant et inversibilité",
+      "back": "Une matrice carrée A est inversible si et seulement si det(A) ≠ 0, et alors det(A⁻¹) = 1 / det(A). Un déterminant nul signifie que les colonnes de A sont liées."
+    },
+    {
+      "id": "ING-MAT2-F05",
+      "front": "Polynôme caractéristique",
+      "back": "χ(λ) = det(A − λI) ; ses racines sont les valeurs propres de A. Pour une matrice 2×2, χ(λ) = λ² − tr(A)·λ + det(A)."
+    },
+    {
+      "id": "ING-MAT2-F06",
+      "front": "Critère de diagonalisation",
+      "back": "Une matrice n×n est diagonalisable si et seulement si la somme des dimensions de ses sous-espaces propres vaut n. Condition suffisante : avoir n valeurs propres distinctes."
+    },
+    {
+      "id": "ING-MAT2-F07",
+      "front": "Théorème spectral (matrice symétrique réelle)",
+      "back": "Une matrice symétrique réelle a des valeurs propres réelles et se diagonalise dans une base orthonormée : A = QDQᵀ, avec Q orthogonale (Q⁻¹ = Qᵀ)."
+    },
+    {
+      "id": "ING-MAT2-F08",
+      "front": "SVD tronquée et compression",
+      "back": "En ne gardant que les k plus grandes valeurs singulières et leurs vecteurs singuliers, on obtient la meilleure approximation de rang k de A (théorème d'Eckart-Young). Pour une matrice m×n, on stocke k(m + n + 1) nombres au lieu de mn."
+    }
+  ]
+}

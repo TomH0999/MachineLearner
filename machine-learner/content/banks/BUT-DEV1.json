@@ -1,0 +1,181 @@
+{
+  "nodeId": "BUT-DEV1",
+  "questions": [
+    {
+      "id": "BUT-DEV1-Q01",
+      "question": "Dans une fonction C, on déclare la variable locale « int compteur = 0; ». Où est-elle stockée, et quand sa mémoire est-elle libérée ?",
+      "options": [
+        "Sur le tas, jusqu'à un appel explicite à free",
+        "Sur la pile, automatiquement à la sortie de la fonction",
+        "Sur le tas, par le ramasse-miettes quand elle ne sert plus",
+        "Dans le segment de données, seulement à la fin du programme"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "Une variable locale vit dans le cadre de pile de la fonction, qui disparaît au retour de celle-ci. Seuls les blocs obtenus par malloc vont sur le tas et exigent un free, car le C n'a pas de ramasse-miettes."
+    },
+    {
+      "id": "BUT-DEV1-Q02",
+      "question": "Qu'affiche « int t[] = {10, 20, 30, 40}; int *p = t; printf(\"%d\", *(p + 2)); » ?",
+      "options": [
+        "12",
+        "20",
+        "Une valeur imprévisible, car p + 2 n'avance que de 2 octets",
+        "30"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "p + 2 avance de 2 éléments de type int, et non de 2 octets : *(p + 2) équivaut à t[2], qui vaut 30. Obtenir 12 reviendrait à calculer *p + 2."
+    },
+    {
+      "id": "BUT-DEV1-Q03",
+      "question": "Que se passe-t-il avec « int *p = malloc(sizeof(int)); free(p); *p = 3; » ?",
+      "options": [
+        "p est un pointeur pendant : écrire à cette adresse est un comportement indéfini",
+        "Rien de grave : free a remis p à NULL",
+        "Une fuite mémoire, car le bloc n'a jamais été libéré",
+        "Une erreur de compilation, car on ne peut pas déréférencer p après free"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "free libère le bloc mais ne modifie pas p, qui garde l'ancienne adresse : c'est un pointeur pendant, et l'écriture est un comportement indéfini. Affecter NULL à p juste après free évite ce piège."
+    },
+    {
+      "id": "BUT-DEV1-Q04",
+      "question": "En Java, depuis quel code peut-on accéder directement à un attribut déclaré private ?",
+      "options": [
+        "Depuis la classe et toutes ses sous-classes",
+        "Depuis toutes les classes du même paquetage",
+        "Uniquement depuis l'intérieur de la classe qui le déclare",
+        "Depuis n'importe quelle classe qui importe celle-ci"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "private limite l'accès au corps de la classe qui déclare l'attribut : c'est la base de l'encapsulation, l'extérieur passant par des méthodes publiques. L'accès des sous-classes relève de protected, celui du paquetage de la visibilité par défaut."
+    },
+    {
+      "id": "BUT-DEV1-Q05",
+      "question": "En Java, Chien hérite d'Animal et redéfinit la méthode parler(). Quelle version s'exécute avec « Animal a = new Chien(); a.parler(); » ?",
+      "options": [
+        "Celle d'Animal, car la variable a est déclarée de type Animal",
+        "Celle de Chien, car la liaison dynamique utilise le type réel de l'objet",
+        "Celle d'Animal, puis celle de Chien, dans cet ordre",
+        "Aucune : sans conversion explicite de a en Chien, le code ne compile pas"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "Le compilateur vérifie seulement que parler() existe dans Animal ; à l'exécution, c'est la version de la classe réelle de l'objet, Chien, qui est appelée. C'est le polymorphisme par liaison dynamique."
+    },
+    {
+      "id": "BUT-DEV1-Q06",
+      "question": "Une classe Java déclare deux méthodes nommées somme : l'une prend deux int, l'autre deux double. Comment s'appelle ce mécanisme ?",
+      "options": [
+        "La redéfinition (override)",
+        "Le polymorphisme par liaison dynamique",
+        "L'héritage multiple",
+        "La surcharge (overloading)"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "Un même nom avec des listes de paramètres différentes dans la même classe est une surcharge : le compilateur choisit la version selon le type des arguments. La redéfinition reprend au contraire la même signature dans une sous-classe."
+    },
+    {
+      "id": "BUT-DEV1-Q07",
+      "question": "Une classe Facture calcule le montant total, génère le PDF et envoie l'e-mail au client. Quel principe SOLID enfreint-elle le plus directement ?",
+      "options": [
+        "Le principe de responsabilité unique (S)",
+        "Le principe de substitution de Liskov (L)",
+        "Le principe de ségrégation des interfaces (I)",
+        "Aucun : tout regrouper dans une seule classe renforce l'encapsulation"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "La classe a trois raisons de changer (règles de calcul, mise en page, envoi) : elle viole le principe de responsabilité unique. On la découpe en classes dédiées, par exemple un générateur de PDF et un service d'envoi."
+    },
+    {
+      "id": "BUT-DEV1-Q08",
+      "question": "Pour ajouter un moyen de paiement, il faut modifier un long switch dans la classe Commande. Quel principe est enfreint, et quelle correction est la plus courante ?",
+      "options": [
+        "Responsabilité unique : découper le switch en plusieurs méthodes privées",
+        "Aucun : compléter le switch est la façon normale d'étendre le code",
+        "Ouvert/fermé : définir une interface MoyenPaiement et ajouter une classe par moyen de paiement",
+        "Singleton : garantir qu'il n'existe qu'une seule instance de Commande"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "Le code doit être ouvert à l'extension mais fermé à la modification : avec une interface MoyenPaiement, un nouveau moyen devient une nouvelle classe, sans toucher à Commande. C'est exactement le patron Strategy."
+    },
+    {
+      "id": "BUT-DEV1-Q09",
+      "question": "Plusieurs graphiques doivent se mettre à jour dès qu'une cellule d'un tableur change, sans que la cellule connaisse leurs classes concrètes. Quel patron de conception convient ?",
+      "options": ["Singleton", "Factory", "Strategy", "Observer"],
+      "correctOptionIndex": 3,
+      "explanation": "Avec Observer, le sujet (la cellule) garde une liste d'abonnés qui implémentent une interface commune et les notifie à chaque changement. On ajoute ou retire des graphiques sans modifier la cellule."
+    },
+    {
+      "id": "BUT-DEV1-Q10",
+      "question": "Laquelle de ces fonctions est pure ?",
+      "options": [
+        "Une fonction qui ajoute son argument à une liste globale, puis renvoie la taille de cette liste",
+        "Une fonction qui renvoie le double de son argument sans rien modifier d'autre",
+        "Une fonction qui renvoie son argument augmenté du nombre de secondes écoulées depuis minuit",
+        "Une fonction qui affiche son argument avec print, puis le renvoie"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "Une fonction pure renvoie toujours le même résultat pour les mêmes arguments et n'a aucun effet de bord. Modifier une variable globale, lire l'horloge ou afficher à l'écran rompt l'une de ces deux conditions."
+    },
+    {
+      "id": "BUT-DEV1-Q11",
+      "question": "En Python, que vaut « list(map(lambda x: x * x, filter(lambda x: x % 2 == 0, [1, 2, 3, 4, 5]))) » ?",
+      "options": ["[4, 16]", "[2, 4]", "[1, 9, 25]", "[1, 4, 9, 16, 25]"],
+      "correctOptionIndex": 0,
+      "explanation": "filter garde d'abord les éléments pairs, soit [2, 4], puis map élève chacun au carré : [4, 16]. Les appels imbriqués s'évaluent de l'intérieur vers l'extérieur."
+    },
+    {
+      "id": "BUT-DEV1-Q12",
+      "question": "En Python, que se passe-t-il à l'exécution de « t = (1, 2, 3); t[0] = 9 » ?",
+      "options": [
+        "t vaut désormais (9, 2, 3)",
+        "Python crée silencieusement un nouveau tuple (9, 2, 3) et l'affecte à t",
+        "Une erreur TypeError est levée, car un tuple est immuable",
+        "t est converti en liste et vaut désormais [9, 2, 3]"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "Un tuple ne peut plus être modifié après sa création : l'affectation t[0] = 9 lève une TypeError. Pour obtenir (9, 2, 3), on construit un nouvel objet, par exemple (9,) + t[1:], le réflexe de la programmation fonctionnelle."
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "BUT-DEV1-F01",
+      "front": "Fuite mémoire",
+      "back": "Bloc alloué sur le tas (malloc, new) dont on a perdu l'adresse sans l'avoir libéré. La mémoire reste réservée jusqu'à la fin du programme : chaque malloc doit avoir son free, chaque new son delete."
+    },
+    {
+      "id": "BUT-DEV1-F02",
+      "front": "Référence C++ vs pointeur",
+      "back": "Une référence est un alias : initialisée à sa déclaration, jamais nulle, elle ne change jamais de cible et s'utilise sans *. Un pointeur peut valoir nullptr, être réaffecté, et se déréférence avec * ou ->."
+    },
+    {
+      "id": "BUT-DEV1-F03",
+      "front": "Classe abstraite vs interface (Java)",
+      "back": "Une classe abstraite peut avoir des attributs, un constructeur et des méthodes concrètes, mais une classe n'hérite que d'une seule classe. Une interface décrit un contrat sans état d'instance, et une classe peut en implémenter plusieurs."
+    },
+    {
+      "id": "BUT-DEV1-F04",
+      "front": "Surcharge vs redéfinition",
+      "back": "Surcharge : même nom, paramètres différents, version choisie à la compilation. Redéfinition : même signature dans une sous-classe, version choisie à l'exécution selon le type réel de l'objet."
+    },
+    {
+      "id": "BUT-DEV1-F05",
+      "front": "Patron Singleton",
+      "back": "Garantit qu'une classe n'a qu'une seule instance et fournit un point d'accès global à celle-ci (constructeur privé et méthode statique). À utiliser avec parcimonie : c'est un état global qui complique les tests."
+    },
+    {
+      "id": "BUT-DEV1-F06",
+      "front": "Patron Factory",
+      "back": "Confie la création des objets à une méthode ou une classe dédiée, qui choisit la classe concrète à instancier. Le code client ne dépend plus que d'une abstraction, pas des constructeurs concrets."
+    },
+    {
+      "id": "BUT-DEV1-F07",
+      "front": "Patron Strategy",
+      "back": "Place une famille d'algorithmes interchangeables derrière une interface commune. L'objet client reçoit la stratégie à utiliser et peut en changer à l'exécution, sans cascade de if ou de switch."
+    },
+    {
+      "id": "BUT-DEV1-F08",
+      "front": "Rôle de reduce",
+      "back": "reduce combine les éléments d'une séquence un à un avec un accumulateur pour produire une seule valeur. En Python, functools.reduce avec une addition et la valeur initiale 0 calcule la somme de la liste."
+    }
+  ]
+}

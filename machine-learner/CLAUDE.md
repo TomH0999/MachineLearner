@@ -19,6 +19,7 @@ Le but est de découper le cahier des charges EngiPath (Skill Tree BUT → Ingé
 - La PARTIE 8 (seed) est incomplète : 6 nœuds sur 15. Elle est aussi **destructive** : ses `deleteMany` effacent la progression des utilisateurs.
 - Contenu pédagogique en cache ("use cache" + cacheTag("content") + cacheLife("max")) : après `npm run db:seed`, redémarrer `npm run dev`.
 - Ne jamais appeler depuis un Server Component une fonction exportée par un fichier "use client" (seuls ses composants sont utilisables côté serveur) : placer les helpers purs dans un module sans directive.
+- Hooks React (useState, useSyncExternalStore…) : jamais dans un module importé par un Server Component (ex. src/lib/theme.ts) ; les placer dans un module dédié importé uniquement par des Client Components (ex. src/lib/use-is-dark-mode.ts).
 
 **Décisions que tu as validées :** Better Auth (email + mot de passe). Le texte du cahier fait foi pour les prérequis : ING-ENG1 est indépendant, et IA1 = MAT2 + MAT3 + MAT4 + DEV1.
 

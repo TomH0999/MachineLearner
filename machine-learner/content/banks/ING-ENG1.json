@@ -1,0 +1,156 @@
+{
+  "nodeId": "ING-ENG1",
+  "questions": [
+    {
+      "id": "ING-ENG1-Q01",
+      "question": "Thanks to the new caching layer, the API now handles requests far more ____ than before.",
+      "options": ["efficient", "efficiency", "efficiently", "efficiencies"],
+      "correctOptionIndex": 2,
+      "explanation": "Le mot manquant décrit la manière dont le verbe « handles » est réalisé : il faut un adverbe, reconnaissable à son suffixe -ly (far more efficiently, bien plus efficacement). « efficient » est un adjectif, qui qualifie un nom (an efficient algorithm) ; « efficiency » et « efficiencies » sont des noms (l'efficacité) et ne peuvent pas modifier un verbe."
+    },
+    {
+      "id": "ING-ENG1-Q02",
+      "question": "We ____ the production cluster closely since last Monday's outage.",
+      "options": ["are monitoring", "monitored", "monitor", "have been monitoring"],
+      "correctOptionIndex": 3,
+      "explanation": "« since » suivi d'un point de départ (last Monday's outage) désigne une action commencée dans le passé et toujours en cours : il faut le present perfect, ici à la forme continue (have been + verbe en -ing) pour une activité qui dure. « are monitoring » et « monitor » calquent le français « nous surveillons depuis » : le présent est impossible avec since. « monitored », au prétérit, décrit une action terminée, elle aussi incompatible avec since."
+    },
+    {
+      "id": "ING-ENG1-Q03",
+      "question": "The vulnerability ____ by an external security researcher last week.",
+      "options": ["was discovered", "discovered", "has been discovered", "is discovering"],
+      "correctOptionIndex": 0,
+      "explanation": "Le sujet (the vulnerability) subit l'action, et l'auteur de l'action est introduit par « by » : c'est la voix passive, be + participe passé. « last week » situe l'action à un moment passé et terminé, d'où le prétérit « was discovered ». « has been discovered » est un present perfect, incompatible avec un repère passé précis ; « discovered » seul ferait de la vulnérabilité l'auteur de la découverte, et « is discovering » est à la voix active et au présent."
+    },
+    {
+      "id": "ING-ENG1-Q04",
+      "question": "If we had written more integration tests, we ____ this bug before last Friday's release.",
+      "options": ["will catch", "would have caught", "would catch", "had caught"],
+      "correctOptionIndex": 1,
+      "explanation": "La condition porte sur le passé et ne s'est pas réalisée (ces tests n'ont pas été écrits) : c'est le conditionnel de type 3, if + past perfect (had written), puis would have + participe passé. « would catch » (type 2) vise une situation présente ou future, alors que la sortie de vendredi dernier est passée ; « will catch » appartient au type 1, pour une condition encore possible ; « had caught » ne s'emploie pas dans la proposition principale."
+    },
+    {
+      "id": "ING-ENG1-Q05",
+      "question": "The backup job runs ____ 2 a.m. every night.",
+      "options": ["in", "on", "at", "during"],
+      "correctOptionIndex": 2,
+      "explanation": "Devant une heure précise, on emploie « at » (at 2 a.m., at noon). « on » introduit un jour ou une date (on Monday, on May 4), « in » un mois, une année ou une partie de la journée (in May, in 2026, in the morning), et « during » une période pendant laquelle quelque chose se produit (during the night), jamais une heure précise."
+    },
+    {
+      "id": "ING-ENG1-Q06",
+      "question": "The engineer ____ pull request fixed the memory leak has been promoted to tech lead.",
+      "options": ["who", "which", "whom", "whose"],
+      "correctOptionIndex": 3,
+      "explanation": "Le pronom relatif exprime ici une possession, la pull request de l'ingénieur : il faut « whose » (dont le, dont la), suivi directement du nom possédé. « who » et « whom » remplacent une personne, sujet ou complément, et « which » une chose : aucun des trois ne peut précéder un nom pour exprimer l'appartenance."
+    },
+    {
+      "id": "ING-ENG1-Q07",
+      "question": "The new release caused errors for 30% of users, so the team decided to ____ to the previous version.",
+      "options": ["roll back", "roll out", "set up", "look into"],
+      "correctOptionIndex": 0,
+      "explanation": "« roll back » signifie revenir à une version antérieure après un problème, d'où « roll back to the previous version ». « roll out » veut dire déployer une nouvelle version, souvent progressivement : c'est l'inverse. « set up » signifie installer ou configurer, et « look into » examiner un problème ou enquêter sur ses causes : ni l'un ni l'autre ne se construit avec « to the previous version »."
+    },
+    {
+      "id": "ING-ENG1-Q08",
+      "question": "A changelog states: “The getUser() method is deprecated and will be removed in v4.0.” What does this mean for code that calls getUser() today?",
+      "options": [
+        "It no longer works and must be rewritten before the next build",
+        "It still works, but it should be migrated to the recommended replacement before v4.0",
+        "It contains a security vulnerability that has just been fixed",
+        "It has been renamed, and both names will be kept permanently"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "« deprecated » (déprécié, obsolète) désigne une fonctionnalité encore disponible mais déconseillée, qui disparaîtra dans une version future, ici la 4.0 : le code fonctionne toujours, mais il faut le migrer avant cette version. Une méthode déjà supprimée serait « removed », pas « deprecated » ; le terme ne parle ni de faille de sécurité ni d'un renommage définitif."
+    },
+    {
+      "id": "ING-ENG1-Q09",
+      "question": "The release notes for version 3.0 of a library mention several breaking changes. What should you expect when upgrading from version 2.x?",
+      "options": [
+        "The new version is unstable and may crash at random",
+        "Only bug fixes, so no code changes are needed",
+        "Some existing code may stop working until it is adapted to the new API",
+        "The package manager will rewrite your code automatically"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "Un « breaking change » est une modification incompatible avec les versions précédentes : un nom changé, un paramètre devenu obligatoire, un comportement différent. Le code existant peut cesser de compiler ou de fonctionner tant qu'on ne l'a pas adapté ; c'est pourquoi la gestion sémantique de versions l'annonce par un nouveau numéro majeur (de 2.x à 3.0). Le terme ne dit rien de la stabilité de la version, une simple correction de bug ne casse rien, et aucun gestionnaire de paquets ne réécrit le code."
+    },
+    {
+      "id": "ING-ENG1-Q10",
+      "question": "Which of these changes to a public web API is backward compatible?",
+      "options": [
+        "Removing an endpoint that some clients still call",
+        "Renaming a field that clients read in the JSON response",
+        "Making a previously optional parameter required",
+        "Adding a new optional parameter with a default value"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "« backward compatible » (rétrocompatible) signifie que les clients écrits pour l'ancienne version continuent de fonctionner sans modification. Un nouveau paramètre optionnel, doté d'une valeur par défaut, ne change rien pour les appels existants, qui ne l'envoient pas. Supprimer un endpoint encore appelé, renommer un champ que les clients lisent ou rendre obligatoire un paramètre qu'ils n'envoient pas casse ces clients : ce sont des breaking changes."
+    },
+    {
+      "id": "ING-ENG1-Q11",
+      "question": "A specification written with RFC 2119 keywords says: “Clients SHOULD retry the request after a 503 response.” What does SHOULD mean here?",
+      "options": [
+        "Retrying is an absolute requirement of the specification",
+        "Retrying is recommended; a client may skip it only for a valid reason, after weighing the consequences",
+        "Retrying is forbidden",
+        "Retrying is truly optional, with no preference either way"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "Dans la RFC 2119, SHOULD (ou RECOMMENDED) exprime une recommandation forte : on peut s'en écarter dans un cas particulier, mais seulement pour une raison valable et après en avoir mesuré les conséquences. L'exigence absolue s'écrit MUST (ou REQUIRED, SHALL), l'interdiction MUST NOT, et le choix réellement libre MAY (ou OPTIONAL)."
+    },
+    {
+      "id": "ING-ENG1-Q12",
+      "question": "A code review comment says: “The flaky test eventually passes after three retries.” What does “eventually” mean here?",
+      "options": [
+        "In the end, after some time or several attempts",
+        "Possibly, depending on the circumstances",
+        "Currently, at the present time",
+        "Occasionally, from time to time"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "« eventually » est un faux ami : il signifie finalement, au bout du compte, et non « éventuellement », qui se traduit par possibly. Le test instable finit donc par passer après trois nouvelles tentatives. « currently » traduit « actuellement », autre piège classique puisque « actually » veut dire en fait ; « occasionally » signifie de temps en temps."
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "ING-ENG1-F01",
+      "front": "deprecated",
+      "back": "déprécié, obsolète — se dit d'une fonctionnalité encore disponible mais déconseillée, qui sera supprimée dans une version future — The --legacy flag is deprecated and will be removed in version 5."
+    },
+    {
+      "id": "ING-ENG1-F02",
+      "front": "breaking change",
+      "back": "changement incompatible — modification qui oblige les utilisateurs à adapter leur code ; en gestion sémantique de versions, elle impose un nouveau numéro majeur — Renaming the userId field is a breaking change, so it ships in version 3.0."
+    },
+    {
+      "id": "ING-ENG1-F03",
+      "front": "backward compatible",
+      "back": "rétrocompatible — une nouvelle version accepte le code, les données et les appels prévus pour l'ancienne, sans modification — Version 2.4 is backward compatible with 2.0, so existing clients keep working."
+    },
+    {
+      "id": "ING-ENG1-F04",
+      "front": "to roll back",
+      "back": "revenir en arrière, annuler un déploiement — remettre en service la version précédente après un incident ; le nom s'écrit en un seul mot, a rollback — The release broke the login page, so we rolled back to version 1.8."
+    },
+    {
+      "id": "ING-ENG1-F05",
+      "front": "bottleneck",
+      "back": "goulot d'étranglement — l'élément le plus lent, qui limite les performances de tout le système — The database, not the web servers, turned out to be the bottleneck."
+    },
+    {
+      "id": "ING-ENG1-F06",
+      "front": "workaround",
+      "back": "solution de contournement — moyen provisoire d'éviter un problème sans le corriger à la source — Until the fix is released, a workaround is to clear the cache manually."
+    },
+    {
+      "id": "ING-ENG1-F07",
+      "front": "actually",
+      "back": "en fait, en réalité — faux ami : « actuellement » se dit currently — The test looks slow, but it actually spends most of its time waiting for the network."
+    },
+    {
+      "id": "ING-ENG1-F08",
+      "front": "to assist",
+      "back": "aider, prêter assistance — faux ami : « assister à une réunion » se dit to attend a meeting — Our support team can assist you with the migration."
+    }
+  ]
+}

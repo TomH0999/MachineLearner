@@ -139,20 +139,15 @@ async function CourseSection({ nodeId, data }: { nodeId: string; data: NodeForUs
 
 function NodePageSkeleton() {
   return (
-    <div className="flex max-w-3xl flex-col gap-8">
-      <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-8">
+      <div className="flex max-w-3xl flex-col gap-3">
         <Skeleton className="h-4 w-40" />
-        <Skeleton className="h-3 w-20" />
-        <Skeleton className="h-8 w-80 max-w-full" />
-        <Skeleton className="h-5 w-56" />
-        <Skeleton className="h-5 w-full" />
+        <Skeleton className="h-8 w-2/3" />
+        <Skeleton className="h-4 w-1/2" />
       </div>
-      <div className="flex flex-col gap-3">
-        <Skeleton className="h-7 w-64" />
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-3/4" />
-        <Skeleton className="h-40 w-full rounded-lg" />
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Skeleton className="aspect-video rounded-xl" />
+        <Skeleton className="h-96 rounded-xl" />
       </div>
     </div>
   );

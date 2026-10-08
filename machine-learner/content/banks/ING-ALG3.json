@@ -1,0 +1,176 @@
+{
+  "nodeId": "ING-ALG3",
+  "questions": [
+    {
+      "id": "ING-ALG3-Q01",
+      "question": "Dans un graphe non pondéré, quel algorithme donne directement les plus courts chemins, en nombre d'arêtes, depuis une source ?",
+      "options": [
+        "Le parcours en largeur (BFS), avec une file",
+        "Le parcours en profondeur (DFS), avec une pile",
+        "Bellman-Ford, le seul correct quand les arêtes n'ont pas de poids",
+        "Aucun parcours : il faut énumérer tous les chemins possibles"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "Le BFS visite les sommets par distance croissante, couche après couche, grâce à sa file FIFO : il atteint chaque sommet pour la première fois par un plus court chemin, en O(V + E). Le DFS peut au contraire s'enfoncer dans un long détour avant de croiser le chemin direct."
+    },
+    {
+      "id": "ING-ALG3-Q02",
+      "question": "Quelle est la complexité en temps d'un parcours en profondeur (DFS) sur un graphe de V sommets et E arêtes, stocké en listes d'adjacence ?",
+      "options": ["O(V × E)", "O(V²)", "O(V + E)", "O(E log V)"],
+      "correctOptionIndex": 2,
+      "explanation": "Chaque sommet est marqué et visité une seule fois, et chaque liste d'adjacence est parcourue une seule fois, soit O(E) arcs examinés au total. O(V²) correspond à une matrice d'adjacence, où l'on lit une ligne entière par sommet, et O(E log V) évoque plutôt Dijkstra avec un tas."
+    },
+    {
+      "id": "ING-ALG3-Q03",
+      "question": "Pendant un DFS sur un graphe orienté, on trouve un arc vers un sommet encore en cours d'exploration (présent sur la pile de récursion). Que peut-on en conclure ?",
+      "options": [
+        "Le graphe n'est pas connexe",
+        "Le sommet visé est inaccessible depuis la source",
+        "Le graphe est acyclique (DAG)",
+        "Le graphe contient un cycle"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "Un sommet en cours d'exploration est un ancêtre du sommet courant dans l'arbre du DFS : cet arc retour referme donc un cycle. Un graphe orienté est un DAG si et seulement si son DFS ne produit aucun arc retour, ce qui permet de vérifier qu'un tri topologique existe."
+    },
+    {
+      "id": "ING-ALG3-Q04",
+      "question": "Pourquoi l'algorithme de Dijkstra peut-il renvoyer des distances fausses sur un graphe qui contient un arc de poids négatif ?",
+      "options": [
+        "Parce qu'une file de priorité ne peut pas contenir de clés négatives",
+        "Parce qu'il fige la distance d'un sommet dès son extraction, alors qu'un arc négatif examiné plus tard pourrait encore la réduire",
+        "Parce qu'il boucle à l'infini dès qu'un poids est négatif",
+        "Parce qu'il ne traite que les graphes non orientés"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "Dijkstra suppose qu'un détour ne peut qu'allonger un chemin, ce qui n'est vrai qu'avec des poids positifs ou nuls : le sommet de plus petite distance provisoire est alors définitif. Avec des arcs négatifs, il faut un algorithme comme Bellman-Ford."
+    },
+    {
+      "id": "ING-ALG3-Q05",
+      "question": "Comment Bellman-Ford détecte-t-il un cycle de poids négatif accessible depuis la source, dans un graphe à V sommets ?",
+      "options": [
+        "Après V − 1 passes de relaxation sur tous les arcs, une passe supplémentaire réduit encore une distance",
+        "Une des distances calculées devient négative",
+        "La file de priorité contient deux fois le même sommet",
+        "Un sommet n'est toujours pas atteint après V − 1 passes"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "Un plus court chemin sans cycle compte au plus V − 1 arcs, donc V − 1 passes suffisent à fixer toutes les distances ; si une V-ième passe en améliore encore une, un cycle négatif permet de baisser le coût sans fin. Une distance négative, elle, est normale dès qu'il existe des arcs négatifs."
+    },
+    {
+      "id": "ING-ALG3-Q06",
+      "question": "Sur une grille où l'on se déplace dans 4 directions avec un coût de 1 par pas, quelle heuristique est admissible pour A* ?",
+      "options": [
+        "Le double de la distance de Manhattan",
+        "Le carré de la distance euclidienne",
+        "La distance de Manhattan |Δx| + |Δy|",
+        "Le nombre total de cases de la grille"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "Avec 4 directions, il faut au moins |Δx| + |Δy| pas pour atteindre le but : la distance de Manhattan ne surestime jamais le coût restant, et A* renvoie alors un chemin optimal. Le carré de la distance euclidienne surestime : pour Δ = (2, 0), il vaut 4 alors que 2 pas suffisent."
+    },
+    {
+      "id": "ING-ALG3-Q07",
+      "question": "Lequel de ces ordres est un tri topologique du graphe orienté d'arcs A→B, A→C, B→D et C→D ?",
+      "options": ["A, B, D, C", "B, A, C, D", "A, D, B, C", "A, C, B, D"],
+      "correctOptionIndex": 3,
+      "explanation": "Un tri topologique place chaque sommet avant tous ses successeurs : A vient en premier, D en dernier, et B et C dans un ordre quelconque entre les deux. « A, B, D, C » viole l'arc C→D, et « B, A, C, D » l'arc A→B."
+    },
+    {
+      "id": "ING-ALG3-Q08",
+      "question": "Un graphe non orienté a les arêtes A–B (1), B–C (2), A–C (3), C–D (4) et B–D (5). Quel est le poids total de son arbre couvrant minimal ?",
+      "options": ["6", "7", "10", "15"],
+      "correctOptionIndex": 1,
+      "explanation": "Kruskal prend A–B (1) et B–C (2), rejette A–C (3), qui fermerait le cycle A, B, C, puis prend C–D (4) : 3 arêtes pour 4 sommets, de poids total 7. Le total 6 garde A–C, ce qui forme un cycle et laisse D isolé."
+    },
+    {
+      "id": "ING-ALG3-Q09",
+      "question": "Dans un réseau de flot, la coupe s–t de plus petite capacité vaut 12. Que vaut le flot maximal de s à t ?",
+      "options": [
+        "Exactement 12",
+        "Au moins 12, sans borne supérieure connue",
+        "La somme des capacités des arcs qui sortent de s",
+        "On ne peut rien conclure sans connaître les chemins augmentants"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "Le théorème flot max / coupe min affirme que la valeur maximale d'un flot est égale à la capacité minimale d'une coupe séparant s de t, ici 12. Les arcs sortant de s ne forment qu'une coupe parmi d'autres : leur capacité totale n'est qu'une borne supérieure."
+    },
+    {
+      "id": "ING-ALG3-Q10",
+      "question": "La fonction récursive naïve fib(n) = fib(n − 1) + fib(n − 2) fait un nombre d'appels exponentiel. Que change la mémoïsation ?",
+      "options": [
+        "Rien sur le temps de calcul : elle économise seulement de la mémoire",
+        "Elle donne le résultat en O(1) en supprimant la récursion",
+        "Chaque fib(k) est calculé une seule fois puis relu dans un cache : le calcul devient linéaire en n",
+        "Elle coupe le problème en deux moitiés, ce qui donne O(log n)"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "Sans cache, les sous-problèmes se chevauchent : fib(n − 2) est recalculé dans la branche de fib(n − 1), et ainsi de suite. En mémorisant chaque résultat, on ne résout que les n + 1 sous-problèmes fib(0) à fib(n), chacun par une seule addition."
+    },
+    {
+      "id": "ING-ALG3-Q11",
+      "question": "Lequel de ces problèmes ne possède PAS la propriété de sous-structure optimale qu'exploite la programmation dynamique ?",
+      "options": [
+        "Le plus court chemin entre deux sommets, sans cycle négatif",
+        "Le sac à dos 0/1",
+        "La plus longue sous-suite commune de deux chaînes",
+        "Le plus long chemin simple entre deux sommets d'un graphe quelconque"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "Un plus court chemin de u à v qui passe par w se compose de plus courts chemins de u à w et de w à v. Pour le plus long chemin simple, deux moitiés optimales peuvent partager des sommets et ne se recollent pas en un chemin simple : ce problème est d'ailleurs NP-difficile."
+    },
+    {
+      "id": "ING-ALG3-Q12",
+      "question": "On dispose d'une réduction polynomiale de 3-SAT, un problème NP-complet, vers un problème X. Que peut-on en conclure ?",
+      "options": [
+        "X est dans NP",
+        "X est au moins aussi difficile que 3-SAT : il est NP-difficile",
+        "X est plus facile que 3-SAT, puisqu'on résout 3-SAT grâce à X",
+        "X est dans P"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "La réduction transforme toute instance de 3-SAT en instance de X : un algorithme polynomial pour X en donnerait un pour 3-SAT, donc pour tout NP, ce qui rend X NP-difficile. Pour le dire NP-complet, il faut encore montrer qu'il appartient à NP."
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "ING-ALG3-F01",
+      "front": "BFS et DFS",
+      "back": "Deux parcours en O(V + E) avec des listes d'adjacence. Le BFS (file) explore par couches et donne les plus courts chemins en nombre d'arêtes ; le DFS (pile ou récursion) s'enfonce d'abord et sert à détecter les cycles, trouver les composantes ou trier topologiquement."
+    },
+    {
+      "id": "ING-ALG3-F02",
+      "front": "Relaxation d'un arc (u, v)",
+      "back": "Si d[u] + w(u, v) < d[v], on remplace d[v] par d[u] + w(u, v) et on note u comme prédécesseur de v. Dijkstra, Bellman-Ford et A* reposent tous sur cette opération : seul l'ordre des relaxations change."
+    },
+    {
+      "id": "ING-ALG3-F03",
+      "front": "Algorithme de Dijkstra",
+      "back": "Plus courts chemins depuis une source, pour des poids positifs ou nuls. On extrait d'une file de priorité le sommet de plus petite distance provisoire, qui devient définitive, puis on relâche ses arcs sortants ; avec un tas binaire, la complexité est O((V + E) log V)."
+    },
+    {
+      "id": "ING-ALG3-F04",
+      "front": "Algorithme de Bellman-Ford",
+      "back": "Relâche tous les arcs V − 1 fois, en O(V × E), ce qui accepte les poids négatifs. Il est plus lent que Dijkstra, mais il signale en plus les cycles de poids négatif accessibles depuis la source."
+    },
+    {
+      "id": "ING-ALG3-F05",
+      "front": "Tri topologique par l'algorithme de Kahn",
+      "back": "On met dans une file les sommets de degré entrant nul, puis on retire chacun en décrémentant le degré entrant de ses successeurs, qui entrent dans la file en atteignant 0. Si des sommets restent à la fin, le graphe contient un cycle ; complexité O(V + E)."
+    },
+    {
+      "id": "ING-ALG3-F06",
+      "front": "Kruskal et Prim",
+      "back": "Deux algorithmes gloutons d'arbre couvrant minimal. Kruskal trie les arêtes et ajoute la plus légère qui ne crée pas de cycle (union-find) ; Prim fait grandir un seul arbre en ajoutant l'arête la plus légère qui le quitte (file de priorité)."
+    },
+    {
+      "id": "ING-ALG3-F07",
+      "front": "Programmation dynamique",
+      "back": "S'applique quand un problème a une sous-structure optimale et des sous-problèmes qui se chevauchent. On mémorise chaque sous-résultat, soit en descendant récursivement avec un cache (mémoïsation), soit en remplissant une table du plus petit au plus grand (bottom-up)."
+    },
+    {
+      "id": "ING-ALG3-F08",
+      "front": "P, NP et NP-complet",
+      "back": "P : problèmes de décision résolus en temps polynomial. NP : problèmes dont une solution proposée se vérifie en temps polynomial. NP-complet : problème de NP auquel tout problème de NP se réduit en temps polynomial, comme SAT ou 3-SAT."
+    }
+  ]
+}

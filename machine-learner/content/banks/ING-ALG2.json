@@ -1,0 +1,166 @@
+{
+  "nodeId": "ING-ALG2",
+  "questions": [
+    {
+      "id": "ING-ALG2-Q01",
+      "question": "Une fausse preuve par récurrence affirme que, dans tout groupe de n ≥ 1 chevaux, tous ont la même couleur. Hérédité : dans un groupe de n + 1 chevaux, les n premiers ont la même couleur, les n derniers aussi, et les deux groupes ont des chevaux en commun. Où est l'erreur ?",
+      "options": [
+        "Dans l'initialisation : un groupe d'un seul cheval n'a pas forcément une seule couleur",
+        "Dans l'hérédité de n = 1 à n = 2 : les deux groupes d'un cheval n'ont aucun cheval en commun",
+        "Dans l'hérédité pour n grand : deux groupes de n chevaux sont trop différents pour être comparés",
+        "Nulle part : la preuve est juste, mais la récurrence ne s'applique pas à des objets concrets"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "L'hérédité doit valoir pour tout n ≥ 1 ; or, pour 2 chevaux, « le premier » et « le dernier » forment deux groupes sans élément commun, et l'argument s'effondre. L'initialisation, elle, est vraie : un cheval seul n'a qu'une couleur."
+    },
+    {
+      "id": "ING-ALG2-Q02",
+      "question": "Un club de 10 membres élit un bureau : un président, un trésorier et un secrétaire, qui sont trois personnes différentes. Combien de bureaux distincts sont possibles ?",
+      "options": ["120", "1 000", "720", "30"],
+      "correctOptionIndex": 2,
+      "explanation": "Les postes sont distincts, donc l'ordre compte : c'est un arrangement A(10, 3) = 10 × 9 × 8 = 720. 120 = C(10, 3) compte les groupes de 3 personnes sans leur attribuer de poste, et 1 000 = 10³ permettrait à une même personne de cumuler les postes."
+    },
+    {
+      "id": "ING-ALG2-Q03",
+      "question": "Combien de mots binaires de longueur 6 contiennent exactement deux 1 ?",
+      "options": ["15", "30", "64", "12"],
+      "correctOptionIndex": 0,
+      "explanation": "Un tel mot est fixé par l'ensemble des 2 positions de ses 1, choisies parmi 6 sans ordre : C(6, 2) = (6 × 5)/2 = 15. 30 = A(6, 2) compte chaque mot deux fois en ordonnant les positions, et 64 = 2⁶ compte tous les mots de longueur 6."
+    },
+    {
+      "id": "ING-ALG2-Q04",
+      "question": "Un tiroir contient un grand nombre de chaussettes de 4 couleurs. Combien faut-il en tirer, sans regarder, pour être certain d'en avoir deux de la même couleur ?",
+      "options": ["4", "2", "8", "5"],
+      "correctOptionIndex": 3,
+      "explanation": "Avec 4 chaussettes, on peut encore avoir 4 couleurs différentes ; la 5ᵉ tombe forcément sur une couleur déjà tirée. C'est le principe des tiroirs : si l'on range 5 objets dans 4 tiroirs, l'un d'eux en contient au moins 2."
+    },
+    {
+      "id": "ING-ALG2-Q05",
+      "question": "Sur les entiers strictement positifs, quelle est la nature de la relation « a divise b » ?",
+      "options": [
+        "Une relation d'équivalence",
+        "Une relation d'ordre partiel",
+        "Une relation d'ordre total",
+        "Ni une équivalence ni un ordre, car elle n'est pas transitive"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "Elle est réflexive (a divise a), antisymétrique (si a divise b et b divise a, alors a = b) et transitive : c'est un ordre. Il est partiel car 2 et 3 ne sont pas comparables, et ce n'est pas une équivalence car 2 divise 4 alors que 4 ne divise pas 2."
+    },
+    {
+      "id": "ING-ALG2-Q06",
+      "question": "Existe-t-il un graphe simple non orienté à 7 sommets dont tous les sommets sont de degré 3 ?",
+      "options": [
+        "Non, car la somme des degrés, 21, serait impaire",
+        "Oui, avec 21 arêtes",
+        "Oui : un cycle passant par les 7 sommets convient",
+        "Non, car un graphe simple à 7 sommets a au plus 7 arêtes"
+      ],
+      "correctOptionIndex": 0,
+      "explanation": "Le lemme des poignées de main donne Σ deg = 2|E|, toujours pair, car chaque arête compte pour ses deux extrémités ; ici la somme vaudrait 7 × 3 = 21. Un cycle n'a que des sommets de degré 2, et un graphe simple à 7 sommets peut avoir jusqu'à 21 arêtes."
+    },
+    {
+      "id": "ING-ALG2-Q07",
+      "question": "Un graphe connexe a 10 sommets et 12 arêtes. Combien d'arêtes faut-il retirer pour obtenir un arbre couvrant ?",
+      "options": ["2", "9", "3", "1"],
+      "correctOptionIndex": 2,
+      "explanation": "Un arbre à n sommets a exactement n − 1 arêtes, soit 9 ici : on retire donc 12 − 9 = 3 arêtes, chacune prise sur un cycle pour préserver la connexité. La réponse 2 = 12 − 10 oublie le « − 1 », et 9 est le nombre d'arêtes de l'arbre."
+    },
+    {
+      "id": "ING-ALG2-Q08",
+      "question": "On déterminise un automate fini non déterministe (AFN) à 3 états par la construction des sous-ensembles. Que peut-on garantir ?",
+      "options": [
+        "Un automate déterministe (AFD) équivalent avec exactement 3 états",
+        "Un AFD équivalent avec au plus 3! = 6 états",
+        "Rien en général : certains langages reconnus par un AFN ne le sont par aucun AFD",
+        "Un AFD équivalent avec au plus 2³ = 8 états"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "Chaque état de l'AFD obtenu correspond à un sous-ensemble des états de l'AFN, d'où au plus 2³ = 8 états. Les AFN et les AFD reconnaissent exactement les mêmes langages, les langages réguliers : le non-déterminisme rend seulement l'automate plus concis."
+    },
+    {
+      "id": "ING-ALG2-Q09",
+      "question": "Quelle expression régulière décrit exactement les mots sur {a, b} qui contiennent au moins un a ?",
+      "options": ["« b*a(a|b)* »", "« (a|b)*a »", "« a(a|b)* »", "« b*ab* »"],
+      "correctOptionIndex": 0,
+      "explanation": "« b*a(a|b)* » lit d'abord des b, puis le premier a, puis n'importe quelle suite : tout mot contenant un a s'écrit ainsi. « (a|b)*a » impose de finir par a, « a(a|b)* » de commencer par a, et « b*ab* » n'autorise qu'un seul a."
+    },
+    {
+      "id": "ING-ALG2-Q10",
+      "question": "Pour prouver que L = { aⁿbⁿ | n ≥ 0 } n'est pas régulier, on applique le lemme de pompage au mot w = aᵖbᵖ, où p est la longueur de pompage. Pourquoi aucun découpage w = xyz ne convient-il ?",
+      "options": [
+        "Car y contient forcément des a et des b, et le répéter mélange l'ordre des lettres",
+        "Car |xy| ≤ p et |y| ≥ 1 forcent y à ne contenir que des a : xy²z a alors plus de a que de b",
+        "Car un langage infini n'est jamais régulier",
+        "Car aucun automate fini ne peut lire un mot plus long que son nombre d'états"
+      ],
+      "correctOptionIndex": 1,
+      "explanation": "Les p premières lettres de w sont des a ; comme |xy| ≤ p, y = aᵏ avec k ≥ 1, et xy²z = aᵖ⁺ᵏbᵖ n'est pas dans L, d'où la contradiction. Le langage « a* » montre pourtant qu'un langage infini peut être régulier."
+    },
+    {
+      "id": "ING-ALG2-Q11",
+      "question": "La grammaire S → aSa | bSb | a | b | ε engendre les palindromes sur {a, b}. Quel est le modèle de machine le plus simple, dans la hiérarchie de Chomsky, qui reconnaît ce langage ?",
+      "options": [
+        "Un automate fini déterministe",
+        "Un automate fini non déterministe",
+        "Un automate à pile",
+        "Une machine de Turing, car ce langage n'est pas hors-contexte"
+      ],
+      "correctOptionIndex": 2,
+      "explanation": "Cette grammaire est hors-contexte (type 2), et les automates à pile reconnaissent exactement ces langages : la pile mémorise la première moitié du mot pour la comparer à la seconde. Les palindromes ne sont pas réguliers, donc aucun automate fini, déterministe ou non, ne suffit."
+    },
+    {
+      "id": "ING-ALG2-Q12",
+      "question": "Que démontre Turing à propos du problème de l'arrêt ?",
+      "options": [
+        "Qu'on ne peut jamais savoir si un programme donné s'arrête sur une entrée donnée",
+        "Que le problème est décidable, mais seulement en temps exponentiel",
+        "Qu'une machine de Turing ne peut pas simuler une autre machine de Turing",
+        "Qu'aucun algorithme ne décide, pour tout programme P et toute entrée x, si P s'arrête sur x"
+      ],
+      "correctOptionIndex": 3,
+      "explanation": "Si un tel décideur H existait, on construirait un programme qui fait l'inverse de ce que H prédit sur lui-même : contradiction. Le théorème interdit une méthode générale, mais pour un programme particulier on peut souvent conclure, et une machine de Turing universelle simule bien n'importe quelle autre."
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "ING-ALG2-F01",
+      "front": "Principe de récurrence",
+      "back": "Pour prouver P(n) pour tout n ≥ n₀, on vérifie P(n₀) (initialisation), puis on montre que P(n) entraîne P(n + 1) pour tout n ≥ n₀ (hérédité). La récurrence forte suppose P(n₀), …, P(n) pour établir P(n + 1)."
+    },
+    {
+      "id": "ING-ALG2-F02",
+      "front": "Arrangement A(n, k) et combinaison C(n, k)",
+      "back": "A(n, k) = n!/(n − k)! compte les suites ordonnées de k éléments distincts pris parmi n. C(n, k) = n!/(k!(n − k)!) compte les sous-ensembles de k éléments, sans ordre, d'où A(n, k) = k! × C(n, k)."
+    },
+    {
+      "id": "ING-ALG2-F03",
+      "front": "Relation d'équivalence et relation d'ordre",
+      "back": "Une équivalence est réflexive, symétrique et transitive : elle découpe l'ensemble en classes disjointes, comme la congruence modulo 3 et ses 3 classes. Un ordre est réflexif, antisymétrique et transitif, comme ≤ sur les nombres ou l'inclusion ⊆ entre ensembles."
+    },
+    {
+      "id": "ING-ALG2-F04",
+      "front": "Lemme des poignées de main",
+      "back": "Dans tout graphe non orienté, Σ deg(v) = 2|E|, car chaque arête compte pour ses deux extrémités. Conséquence : le nombre de sommets de degré impair est toujours pair."
+    },
+    {
+      "id": "ING-ALG2-F05",
+      "front": "AFD et AFN",
+      "back": "Un AFD a exactement une transition par état et par symbole ; un AFN peut en avoir plusieurs, aucune, ou des ε-transitions. Les deux reconnaissent les mêmes langages, les réguliers, et la construction des sous-ensembles transforme tout AFN en AFD."
+    },
+    {
+      "id": "ING-ALG2-F06",
+      "front": "Lemme de pompage (langages réguliers)",
+      "back": "Si L est régulier, il existe p tel que tout mot w ∈ L de longueur ≥ p s'écrit xyz avec |xy| ≤ p, |y| ≥ 1 et xyⁱz ∈ L pour tout i ≥ 0. On l'utilise par l'absurde pour prouver qu'un langage n'est pas régulier."
+    },
+    {
+      "id": "ING-ALG2-F07",
+      "front": "Hiérarchie de Chomsky",
+      "back": "Type 3 : langages réguliers (automates finis) ⊂ type 2 : hors-contexte (automates à pile) ⊂ type 1 : contextuels (automates linéairement bornés) ⊂ type 0 : récursivement énumérables (machines de Turing). Chaque inclusion est stricte."
+    },
+    {
+      "id": "ING-ALG2-F08",
+      "front": "Problème de l'arrêt",
+      "back": "Il est indécidable : aucune machine de Turing ne répond correctement, pour tout couple (programme, entrée), à la question « le programme s'arrête-t-il ? ». Il est pourtant semi-décidable : en simulant le programme, on finit par répondre « oui » s'il s'arrête."
+    }
+  ]
+}

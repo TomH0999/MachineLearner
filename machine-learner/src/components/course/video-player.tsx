@@ -4,36 +4,13 @@ import { useState } from "react";
 import ReactPlayer from "react-player";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { getYouTubeVideoId, youTubeThumbnailUrl } from "@/lib/youtube";
 
 export interface VideoLesson {
   id: string;
   order: number;
   title: string;
   youtubeUrl: string;
-}
-
-const YOUTUBE_ID_PATTERN = /^[\w-]{11}$/;
-
-/** Id YouTube d'une URL `youtube.com/watch?v=…` ou `youtu.be/…`, sinon null. */
-function getYouTubeVideoId(url: string): string | null {
-  let parsed: URL;
-  try {
-    parsed = new URL(url);
-  } catch {
-    return null;
-  }
-  const host = parsed.hostname.replace(/^(www|m)\./, "");
-  const id =
-    host === "youtu.be"
-      ? parsed.pathname.slice(1).split("/")[0]
-      : host === "youtube.com" && parsed.pathname === "/watch"
-        ? parsed.searchParams.get("v")
-        : null;
-  return id && YOUTUBE_ID_PATTERN.test(id) ? id : null;
-}
-
-function thumbnailUrl(id: string): string {
-  return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 }
 
 function YouTubeLink({ href, className }: { href: string; className?: string }) {
@@ -69,7 +46,7 @@ export function VideoPlayer({ lessons }: { lessons: VideoLesson[] }) {
   }
 
   const videoId = getYouTubeVideoId(lesson.youtubeUrl);
-  const thumbnail = videoId ? thumbnailUrl(videoId) : undefined;
+  const thumbnail = videoId ? youTubeThumbnailUrl(videoId) : undefined;
   const failed = failedIds.has(lesson.id);
 
   function selectLesson(id: string) {
